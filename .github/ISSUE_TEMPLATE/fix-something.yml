@@ -1,0 +1,38 @@
+name: Something here is wrong or out of date
+description: A closed restaurant, a changed visa rule, a broken link, a bad recommendation.
+title: "[fix] "
+labels: ["correction"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Corrections are the most valuable thing you can send. A guide people trust
+        is worth more than a guide that is merely comprehensive — and it stays
+        trustworthy only because people report what's gone stale.
+
+  - type: input
+    id: where
+    attributes:
+      label: Which page or place?
+      description: A link, or just the page name.
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What's wrong?
+    validations:
+      required: true
+
+  - type: textarea
+    id: correct
+    attributes:
+      label: What should it say instead?
+      description: If you know. If you don't, say so — flagging it is already useful.
+
+  - type: input
+    id: when
+    attributes:
+      label: When did you check?
+      placeholder: 2026-08

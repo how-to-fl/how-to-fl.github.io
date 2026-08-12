@@ -1,0 +1,66 @@
+# Every pin on the map lives in this one file.
+#
+# ── Adding a place ───────────────────────────────────────────────────────────
+# Copy the block below, fill it in, done. You do not need to run anything —
+# CI checks it for you and the map rebuilds automatically.
+#
+# ── The one rule that matters ────────────────────────────────────────────────
+# COORDINATES MUST BE WGS-84.
+#
+# China mandates an offset coordinate system. Amap (高德) and Tencent use
+# GCJ-02; Baidu uses BD-09. OpenStreetMap, GPS and this map use WGS-84.
+# A coordinate copied out of a Chinese map app and pasted here lands
+# 300–500 metres away — reliably enough to point at the wrong side of a
+# six-lane road.
+#
+# Safe way to get coordinates: find the place on openstreetmap.org, right-click
+# the spot, "Show address" — the numbers in the URL are WGS-84.
+#
+# ── Fields ───────────────────────────────────────────────────────────────────
+# name_en          required  Name in English
+# name_zh          required  Name in Chinese — for showing people
+# address_zh       required  Full Chinese address. The site renders a copy
+#                            button on this, for taxi drivers and Didi.
+# category         required  food | bar | club | cafe | shop | clinic | sport |
+#                            study | landmark | service
+# lat, lng         required  WGS-84. See above.
+# metro            optional  Nearest station and line
+# price            optional  ¥ | ¥¥ | ¥¥¥ | ¥¥¥¥
+# note             optional  One sentence on why it is worth going
+# recommended_by   required  Which cohort, so readers can weigh it
+# last_verified    required  YYYY-MM. When someone last confirmed it exists.
+
+places:
+  - name_en: Peking University, West Gate
+    name_zh: 北京大学西门
+    address_zh: 北京市海淀区颐和园路5号
+    category: landmark
+    lat: 39.99154
+    lng: 116.30507
+    metro: East Gate of Peking University (Line 4)
+    note: The classic entrance. Where every visiting parent wants their photo.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+
+  - name_en: Global Village
+    name_zh: 北京大学中关新园
+    address_zh: 北京市海淀区中关村北大街126号
+    category: landmark
+    lat: 39.99310
+    lng: 116.31480
+    note: Where you will live. Reception handles dorm check-in.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+
+  # ── Copy from here ─────────────────────────────────────────────────────────
+  # - name_en:
+  #   name_zh:
+  #   address_zh:
+  #   category:
+  #   lat:
+  #   lng:
+  #   metro:
+  #   price:
+  #   note:
+  #   recommended_by:
+  #   last_verified:

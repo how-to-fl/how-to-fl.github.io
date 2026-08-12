@@ -1,0 +1,68 @@
+---
+/**
+ * Overrides Starlight's default page title to append a freshness line.
+ *
+ * This is the highest-leverage twenty lines in the project: a guide people
+ * trust is worth more than a guide that is merely comprehensive. Every page
+ * says out loud when it was last checked, and shouts when that was too long
+ * ago — so a reader in 2029 knows what they are looking at.
+ */
+const { entry } = Astro.locals.starlightRoute;
+const { title, last_verified, status, owner } = entry.data as {
+	title: string;
+	last_verified?: string;
+	status?: 'stub' | 'draft' | 'live';
+	owner?: string;
+};
+
+const STALE_AFTER_MONTHS = 12;
+
+/** Months between a YYYY-MM string and today. */
+function monthsSince(stamp: string): number {
+	const [y, m] = stamp.split('-').map(Number);
+	const now = new Date();
+	return (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - m);
+}
+
+const age = last_verified ? monthsSince(last_verified) : null;
+const isStale = age !== null && age > STALE_AFTER_MONTHS;
+
+/** "2026-08" -> "August 2026" */
+const verifiedLabel = last_verified
+	? new Date(`${last_verified}-01T00:00:00Z`).toLocaleDateString('en-GB', {
+			month: 'long',
+			year: 'numeric',
+			timeZone: 'UTC',
+		})
+	: null;
+---
+
+<h1 id="_top">{title}</h1>
+
+{
+	status === 'stub' && (
+		<p class="fl-note fl-note--stub">
+			<strong>This page is a stub.</strong> The structure is here but nobody has written it yet.
+			{owner ? ` Owner: ${owner}.` : ' It has no owner — claim it.'} See{' '}
+			<a href="https://github.com/how-to-fl/how-to-fl.github.io/blob/main/CONTRIBUTING.md">
+				how to contribute
+			</a>
+			.
+		</p>
+	)
+}
+
+{
+	isStale && (
+		<p class="fl-note fl-note--stale">
+			<strong>Not checked since {verifiedLabel}.</strong> Visa rules, prices and opening hours all
+			move. Treat this as a starting point and verify anything that matters.
+		</p>
+	)
+}
+
+{
+	!isStale && verifiedLabel && status !== 'stub' && (
+		<p class="fl-verified">Last checked {verifiedLabel}{owner ? ` · ${owner}` : ''}</p>
+	)
+}

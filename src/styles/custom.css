@@ -1,0 +1,70 @@
+/* Project styling on top of Starlight's defaults.
+   Everything here must be self-contained — no @import from a CDN, no
+   Google Fonts, no external anything. See CONTRIBUTING.md. */
+
+:root {
+	/* Jade accent — readable on both of Starlight's themes. */
+	--sl-color-accent-low: #16302a;
+	--sl-color-accent: #1c6b58;
+	--sl-color-accent-high: #9fd9c7;
+}
+
+:root[data-theme='light'] {
+	--sl-color-accent-low: #d8ece5;
+	--sl-color-accent: #17604e;
+	--sl-color-accent-high: #0c2f27;
+}
+
+/* --- Freshness + status notices (see src/components/PageTitle.astro) --- */
+
+.fl-note {
+	border-left: 3px solid var(--sl-color-accent);
+	background: var(--sl-color-bg-nav);
+	border-radius: 0 0.4rem 0.4rem 0;
+	padding: 0.75rem 1rem;
+	margin-block: 0.75rem 1.5rem;
+	font-size: var(--sl-text-sm);
+	line-height: 1.55;
+}
+
+.fl-note--stale {
+	border-left-color: var(--sl-color-orange);
+	background: var(--sl-color-orange-low);
+}
+
+.fl-note--stub {
+	border-left-color: var(--sl-color-gray-4);
+}
+
+.fl-verified {
+	color: var(--sl-color-gray-3);
+	font-size: var(--sl-text-xs);
+	margin-block: 0.4rem 1.5rem;
+	letter-spacing: 0.02em;
+}
+
+/* --- Copy-to-clipboard button for Chinese addresses --- */
+
+.fl-copy {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	font: inherit;
+	font-size: var(--sl-text-xs);
+	color: var(--sl-color-white);
+	background: var(--sl-color-accent);
+	border: none;
+	border-radius: 0.3rem;
+	padding: 0.2rem 0.55rem;
+	cursor: pointer;
+}
+
+.fl-copy:hover {
+	background: var(--sl-color-accent-high);
+	color: var(--sl-color-black);
+}
+
+.fl-copy:focus-visible {
+	outline: 2px solid var(--sl-color-accent-high);
+	outline-offset: 2px;
+}

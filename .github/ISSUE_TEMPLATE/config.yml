@@ -1,0 +1,12 @@
+# GitHub is roughly 60% disrupted from mainland China, and every contributor is
+# in Beijing. These fallbacks are not a courtesy — for most of the cohort most
+# of the time, they are the only route in. Keep them at the top.
+blank_issues_enabled: true
+contact_links:
+  - name: Can't reach GitHub reliably? Send it any way you like
+    url: https://github.com/how-to-fl/how-to-fl.github.io/blob/main/CONTRIBUTING.md#if-github-is-not-loading
+    about: WeChat, email, or bring it to the next contribution sprint. A maintainer will enter it for you.
+
+  - name: Come to a contribution sprint
+    url: https://github.com/how-to-fl/how-to-fl.github.io/blob/main/CONTRIBUTING.md#contribution-sprints
+    about: Ninety minutes, pizza, everyone adds three places and one paragraph. Easiest way to help.

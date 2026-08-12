@@ -1,0 +1,95 @@
+name: Add a place to the map
+description: A restaurant, bar, café, clinic, gym, study spot — anything worth pinning.
+title: "[place] "
+labels: ["place"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Fill in what you know. If you can't find the coordinates, leave them blank
+        and say roughly where it is — a maintainer will look them up. Don't let a
+        missing field stop you submitting.
+
+  - type: input
+    id: name_en
+    attributes:
+      label: Name in English
+      placeholder: Jing-A Taproom
+    validations:
+      required: true
+
+  - type: input
+    id: name_zh
+    attributes:
+      label: Name in Chinese
+      placeholder: 京A精酿啤酒
+    validations:
+      required: true
+
+  - type: input
+    id: address_zh
+    attributes:
+      label: Address in Chinese
+      description: This is what gets a copy button on the site, for showing a taxi driver or pasting into Didi. Worth getting right.
+      placeholder: 北京市朝阳区三里屯...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: What kind of place is it?
+      options:
+        - food
+        - bar
+        - club
+        - cafe
+        - shop
+        - clinic
+        - sport
+        - study
+        - landmark
+        - service
+    validations:
+      required: true
+
+  - type: input
+    id: coords
+    attributes:
+      label: Coordinates (optional)
+      description: >
+        WGS-84 only. Find it on openstreetmap.org, right-click the spot, "Show address" —
+        the numbers in the URL are correct. Do NOT copy from Amap/高德 or Baidu: they use a
+        different, deliberately offset system, and the pin will land 300–500m away.
+      placeholder: "39.9345, 116.4477"
+
+  - type: input
+    id: metro
+    attributes:
+      label: Nearest metro (optional)
+      placeholder: Tuanjiehu (Line 10)
+
+  - type: dropdown
+    id: price
+    attributes:
+      label: Price (optional)
+      options:
+        - ""
+        - "¥"
+        - "¥¥"
+        - "¥¥¥"
+        - "¥¥¥¥"
+
+  - type: textarea
+    id: note
+    attributes:
+      label: Why is it worth going?
+      description: One or two sentences. Specific beats enthusiastic — "best 麻辣烫 near campus, open till 3am" tells someone more than "amazing place!!".
+
+  - type: input
+    id: recommended_by
+    attributes:
+      label: Which cohort are you?
+      placeholder: Cohort 7
+    validations:
+      required: true
