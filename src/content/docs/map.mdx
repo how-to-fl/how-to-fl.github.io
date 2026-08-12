@@ -1,0 +1,51 @@
+---
+title: "The map"
+description: "Every place the cohorts have recommended, on one map — with the Chinese address ready to copy."
+last_verified: 2026-08
+status: live
+---
+
+import BeijingMap from '../../components/BeijingMap.astro';
+
+Everywhere the cohorts have recommended. Click a pin for the details, and use
+**Copy address** to get the Chinese address onto your clipboard — that is the version
+you show a taxi driver or paste into Didi.
+
+<BeijingMap />
+
+## Adding a place
+
+Two ways, and neither needs you to write code.
+
+**If GitHub loads for you**, [open the "add a place" form](https://github.com/how-to-fl/how-to-fl.github.io/issues/new/choose)
+— five fields, and a maintainer merges it.
+
+**If GitHub does not load** — and from a Beijing connection it often won't — send it by
+WeChat or email, or bring it to the next contribution sprint. Someone will add it.
+
+### Getting the coordinates right
+
+This is the one thing worth being careful about.
+
+China mandates an offset coordinate system. **Amap (高德) and Tencent use GCJ-02, Baidu
+uses BD-09**, and this map uses WGS-84, the same system as GPS and OpenStreetMap. A
+coordinate copied out of a Chinese map app lands **300–500 metres** from where you meant
+— far enough to point at the wrong side of a six-lane road.
+
+To get a correct coordinate: find the place on
+[openstreetmap.org](https://www.openstreetmap.org), right-click the spot, and choose
+"Show address". The numbers in the URL are WGS-84.
+
+If you are not sure, **leave the coordinates out** and describe where it is instead.
+A missing coordinate is a small job for a maintainer; a wrong one is invisible until
+somebody is lost. The build also rejects anything outside greater Beijing, so a badly
+mistaken coordinate gets caught automatically — but one that is merely 400 m off will not be.
+
+## Why the map looks like this
+
+The basemap is a single 40 MB file served from this site, not from Google or Amap. Your
+browser reads only the few kilobytes it needs for the area you are looking at.
+
+That is deliberate: a map that depends on a third-party service is a map that stops
+working the day that service becomes unreachable, and it would take the rest of the page
+down with it. Chinese labels are drawn using your own device's fonts.

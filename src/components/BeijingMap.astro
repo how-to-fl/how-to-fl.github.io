@@ -1,0 +1,450 @@
+---
+/**
+ * The Beijing map.
+ *
+ * Reads data/places.yaml at build time and ships it to the browser as GeoJSON.
+ * Everything it loads — basemap, fonts, sprites, the map library itself — comes
+ * from our own origin, because a third-party origin is a thing that can be
+ * blocked independently of this site.
+ *
+ * Chinese labels are rendered with the reader's own system fonts via
+ * localIdeographFontFamily rather than downloaded as glyph tiles. Vendoring CJK
+ * glyphs would have cost tens of megabytes; this costs nothing.
+ */
+import { parse } from 'yaml';
+// ?raw inlines the file at compile time. Reading it with fs and import.meta.url
+// instead would resolve against the bundled chunk's location at build time, not
+// this source file, and fail with ENOENT during `astro build`.
+import placesRaw from '../../data/places.yaml?raw';
+
+const places = parse(placesRaw)?.places ?? [];
+
+const geojson = {
+	type: 'FeatureCollection',
+	features: places
+		.filter((p: any) => typeof p?.lat === 'number' && typeof p?.lng === 'number')
+		.map((p: any) => ({
+			type: 'Feature',
+			geometry: { type: 'Point', coordinates: [p.lng, p.lat] },
+			properties: {
+				name_en: p.name_en ?? '',
+				name_zh: p.name_zh ?? '',
+				address_zh: p.address_zh ?? '',
+				category: p.category ?? 'service',
+				metro: p.metro ?? '',
+				price: p.price ?? '',
+				note: p.note ?? '',
+				recommended_by: p.recommended_by ?? '',
+				last_verified: p.last_verified ?? '',
+			},
+		})),
+};
+
+// Categories present in the data, so the filter bar never offers an empty one.
+const CATEGORY_LABELS: Record<string, string> = {
+	food: 'Food',
+	bar: 'Bars',
+	club: 'Clubs',
+	cafe: 'Cafés',
+	shop: 'Shops',
+	clinic: 'Clinics',
+	sport: 'Sport',
+	study: 'Study spots',
+	landmark: 'Landmarks',
+	service: 'Services',
+};
+
+const present = [...new Set(geojson.features.map((f: any) => f.properties.category))]
+	.filter((c) => c in CATEGORY_LABELS)
+	.sort((a, b) => CATEGORY_LABELS[a].localeCompare(CATEGORY_LABELS[b]));
+---
+
+<div class="fl-map-wrap">
+	<div class="fl-map-filters" role="group" aria-label="Filter places by category">
+		<button type="button" class="fl-chip is-on" data-category="all" aria-pressed="true">
+			All <span class="fl-chip-count">{geojson.features.length}</span>
+		</button>
+		{
+			present.map((c) => (
+				<button type="button" class="fl-chip" data-category={c} aria-pressed="false">
+					<span class="fl-chip-dot" data-category={c} />
+					{CATEGORY_LABELS[c]}
+					<span class="fl-chip-count">
+						{geojson.features.filter((f: any) => f.properties.category === c).length}
+					</span>
+				</button>
+			))
+		}
+	</div>
+
+	<div
+		id="fl-map"
+		class="fl-map"
+		role="application"
+		aria-label="Map of places in Beijing recommended by the cohorts"
+		tabindex="0"
+	>
+	</div>
+
+	<p class="fl-map-status" id="fl-map-status" role="status" hidden></p>
+
+	<noscript>
+		<p class="fl-map-fallback">
+			The map needs JavaScript. Every place on it is also listed in
+			<a href="https://github.com/how-to-fl/how-to-fl.github.io/blob/main/data/places.yaml">
+				data/places.yaml
+			</a>, with addresses in Chinese.
+		</p>
+	</noscript>
+
+	<p class="fl-map-credit">
+		Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors ·
+		basemap by <a href="https://protomaps.com">Protomaps</a> · {geojson.features.length} places
+		added by the cohorts
+	</p>
+</div>
+
+<script type="application/json" id="fl-places-data" set:html={JSON.stringify(geojson)} />
+
+<script>
+	// pmtiles and the basemap styles are plain libraries — safe to bundle.
+	import { Protocol } from 'pmtiles';
+	import { layers, namedFlavor } from '@protomaps/basemaps';
+
+	const container = document.getElementById('fl-map');
+	const dataEl = document.getElementById('fl-places-data');
+
+	if (container && dataEl) {
+		// MapLibre is deliberately NOT bundled — see scripts/sync-vendor.mjs.
+		// Bundling it silently breaks its Web Worker handshake and the map hangs
+		// blank with no error at all. Loading it as its own module from our own
+		// origin lets it resolve its worker the way it expects.
+		// @vite-ignore keeps the bundler from rewriting this back into a bundle.
+		const VENDOR = `${window.location.origin}/vendor/maplibre`;
+
+		const css = document.createElement('link');
+		css.rel = 'stylesheet';
+		css.href = `${VENDOR}/maplibre-gl.css`;
+		document.head.appendChild(css);
+
+		const {
+			Map: MapLibreMap,
+			Popup,
+			NavigationControl,
+			AttributionControl,
+			ScaleControl,
+			LngLatBounds,
+			addProtocol,
+		} = await import(/* @vite-ignore */ `${VENDOR}/maplibre-gl.mjs`);
+
+		const geojson = JSON.parse(dataEl.textContent || '{"type":"FeatureCollection","features":[]}');
+
+		// Distinct enough to tell apart at a glance, and legible on both basemaps.
+		const COLORS: Record<string, string> = {
+			food: '#e07a3f',
+			bar: '#8e5ea2',
+			club: '#d4568c',
+			cafe: '#a2703f',
+			shop: '#3d8bcd',
+			clinic: '#d64545',
+			sport: '#4a9d5f',
+			study: '#6b7b8c',
+			landmark: '#1c6b58',
+			service: '#8a8f98',
+		};
+
+		const colorExpression: any = ['match', ['get', 'category']];
+		for (const [cat, hex] of Object.entries(COLORS)) colorExpression.push(cat, hex);
+		colorExpression.push('#8a8f98');
+
+		const protocol = new Protocol();
+		addProtocol('pmtiles', protocol.tile);
+
+		const isDark = () => {
+			const explicit = document.documentElement.dataset.theme;
+			if (explicit === 'dark') return true;
+			if (explicit === 'light') return false;
+			return window.matchMedia('(prefers-color-scheme: dark)').matches;
+		};
+
+		/** The whole style, basemap plus our pins, so setStyle() on theme change
+		 *  doesn't drop the places layers. */
+		// MapLibre 6 rejects a root-relative sprite URL outright ("must be absolute"),
+		// which aborts the whole style load and leaves a blank map.
+		// Concatenated rather than built with new URL(), because URL() would
+		// percent-encode the {fontstack} / {range} braces and break MapLibre's
+		// template substitution. Taken from location.origin so this works on
+		// localhost, on github.io, and on a custom domain later.
+		const origin = window.location.origin;
+
+		function buildStyle(dark: boolean) {
+			const flavorName = dark ? 'dark' : 'light';
+			return {
+				version: 8 as const,
+				glyphs: `${origin}/basemap/fonts/{fontstack}/{range}.pbf`,
+				sprite: `${origin}/basemap/sprites/${flavorName}`,
+				sources: {
+					protomaps: {
+						type: 'vector' as const,
+						url: 'pmtiles:///basemap/beijing.pmtiles',
+						attribution: '© OpenStreetMap contributors',
+					},
+					places: { type: 'geojson' as const, data: geojson },
+				},
+				layers: [
+					...layers('protomaps', namedFlavor(flavorName), { lang: 'en' }),
+					{
+						id: 'places-halo',
+						type: 'circle' as const,
+						source: 'places',
+						paint: {
+							'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 7, 16, 13],
+							'circle-color': dark ? '#161d1b' : '#ffffff',
+							'circle-opacity': 0.95,
+						},
+					},
+					{
+						id: 'places-dot',
+						type: 'circle' as const,
+						source: 'places',
+						paint: {
+							'circle-radius': ['interpolate', ['linear'], ['zoom'], 10, 4, 16, 9],
+							'circle-color': colorExpression,
+							'circle-stroke-width': 1.5,
+							'circle-stroke-color': dark ? '#161d1b' : '#ffffff',
+						},
+					},
+					{
+						id: 'places-label',
+						type: 'symbol' as const,
+						source: 'places',
+						minzoom: 13,
+						layout: {
+							'text-field': ['get', 'name_en'],
+							'text-font': ['Noto Sans Medium'],
+							'text-size': 12,
+							'text-offset': [0, 1.1],
+							'text-anchor': 'top' as const,
+							'text-optional': true,
+						},
+						paint: {
+							'text-color': dark ? '#e9f0ed' : '#141d1b',
+							'text-halo-color': dark ? '#0e1413' : '#ffffff',
+							'text-halo-width': 1.5,
+						},
+					},
+				],
+			};
+		}
+
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		const map = new MapLibreMap({
+			container,
+			style: buildStyle(isDark()) as any,
+			center: [116.3105, 39.9926], // PKU campus
+			zoom: 12,
+			maxBounds: [
+				[115.5, 39.2],
+				[117.3, 40.8],
+			],
+			// Chinese labels render from the reader's own fonts — no CJK glyph download.
+			localIdeographFontFamily:
+				"'Noto Sans CJK SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif",
+			attributionControl: false,
+		});
+
+		// --- Load state ---------------------------------------------------------
+		// If the basemap is unreachable — a plausible outcome behind the Great
+		// Firewall — say so, rather than leaving the reader staring at a grey box.
+		// The container's data-map-state also makes the map testable.
+		const statusEl = document.getElementById('fl-map-status');
+		let ready = false;
+
+		function setState(state: string, message = '') {
+			container.dataset.mapState = state;
+			if (statusEl) {
+				statusEl.hidden = !message;
+				statusEl.textContent = message;
+				statusEl.dataset.state = state;
+			}
+		}
+
+		setState('loading');
+
+		map.on('load', () => {
+			ready = true;
+			setState('ready');
+		});
+
+		// MapLibre fires 'error' for single failed tiles too, so don't panic on the
+		// first one — only report if the map never finished loading at all.
+		map.on('error', (e: any) => {
+			console.error('[map]', e?.error?.message || e);
+			if (!ready) setState('error');
+		});
+
+		setTimeout(() => {
+			if (!ready) {
+				setState(
+					'error',
+					'The map could not load. Every place on it is also listed in data/places.yaml in the repository, with Chinese addresses.'
+				);
+			}
+		}, 10000);
+
+		map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
+		map.addControl(
+			new AttributionControl({ compact: true, customAttribution: '© Protomaps' }),
+			'bottom-right'
+		);
+		map.addControl(new ScaleControl({ maxWidth: 90, unit: 'metric' }), 'bottom-left');
+
+		// --- Popups -------------------------------------------------------------
+
+		const monthsSince = (stamp: string) => {
+			const m = /^(\d{4})-(\d{2})$/.exec(stamp);
+			if (!m) return null;
+			const now = new Date();
+			return (now.getFullYear() - +m[1]) * 12 + (now.getMonth() + 1 - +m[2]);
+		};
+
+		const esc = (s: string) =>
+			String(s).replace(
+				/[&<>"']/g,
+				(c) =>
+					({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string
+			);
+
+		function popupHtml(p: Record<string, string>) {
+			const age = p.last_verified ? monthsSince(p.last_verified) : null;
+			const stale = age !== null && age > 12;
+			const meta = [p.metro, p.price].filter(Boolean).map(esc).join(' · ');
+
+			return `
+				<div class="fl-pop">
+					<p class="fl-pop-cat" data-category="${esc(p.category)}">${esc(p.category)}</p>
+					<h3 class="fl-pop-name">${esc(p.name_en)}</h3>
+					${p.name_zh ? `<p class="fl-pop-zh">${esc(p.name_zh)}</p>` : ''}
+					${p.note ? `<p class="fl-pop-note">${esc(p.note)}</p>` : ''}
+					${meta ? `<p class="fl-pop-meta">${meta}</p>` : ''}
+					${
+						p.address_zh
+							? `<div class="fl-pop-addr">
+									<span>${esc(p.address_zh)}</span>
+									<button type="button" class="fl-copy" data-copy="${esc(p.address_zh)}">
+										Copy address
+									</button>
+								</div>`
+							: ''
+					}
+					<p class="fl-pop-foot">
+						${p.recommended_by ? `Added by ${esc(p.recommended_by)}` : ''}
+						${
+							p.last_verified
+								? `<span class="${stale ? 'fl-pop-stale' : ''}">${
+										stale ? '⚠ not checked since ' : '· checked '
+									}${esc(p.last_verified)}</span>`
+								: ''
+						}
+					</p>
+				</div>`;
+		}
+
+		let popup: any = null;
+
+		map.on('click', 'places-dot', (e: any) => {
+			const f = e.features?.[0];
+			if (!f) return;
+			const coords = (f.geometry as any).coordinates.slice();
+			popup?.remove();
+			popup = new Popup({ closeButton: true, maxWidth: '280px', offset: 12 })
+				.setLngLat(coords)
+				.setHTML(popupHtml(f.properties))
+				.addTo(map);
+		});
+
+		map.on('mouseenter', 'places-dot', () => (map.getCanvas().style.cursor = 'pointer'));
+		map.on('mouseleave', 'places-dot', () => (map.getCanvas().style.cursor = ''));
+
+		// Copy button inside popups — delegated, since popups come and go.
+		container.addEventListener('click', async (ev) => {
+			const btn = (ev.target as HTMLElement)?.closest?.('.fl-copy') as HTMLButtonElement | null;
+			if (!btn) return;
+			const text = btn.dataset.copy || '';
+			try {
+				await navigator.clipboard.writeText(text);
+				const original = btn.textContent;
+				btn.textContent = 'Copied ✓';
+				btn.disabled = true;
+				setTimeout(() => {
+					btn.textContent = original;
+					btn.disabled = false;
+				}, 1600);
+			} catch {
+				// Clipboard blocked (insecure context, or permission denied):
+				// select the text so it can still be copied by hand.
+				const span = btn.previousElementSibling;
+				if (span) {
+					const range = document.createRange();
+					range.selectNodeContents(span);
+					const sel = window.getSelection();
+					sel?.removeAllRanges();
+					sel?.addRange(range);
+				}
+				btn.textContent = 'Select & copy';
+			}
+		});
+
+		// --- Category filter ----------------------------------------------------
+
+		let activeCategory = 'all';
+
+		function applyFilter() {
+			const filter: any = activeCategory === 'all' ? null : ['==', ['get', 'category'], activeCategory];
+			for (const id of ['places-halo', 'places-dot', 'places-label']) {
+				if (map.getLayer(id)) map.setFilter(id, filter);
+			}
+		}
+
+		document.querySelectorAll<HTMLButtonElement>('.fl-chip').forEach((chip) => {
+			chip.addEventListener('click', () => {
+				activeCategory = chip.dataset.category || 'all';
+				document.querySelectorAll('.fl-chip').forEach((c) => {
+					const on = c === chip;
+					c.classList.toggle('is-on', on);
+					c.setAttribute('aria-pressed', String(on));
+				});
+				popup?.remove();
+				applyFilter();
+			});
+		});
+
+		// --- Fit to the pins, and keep the basemap in step with the site theme ---
+
+		map.on('load', () => {
+			applyFilter();
+			const feats = geojson.features;
+			if (feats.length > 1) {
+				const b = new LngLatBounds();
+				feats.forEach((f: any) => b.extend(f.geometry.coordinates));
+				map.fitBounds(b, { padding: 60, maxZoom: 15, animate: !reduceMotion });
+			}
+		});
+
+		let dark = isDark();
+		const syncTheme = () => {
+			const next = isDark();
+			if (next === dark) return;
+			dark = next;
+			map.setStyle(buildStyle(dark) as any);
+			map.once('styledata', applyFilter);
+		};
+
+		new MutationObserver(syncTheme).observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ['data-theme'],
+		});
+		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', syncTheme);
+	}
+</script>

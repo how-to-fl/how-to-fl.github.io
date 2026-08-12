@@ -19,3 +19,6 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# Vendored from node_modules by scripts/sync-vendor.mjs
+public/vendor/
