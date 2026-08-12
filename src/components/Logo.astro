@@ -1,0 +1,102 @@
+---
+/**
+ * The FL seal, drawn as SVG so it stays crisp at any size, recolours with the
+ * theme, and costs one same-origin request instead of a raster download.
+ *
+ * Cohort 6's badge has a "6" and the Peking University seal in it. Both are
+ * deliberately left out here: the guide outlives any one cohort, so the mark
+ * shouldn't be stamped with one — and the university's seal is theirs, not ours
+ * to redraw. If the programme office ever blesses the project, drop the real
+ * artwork in and swap this component out.
+ */
+interface Props {
+	/** Rendered size in px. */
+	size?: number;
+	class?: string;
+}
+const { size = 44, class: className = '' } = Astro.props;
+const id = `fl-seal-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<svg
+	class={`fl-logo ${className}`}
+	width={size}
+	height={size}
+	viewBox="0 0 100 100"
+	role="img"
+	aria-label="How to FL"
+	fill="none"
+	xmlns="http://www.w3.org/2000/svg"
+>
+	<defs>
+		<path id={`${id}-arc-top`} d="M 16,50 A 34,34 0 0 1 84,50" />
+		<path id={`${id}-arc-bottom`} d="M 21,50 A 29,29 0 0 0 79,50" />
+	</defs>
+
+	<!-- Seal ground -->
+	<circle cx="50" cy="50" r="49" class="fl-logo-ground" />
+
+	<!-- Double ring: a heavy outer keyline and a hairline inside it -->
+	<circle cx="50" cy="50" r="47.2" class="fl-logo-ring" stroke-width="1.7" />
+	<circle cx="50" cy="50" r="42.5" class="fl-logo-ring" stroke-width="0.7" />
+
+	<!-- FUTURE LEADERS, arched over the top -->
+	<text class="fl-logo-arc">
+		<textPath href={`#${id}-arc-top`} startOffset="50%" text-anchor="middle">
+			FUTURE LEADERS
+		</textPath>
+	</text>
+
+	<!-- The FL monogram -->
+	<text x="50" y="50" class="fl-logo-mark" text-anchor="middle" dominant-baseline="central">
+		FL
+	</text>
+
+	<!-- Flanking rules, echoing the inner arcs on the cohort badge -->
+	<path d="M 18.5,58 A 32,32 0 0 0 30,76" class="fl-logo-ring" stroke-width="0.7" />
+	<path d="M 81.5,58 A 32,32 0 0 1 70,76" class="fl-logo-ring" stroke-width="0.7" />
+
+	<!-- PEKING UNIVERSITY, arched along the bottom -->
+	<text class="fl-logo-arc fl-logo-arc--small">
+		<textPath href={`#${id}-arc-bottom`} startOffset="50%" text-anchor="middle">
+			PEKING UNIVERSITY
+		</textPath>
+	</text>
+</svg>
+
+<style>
+	.fl-logo {
+		display: block;
+		flex: none;
+	}
+
+	.fl-logo-ground {
+		fill: var(--fl-cream);
+	}
+
+	.fl-logo-ring {
+		stroke: var(--fl-crimson);
+		fill: none;
+	}
+
+	.fl-logo-arc {
+		fill: var(--fl-crimson);
+		font-family: var(--fl-font-display);
+		font-size: 9.5px;
+		font-weight: 500;
+		letter-spacing: 0.34em;
+	}
+
+	.fl-logo-arc--small {
+		font-size: 6.4px;
+		letter-spacing: 0.2em;
+	}
+
+	.fl-logo-mark {
+		fill: var(--fl-crimson);
+		font-family: var(--fl-font-display);
+		font-size: 40px;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+	}
+</style>

@@ -1,13 +1,33 @@
 ---
-title: how to FL
+title: How to FL
 description: Everything we wish someone had told us before we landed in Beijing. Written by us, for you.
 template: splash
 editUrl: false
-hero:
-  tagline: Everything we wish someone had told us before we landed — getting into China, surviving PKU, and actually living here.
+tableOfContents: false
 ---
 
 import { Card, CardGrid, LinkButton, LinkCard } from '@astrojs/starlight/components';
+import Logo from '../../components/Logo.astro';
+
+<div class="fl-hero">
+  <div class="fl-hero-seal"><Logo size={96} /></div>
+
+  <h1 class="fl-hero-title">Welcome to<br /><em>How to FL</em></h1>
+
+  <p class="fl-hero-tagline">
+    Everything we wish someone had told us before we landed — getting into China,
+    surviving PKU, and actually living in Beijing.
+  </p>
+
+  <div class="fl-pills">
+    <span class="fl-pill">Your go-to place for everything FL</span>
+    <span class="fl-pill">Written by the cohorts</span>
+  </div>
+
+  <p class="fl-strip">
+    Arriving · Visas · Campus · Canteens · Courses · 美团 · Nights out · Clinics · Travel
+  </p>
+</div>
 
 ## 欢迎 — welcome
 
@@ -47,9 +67,8 @@ checked it**, and shouts at you if that was ages ago.
   **Getting here, and your first three days.** This is the half with actual deadlines
   attached, where a mistake costs you real money or a trip to the police station.
 
-  Visas and the JW202 · what you genuinely can't pack · the airport taxi scam · registering
-  with the police within 24 hours · residence permit within 30 days · SIM, bank, Alipay ·
-  the cons that target new arrivals
+  Visas and the JW202 · what you genuinely can't pack · VPNs, sorted before you fly · the
+  airport taxi scam · registering with the police within 24 hours · SIM, bank, Alipay
 
   <LinkButton href="/china/before-you-fly/" variant="primary">Start here →</LinkButton>
 </Card>
@@ -89,9 +108,9 @@ checked it**, and shouts at you if that was ages ago.
 
 <CardGrid>
   <Card title="The map" icon="map-pin">
-    Everywhere we've recommended — restaurants, bars, clinics, gyms, study spots — on one
-    map. Each one comes with its **Chinese address ready to copy**, which is what you hand
-    to a taxi driver or paste into Didi.
+    Everywhere we've recommended — restaurants, bars, clinics, gyms, study spots — laid over
+    the **Beijing subway network**, so you can see at a glance how you'd actually get there.
+    Every pin carries its **Chinese address, ready to copy**.
 
     [Open the map →](/map/)
   </Card>

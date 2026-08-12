@@ -8,12 +8,17 @@
  * ago — so a reader in 2029 knows what they are looking at.
  */
 const { entry } = Astro.locals.starlightRoute;
-const { title, last_verified, status, owner } = entry.data as {
+const { title, last_verified, status, owner, template } = entry.data as {
 	title: string;
 	last_verified?: string;
 	status?: 'stub' | 'draft' | 'live';
 	owner?: string;
+	template?: string;
 };
+
+// Splash pages carry their own hero, which already contains the h1 and needs no
+// freshness furniture — rendering this as well gives you the title twice.
+const isSplash = template === 'splash';
 
 const STALE_AFTER_MONTHS = 12;
 
@@ -37,10 +42,10 @@ const verifiedLabel = last_verified
 	: null;
 ---
 
-<h1 id="_top">{title}</h1>
+{!isSplash && <h1 id="_top">{title}</h1>}
 
 {
-	status === 'stub' && (
+	!isSplash && status === 'stub' && (
 		<p class="fl-note fl-note--stub">
 			<strong>Nobody's written this one yet.</strong> We've laid out the headings; the words are
 			missing.
@@ -55,7 +60,7 @@ const verifiedLabel = last_verified
 }
 
 {
-	isStale && (
+	!isSplash && isStale && (
 		<p class="fl-note fl-note--stale">
 			<strong>None of us has checked this since {verifiedLabel}.</strong> Prices move, places
 			close, and visa rules change without telling anyone — so treat this as a starting point and
@@ -65,7 +70,7 @@ const verifiedLabel = last_verified
 }
 
 {
-	!isStale && verifiedLabel && status !== 'stub' && (
+	!isSplash && !isStale && verifiedLabel && status !== 'stub' && (
 		<p class="fl-verified">One of us checked this in {verifiedLabel}{owner ? ` · ${owner}` : ''}</p>
 	)
 }

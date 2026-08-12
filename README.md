@@ -69,6 +69,23 @@ breaks the template substitution.
 | `npm run validate` | The checks our build runs |
 | `npm run build` | Production build into `dist/` |
 | `npm run preview` | Serve the production build locally |
+| `npm run fetch:fonts` | Re-vendor Playfair Display + DM Sans into `public/fonts/` |
+| `npm run fetch:subway` | Pull the subway network from OpenStreetMap (see below) |
+
+### Upgrading the subway layer
+
+The map draws the subway from rail geometry and station names already in the basemap, so it
+works out of the box with nothing to fetch. Running `npm run fetch:subway` pulls the real
+route relations from OpenStreetMap instead, which carry **each line's official colour and
+name** — a much more readable map.
+
+It writes `public/data/beijing-subway.geojson`; commit that file and the map picks it up
+automatically at build time. If the file isn't there, the baseline is used, so a failed
+fetch never breaks the site.
+
+Overpass rate-limits by IP and will hand you `429`s if you hammer it or if you share an
+address with a lot of other people. Check your quota at
+<https://overpass-api.de/api/status> and try again in a few minutes.
 
 ## Keeping it alive
 

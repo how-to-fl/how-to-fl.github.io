@@ -19,6 +19,22 @@ import placesRaw from '../../data/places.yaml?raw';
 
 const places = parse(placesRaw)?.places ?? [];
 
+// The subway overlay comes in two tiers.
+//
+// Baseline (always available): the basemap already carries rail geometry and
+// station POIs, so we can draw the network without fetching anything.
+//
+// Upgrade (optional): `npm run fetch:subway` pulls the real route relations from
+// OpenStreetMap, which carry each line's official colour and name. If somebody
+// has run it and committed the result, we draw that on top instead. Detected at
+// build time so a missing file simply means the baseline is used.
+const subwayFiles = import.meta.glob('/public/data/beijing-subway.geojson', {
+	query: '?url',
+	import: 'default',
+	eager: true,
+});
+const hasSubwayData = Object.keys(subwayFiles).length > 0;
+
 const geojson = {
 	type: 'FeatureCollection',
 	features: places
@@ -75,14 +91,25 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 				</button>
 			))
 		}
+
+		<button
+			type="button"
+			class="fl-chip fl-chip--layer is-on"
+			id="fl-subway-toggle"
+			aria-pressed="true"
+		>
+			<span class="fl-chip-rule"></span>
+			Subway
+		</button>
 	</div>
 
 	<div
 		id="fl-map"
 		class="fl-map"
 		role="application"
-		aria-label="Map of places in Beijing we have recommended"
+		aria-label="Map of places in Beijing we have recommended, over the subway network"
 		tabindex="0"
+		data-subway={hasSubwayData ? 'geojson' : 'basemap'}
 	>
 	</div>
 
@@ -178,6 +205,13 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 		// template substitution. Taken from location.origin so this works on
 		// localhost, on github.io, and on a custom domain later.
 		const origin = window.location.origin;
+		const subwayMode = container.dataset.subway === 'geojson' ? 'geojson' : 'basemap';
+
+		// Every layer the subway toggle switches on and off.
+		const SUBWAY_LAYERS =
+			subwayMode === 'geojson'
+				? ['subway-casing', 'subway-line', 'subway-osm-line', 'subway-osm-station', 'subway-osm-station-label']
+				: ['subway-casing', 'subway-line', 'subway-station-label'];
 
 		function buildStyle(dark: boolean) {
 			const flavorName = dark ? 'dark' : 'light';
@@ -192,9 +226,122 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 						attribution: '© OpenStreetMap contributors',
 					},
 					places: { type: 'geojson' as const, data: geojson },
+					...(subwayMode === 'geojson'
+						? { subway: { type: 'geojson' as const, data: '/data/beijing-subway.geojson' } }
+						: {}),
 				},
 				layers: [
 					...layers('protomaps', namedFlavor(flavorName), { lang: 'en' }),
+
+					// ---- Subway overlay -------------------------------------------
+					// Drawn above the basemap but below our pins, so the pins stay
+					// clickable and the network reads as context rather than content.
+					// A pale casing under each line keeps it legible over parks and
+					// water, which is where the basemap gets busiest.
+					{
+						id: 'subway-casing',
+						type: 'line' as const,
+						source: 'protomaps',
+						'source-layer': 'roads',
+						filter: ['==', ['get', 'kind'], 'rail'],
+						layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
+						paint: {
+							'line-color': dark ? '#0e1413' : '#ffffff',
+							'line-opacity': 0.85,
+							'line-width': ['interpolate', ['linear'], ['zoom'], 9, 3.2, 16, 8],
+						},
+					},
+					{
+						id: 'subway-line',
+						type: 'line' as const,
+						source: 'protomaps',
+						'source-layer': 'roads',
+						filter: ['==', ['get', 'kind'], 'rail'],
+						layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
+						paint: {
+							'line-color': dark ? '#7fb2e0' : '#2f6ea8',
+							'line-opacity': 0.9,
+							'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1.1, 16, 4],
+						},
+					},
+					// Real route relations, if someone has run `npm run fetch:subway`.
+					// These carry each line's official colour, so they replace the
+					// generic blue above rather than sitting alongside it.
+					...(subwayMode === 'geojson'
+						? [
+								{
+									id: 'subway-osm-line',
+									type: 'line' as const,
+									source: 'subway',
+									filter: ['==', ['get', 'kind'], 'line'],
+									layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
+									paint: {
+										'line-color': ['coalesce', ['get', 'colour'], '#2f6ea8'],
+										'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1.4, 16, 4.5],
+										'line-opacity': 0.95,
+									},
+								},
+								{
+									id: 'subway-osm-station',
+									type: 'circle' as const,
+									source: 'subway',
+									filter: ['==', ['get', 'kind'], 'station'],
+									minzoom: 11,
+									paint: {
+										'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 2, 16, 4.5],
+										'circle-color': dark ? '#0e1413' : '#ffffff',
+										'circle-stroke-width': 1.4,
+										'circle-stroke-color': dark ? '#9fc4e4' : '#2f6ea8',
+									},
+								},
+								{
+									id: 'subway-osm-station-label',
+									type: 'symbol' as const,
+									source: 'subway',
+									filter: ['==', ['get', 'kind'], 'station'],
+									minzoom: 13,
+									layout: {
+										'text-field': ['get', 'name'],
+										'text-font': ['Noto Sans Regular'],
+										'text-size': 10.5,
+										'text-offset': [0, 0.9],
+										'text-anchor': 'top' as const,
+										'text-optional': true,
+										'text-padding': 4,
+									},
+									paint: {
+										'text-color': dark ? '#9fc4e4' : '#2f6ea8',
+										'text-halo-color': dark ? '#0e1413' : '#ffffff',
+										'text-halo-width': 1.4,
+									},
+								},
+							]
+						: [
+								// Baseline: station names straight from the basemap POIs.
+								{
+									id: 'subway-station-label',
+									type: 'symbol' as const,
+									source: 'protomaps',
+									'source-layer': 'pois',
+									filter: ['==', ['get', 'kind'], 'station'],
+									minzoom: 12,
+									layout: {
+										'text-field': ['coalesce', ['get', 'name:en'], ['get', 'name']],
+										'text-font': ['Noto Sans Regular'],
+										'text-size': 10.5,
+										'text-offset': [0, 0.8],
+										'text-anchor': 'top' as const,
+										'text-optional': true,
+										'text-padding': 4,
+									},
+									paint: {
+										'text-color': dark ? '#9fc4e4' : '#2f6ea8',
+										'text-halo-color': dark ? '#0e1413' : '#ffffff',
+										'text-halo-width': 1.4,
+									},
+								},
+							]),
+
 					{
 						id: 'places-halo',
 						type: 'circle' as const,
@@ -445,10 +592,32 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 			map.fitBounds(b, { padding: 70, maxZoom: 16, duration: reduceMotion ? 0 : 700 });
 		}
 
-		document.querySelectorAll<HTMLButtonElement>('.fl-chip').forEach((chip) => {
+		// --- Subway overlay toggle ----------------------------------------------
+
+		let subwayOn = true;
+
+		function applySubway() {
+			for (const id of SUBWAY_LAYERS) {
+				if (map.getLayer(id)) {
+					map.setLayoutProperty(id, 'visibility', subwayOn ? 'visible' : 'none');
+				}
+			}
+		}
+
+		const subwayBtn = document.getElementById('fl-subway-toggle');
+		subwayBtn?.addEventListener('click', () => {
+			subwayOn = !subwayOn;
+			subwayBtn.classList.toggle('is-on', subwayOn);
+			subwayBtn.setAttribute('aria-pressed', String(subwayOn));
+			applySubway();
+		});
+
+		// --- Category filter ----------------------------------------------------
+
+		document.querySelectorAll<HTMLButtonElement>('.fl-chip:not(.fl-chip--layer)').forEach((chip) => {
 			chip.addEventListener('click', () => {
 				activeCategory = chip.dataset.category || 'all';
-				document.querySelectorAll('.fl-chip').forEach((c) => {
+				document.querySelectorAll('.fl-chip:not(.fl-chip--layer)').forEach((c) => {
 					const on = c === chip;
 					c.classList.toggle('is-on', on);
 					c.setAttribute('aria-pressed', String(on));
@@ -463,6 +632,7 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 
 		map.on('load', () => {
 			applyFilter();
+			applySubway();
 			const feats = geojson.features;
 			if (feats.length > 1) {
 				const b = new LngLatBounds();
@@ -477,7 +647,10 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 			if (next === dark) return;
 			dark = next;
 			map.setStyle(buildStyle(dark) as any);
-			map.once('styledata', applyFilter);
+			map.once('styledata', () => {
+				applyFilter();
+				applySubway();
+			});
 		};
 
 		new MutationObserver(syncTheme).observe(document.documentElement, {

@@ -1,0 +1,34 @@
+---
+/**
+ * Overrides Starlight's site title so the seal sits next to the wordmark in the
+ * header on every page. Starlight's own `logo` option only takes an image file;
+ * we want the SVG component so it recolours with the theme.
+ */
+import Logo from './Logo.astro';
+const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
+---
+
+<a href={siteTitleHref} class="site-title sl-flex">
+	<Logo size={34} />
+	<span>{siteTitle}</span>
+</a>
+
+<style>
+	.site-title {
+		align-items: center;
+		gap: 0.6rem;
+		text-decoration: none;
+		color: var(--sl-color-white);
+		font-family: var(--fl-font-display);
+		font-weight: 800;
+		font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+		letter-spacing: -0.01em;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
+	.site-title span {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+</style>

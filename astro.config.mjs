@@ -8,16 +8,37 @@ export default defineConfig({
 	site: 'https://how-to-fl.github.io',
 	integrations: [
 		starlight({
-			title: 'how to FL',
+			title: 'How to FL',
 			description:
-				'A survival guide for Future Leaders arriving in Beijing. Written by the cohorts, for the cohorts.',
+				'Everything we wish someone had told us before we landed in Beijing. Written by us, for you.',
 			social: [
 				{ icon: 'github', label: 'GitHub', href: 'https://github.com/how-to-fl/how-to-fl.github.io' },
 			],
 			// Every font and icon must be served from our own origin — see CONTRIBUTING.md.
 			// Nothing here may reference a CDN, Google Fonts, or raw.githubusercontent.com.
 			customCss: ['./src/styles/custom.css'],
+			head: [
+				{
+					// Playfair Display + DM Sans, vendored by scripts/fetch-fonts.mjs.
+					// Same-origin: a webfont that hangs takes the page's text with it.
+					tag: 'link',
+					attrs: { rel: 'stylesheet', href: '/fonts/fonts.css' },
+				},
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'preload',
+						as: 'font',
+						type: 'font/woff2',
+						crossorigin: 'anonymous',
+						href: '/fonts/playfair-display-latin-normal.woff2',
+					},
+				},
+				{ tag: 'meta', attrs: { name: 'theme-color', content: '#8e1b2c' } },
+			],
 			components: {
+				// The seal + wordmark in the header.
+				SiteTitle: './src/components/SiteTitle.astro',
 				// Adds the "last checked" line under every page title.
 				PageTitle: './src/components/PageTitle.astro',
 			},

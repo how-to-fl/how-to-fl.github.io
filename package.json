@@ -12,7 +12,9 @@
     "prebuild": "node scripts/sync-vendor.mjs",
     "predev": "node scripts/sync-vendor.mjs",
     "vendor": "node scripts/sync-vendor.mjs",
-    "admin": "node scripts/admin-server.mjs"
+    "admin": "node scripts/admin-server.mjs",
+    "fetch:subway": "node scripts/fetch-subway.mjs",
+    "fetch:fonts": "node scripts/fetch-fonts.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.41.7",
