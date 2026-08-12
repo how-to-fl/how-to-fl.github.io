@@ -1,14 +1,14 @@
 ---
 title: "Before you fly"
-description: "Visa, insurance, the physical exam, and what genuinely cannot go in your suitcase."
+description: "Visas, insurance, the medical form — and what you genuinely can't put in your suitcase."
 status: stub
 sidebar:
   order: 1
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## Visa: X1 vs X2, and the JW202
 
@@ -18,15 +18,15 @@ _To be written._
 
 _To be written._
 
-## Passport validity
+## Check your passport expiry
 
 _To be written._
 
-## Insurance: what your home country covers and what PKU requires
+## Insurance: what home covers, what PKU insists on
 
 _To be written._
 
-## What NOT to pack — medication legality
+## What you can't bring — medication rules matter here
 
 _To be written._
 
@@ -34,6 +34,6 @@ _To be written._
 
 _To be written._
 
-## Packing list
+## What to pack
 
 _To be written._

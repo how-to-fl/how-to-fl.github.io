@@ -1,14 +1,14 @@
 ---
-title: "Phrasebook and glossary"
+title: "Phrasebook"
 description: "Copy-pasteable Chinese for the situations that actually come up."
 status: stub
 sidebar:
   order: 2
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## Getting around
 
@@ -26,7 +26,7 @@ _To be written._
 
 _To be written._
 
-## Dietary requirements
+## Telling someone what you can't eat
 
 _To be written._
 

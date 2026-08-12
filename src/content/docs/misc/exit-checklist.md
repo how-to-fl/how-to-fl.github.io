@@ -1,20 +1,20 @@
 ---
-title: "Leaving — the exit checklist"
-description: "Closing things down properly, and handing your life to the next cohort."
+title: "Leaving — the checklist"
+description: "Shutting things down properly, and handing your life to the next cohort."
 status: stub
 sidebar:
   order: 5
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
-## Closing the bank account
+## Closing your bank account
 
 _To be written._
 
-## Deregistration
+## Deregistering
 
 _To be written._
 
@@ -22,10 +22,10 @@ _To be written._
 
 _To be written._
 
-## Selling your bike, air purifier and kettle to the next cohort
+## Selling your bike, air purifier and kettle to the next lot
 
 _To be written._
 
-## Keeping access to your Chinese apps
+## Keeping your Chinese apps working
 
 _To be written._

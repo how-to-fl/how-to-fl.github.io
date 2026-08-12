@@ -1,14 +1,14 @@
 ---
-title: "Sports and extracurriculars"
-description: "PKU clubs, the club fair, gyms and pitches, and how to join anything."
+title: "Sports and societies"
+description: "The club fair, PKU's gyms and pitches, and how to actually join something."
 status: stub
 sidebar:
   order: 4
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## The club fair, and how to actually join something
 
@@ -18,7 +18,7 @@ _To be written._
 
 _To be written._
 
-## Clubs and societies worth knowing about
+## Societies worth knowing about
 
 _To be written._
 
@@ -30,6 +30,6 @@ _To be written._
 
 _To be written._
 
-## Student government and societies
+## Student government
 
 _To be written._

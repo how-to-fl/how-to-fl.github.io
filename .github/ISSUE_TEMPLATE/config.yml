@@ -3,10 +3,10 @@
 # of the time, they are the only route in. Keep them at the top.
 blank_issues_enabled: true
 contact_links:
-  - name: Can't reach GitHub reliably? Send it any way you like
-    url: https://github.com/how-to-fl/how-to-fl.github.io/blob/main/CONTRIBUTING.md#if-github-is-not-loading
-    about: WeChat, email, or bring it to the next contribution sprint. A maintainer will enter it for you.
+  - name: GitHub not loading? Send it to us any way you like
+    url: https://github.com/how-to-fl/how-to-fl.github.io/blob/main/CONTRIBUTING.md#if-github-wont-load
+    about: WeChat, email, or bring it to the next session. One of us will type it in for you.
 
-  - name: Come to a contribution sprint
-    url: https://github.com/how-to-fl/how-to-fl.github.io/blob/main/CONTRIBUTING.md#contribution-sprints
-    about: Ninety minutes, pizza, everyone adds three places and one paragraph. Easiest way to help.
+  - name: Come to a contribution session
+    url: https://github.com/how-to-fl/how-to-fl.github.io/blob/main/CONTRIBUTING.md#contribution-sessions
+    about: Ninety minutes, pizza, everyone adds three places and a paragraph. Easiest way to pitch in.

@@ -1,20 +1,20 @@
 ---
-title: "Activities and community"
-description: "Embassy events, the expat community, parties, and things to do that are not drinking."
+title: "Things to do, and people to meet"
+description: "Embassy events, the expat scene, parties, and things that aren't drinking."
 status: stub
 sidebar:
   order: 4
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## Embassy and cultural institute events
 
 _To be written._
 
-## The expat community
+## The expat scene
 
 _To be written._
 
@@ -26,6 +26,6 @@ _To be written._
 
 _To be written._
 
-## Museums, galleries and day trips
+## Museums, galleries, and days out
 
 _To be written._

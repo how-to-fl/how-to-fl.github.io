@@ -1,24 +1,24 @@
 ---
-title: "Visas and permits, after arrival"
-description: "Renewals, multiple-entry conversion, and leaving the country without drama."
+title: "Visas and permits, once you're here"
+description: "Renewals, going multiple-entry, and leaving the country without drama."
 status: stub
 sidebar:
   order: 7
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
-## Residence permit renewal
-
-_To be written._
-
-## Converting to multiple-entry before you travel
+## Renewing your residence permit
 
 _To be written._
 
-## Re-registering with the police after any trip
+## Going multiple-entry before you travel
+
+_To be written._
+
+## Re-registering with the police after every trip
 
 _To be written._
 

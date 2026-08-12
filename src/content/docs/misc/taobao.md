@@ -1,24 +1,24 @@
 ---
 title: "淘宝 guide"
-description: "Buying anything, and getting it delivered to a dorm."
+description: "Buying anything, and getting it delivered to your room."
 status: stub
 sidebar:
   order: 1
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## Setting up an account
 
 _To be written._
 
-## Searching in Chinese when you cannot read Chinese
+## Searching in Chinese when you can't read Chinese
 
 _To be written._
 
-## Delivery to campus and pickup lockers
+## Delivery to campus, and the pickup lockers
 
 _To be written._
 

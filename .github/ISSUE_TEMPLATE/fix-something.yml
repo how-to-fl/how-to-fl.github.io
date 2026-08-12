@@ -1,14 +1,14 @@
 name: Something here is wrong or out of date
-description: A closed restaurant, a changed visa rule, a broken link, a bad recommendation.
+description: A place that's closed, a visa rule that's changed, a broken link, a recommendation that's gone downhill.
 title: "[fix] "
 labels: ["correction"]
 body:
   - type: markdown
     attributes:
       value: |
-        Corrections are the most valuable thing you can send. A guide people trust
-        is worth more than a guide that is merely comprehensive — and it stays
-        trustworthy only because people report what's gone stale.
+        Corrections are genuinely the most useful thing you can send us. A guide people
+        trust beats a guide that's merely thorough — and it only stays trustworthy because
+        people like you tell us when it's gone stale.
 
   - type: input
     id: where
@@ -21,7 +21,7 @@ body:
   - type: textarea
     id: what
     attributes:
-      label: What's wrong?
+      label: What's wrong with it?
     validations:
       required: true
 
@@ -29,7 +29,7 @@ body:
     id: correct
     attributes:
       label: What should it say instead?
-      description: If you know. If you don't, say so — flagging it is already useful.
+      description: If you know. If you don't, just say so — flagging it is already plenty.
 
   - type: input
     id: when

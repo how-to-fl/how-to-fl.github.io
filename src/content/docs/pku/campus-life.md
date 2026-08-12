@@ -1,16 +1,16 @@
 ---
 title: "Campus life"
-description: "Global Village, dorms, laundry, and finding your way around a very large campus."
+description: "Global Village, your room, laundry, and finding your way round a very large campus."
 status: stub
 sidebar:
   order: 1
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
-## Global Village: check-in and what to expect
+## Global Village: checking in, and what to expect
 
 _To be written._
 
@@ -18,7 +18,7 @@ _To be written._
 
 _To be written._
 
-## Laundry, water, heating
+## Laundry, hot water, heating
 
 _To be written._
 
@@ -26,7 +26,7 @@ _To be written._
 
 _To be written._
 
-## Where to study
+## Where we actually study
 
 _To be written._
 

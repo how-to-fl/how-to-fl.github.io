@@ -60,9 +60,9 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 ---
 
 <div class="fl-map-wrap">
-	<div class="fl-map-filters" role="group" aria-label="Filter places by category">
+	<div class="fl-map-filters" role="group" aria-label="Show only one kind of place">
 		<button type="button" class="fl-chip is-on" data-category="all" aria-pressed="true">
-			All <span class="fl-chip-count">{geojson.features.length}</span>
+			Everything <span class="fl-chip-count">{geojson.features.length}</span>
 		</button>
 		{
 			present.map((c) => (
@@ -81,7 +81,7 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 		id="fl-map"
 		class="fl-map"
 		role="application"
-		aria-label="Map of places in Beijing recommended by the cohorts"
+		aria-label="Map of places in Beijing we have recommended"
 		tabindex="0"
 	>
 	</div>
@@ -90,17 +90,17 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 
 	<noscript>
 		<p class="fl-map-fallback">
-			The map needs JavaScript. Every place on it is also listed in
+			The map needs JavaScript to work. Everything on it is also written out in
 			<a href="https://github.com/how-to-fl/how-to-fl.github.io/blob/main/data/places.yaml">
 				data/places.yaml
-			</a>, with addresses in Chinese.
+			</a>, Chinese addresses and all.
 		</p>
 	</noscript>
 
 	<p class="fl-map-credit">
 		Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors ·
 		basemap by <a href="https://protomaps.com">Protomaps</a> · {geojson.features.length} places
-		added by the cohorts
+		added by us
 	</p>
 </div>
 
@@ -133,6 +133,8 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 			NavigationControl,
 			AttributionControl,
 			ScaleControl,
+			FullscreenControl,
+			GeolocateControl,
 			LngLatBounds,
 			addProtocol,
 		} = await import(/* @vite-ignore */ `${VENDOR}/maplibre-gl.mjs`);
@@ -252,6 +254,12 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 			localIdeographFontFamily:
 				"'Noto Sans CJK SC','PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif",
 			attributionControl: false,
+			// Wheel-zoom needs ctrl/⌘, and one-finger drag scrolls the page rather
+			// than panning. Without this the map hijacks your scroll the moment you
+			// read past it, which on a long page is maddening.
+			cooperativeGestures: true,
+			// Keyboard: +/- to zoom, arrows to pan, once the map has focus.
+			keyboard: true,
 		});
 
 		// --- Load state ---------------------------------------------------------
@@ -288,12 +296,20 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 			if (!ready) {
 				setState(
 					'error',
-					'The map could not load. Every place on it is also listed in data/places.yaml in the repository, with Chinese addresses.'
+					"We couldn't load the map — it may be blocked or just very slow from where you are. Everything on it is also written out in data/places.yaml in our repo, Chinese addresses and all."
 				);
 			}
 		}, 10000);
 
-		map.addControl(new NavigationControl({ showCompass: false }), 'top-right');
+		// Zoom controls. Buttons and keyboard +/- always work; scroll-wheel zoom
+		// needs ctrl/⌘ held (cooperativeGestures, set on the Map above) so the map
+		// doesn't swallow the page scroll when you're just reading past it.
+		map.addControl(new NavigationControl({ showCompass: false, showZoom: true }), 'top-right');
+		map.addControl(new FullscreenControl(), 'top-right');
+		map.addControl(
+			new GeolocateControl({ trackUserLocation: true, positionOptions: { enableHighAccuracy: true } }),
+			'top-right'
+		);
 		map.addControl(
 			new AttributionControl({ compact: true, customAttribution: '© Protomaps' }),
 			'bottom-right'
@@ -407,6 +423,28 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 			}
 		}
 
+		/** Zoom to whatever is currently showing, so filtering actually takes you
+		 *  there instead of just hiding the other pins. */
+		function zoomToVisible() {
+			const visible = geojson.features.filter(
+				(f: any) => activeCategory === 'all' || f.properties.category === activeCategory
+			);
+			if (!visible.length) return;
+
+			if (visible.length === 1) {
+				map.easeTo({
+					center: visible[0].geometry.coordinates,
+					zoom: 16,
+					duration: reduceMotion ? 0 : 700,
+				});
+				return;
+			}
+
+			const b = new LngLatBounds();
+			visible.forEach((f: any) => b.extend(f.geometry.coordinates));
+			map.fitBounds(b, { padding: 70, maxZoom: 16, duration: reduceMotion ? 0 : 700 });
+		}
+
 		document.querySelectorAll<HTMLButtonElement>('.fl-chip').forEach((chip) => {
 			chip.addEventListener('click', () => {
 				activeCategory = chip.dataset.category || 'all';
@@ -417,6 +455,7 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 				});
 				popup?.remove();
 				applyFilter();
+				zoomToVisible();
 			});
 		});
 

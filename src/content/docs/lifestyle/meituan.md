@@ -1,14 +1,14 @@
 ---
 title: "美团 must-haves"
-description: "Food delivery, groceries, bikes, and everything else Meituan quietly does."
+description: "Food delivery, groceries, bikes, and everything else Meituan quietly does for you."
 status: stub
 sidebar:
   order: 3
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## Setting it up with a foreign card
 
@@ -18,7 +18,7 @@ _To be written._
 
 _To be written._
 
-## Groceries and daily necessities
+## Groceries and everyday stuff
 
 _To be written._
 
@@ -26,6 +26,6 @@ _To be written._
 
 _To be written._
 
-## The things people miss
+## Things most people miss
 
 _To be written._

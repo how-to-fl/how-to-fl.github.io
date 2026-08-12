@@ -1,51 +1,57 @@
 ---
 title: "The map"
-description: "Every place the cohorts have recommended, on one map — with the Chinese address ready to copy."
+description: "Everywhere we've recommended, on one map — with the Chinese address ready to copy."
 last_verified: 2026-08
 status: live
 ---
 
 import BeijingMap from '../../components/BeijingMap.astro';
 
-Everywhere the cohorts have recommended. Click a pin for the details, and use
-**Copy address** to get the Chinese address onto your clipboard — that is the version
-you show a taxi driver or paste into Didi.
+Everywhere we've recommended. Click a pin for the details, and hit **Copy address** to get
+the Chinese address onto your clipboard — that's the bit you show a taxi driver or paste
+into Didi.
 
 <BeijingMap />
 
-## Adding a place
+**Moving around:** use the **+ / −** buttons, or hold <kbd>ctrl</kbd> (<kbd>⌘</kbd> on a Mac)
+while you scroll. We made scrolling need a modifier key on purpose, so the map doesn't
+hijack the page when you're just reading past it. The **⛶** button goes fullscreen, which is
+what you want if you're actually planning an evening. Tap a category and we'll zoom you to
+those pins.
 
-Two ways, and neither needs you to write code.
+## Adding somewhere
 
-**If GitHub loads for you**, [open the "add a place" form](https://github.com/how-to-fl/how-to-fl.github.io/issues/new/choose)
-— five fields, and a maintainer merges it.
+Two ways, neither of which involves writing code.
 
-**If GitHub does not load** — and from a Beijing connection it often won't — send it by
-WeChat or email, or bring it to the next contribution sprint. Someone will add it.
+**If GitHub loads for you**, [fill in the "add a place" form](https://github.com/how-to-fl/how-to-fl.github.io/issues/new/choose)
+— five fields, and one of us merges it.
+
+**If GitHub won't load** — and from Beijing it often won't — WeChat or email it to one of
+us, or bring it to the next contribution session. Someone will add it for you.
 
 ### Getting the coordinates right
 
-This is the one thing worth being careful about.
+This is the one bit worth being fussy about.
 
-China mandates an offset coordinate system. **Amap (高德) and Tencent use GCJ-02, Baidu
-uses BD-09**, and this map uses WGS-84, the same system as GPS and OpenStreetMap. A
-coordinate copied out of a Chinese map app lands **300–500 metres** from where you meant
-— far enough to point at the wrong side of a six-lane road.
+China mandates an offset coordinate system. **Amap (高德) and Tencent use GCJ-02, Baidu uses
+BD-09**, and our map uses WGS-84 — the same thing GPS and OpenStreetMap use. Anything you
+copy out of a Chinese map app lands **300–500 metres** from where you meant, which is far
+enough to send someone to the wrong side of a six-lane road.
 
-To get a correct coordinate: find the place on
-[openstreetmap.org](https://www.openstreetmap.org), right-click the spot, and choose
-"Show address". The numbers in the URL are WGS-84.
+To get one that works: find the place on
+[openstreetmap.org](https://www.openstreetmap.org), right-click the spot, choose "Show
+address", and read the numbers out of the URL.
 
-If you are not sure, **leave the coordinates out** and describe where it is instead.
-A missing coordinate is a small job for a maintainer; a wrong one is invisible until
-somebody is lost. The build also rejects anything outside greater Beijing, so a badly
-mistaken coordinate gets caught automatically — but one that is merely 400 m off will not be.
+Honestly though — if you're not sure, **just leave the coordinates out** and tell us roughly
+where it is. A blank is a two-minute job for whoever merges it; a wrong one is invisible
+until somebody's lost. Our build rejects anything outside greater Beijing, so a wildly wrong
+number gets caught, but one that's merely 400 m off sails straight through.
 
 ## Why the map looks like this
 
-The basemap is a single 40 MB file served from this site, not from Google or Amap. Your
-browser reads only the few kilobytes it needs for the area you are looking at.
+The basemap is a single 40 MB file we serve ourselves, not something borrowed from Google or
+Amap. Your browser only pulls the few kilobytes it needs for wherever you're looking.
 
-That is deliberate: a map that depends on a third-party service is a map that stops
-working the day that service becomes unreachable, and it would take the rest of the page
-down with it. Chinese labels are drawn using your own device's fonts.
+That's deliberate. A map that leans on someone else's service is a map that dies the day
+that service becomes unreachable from here — and it'd take the rest of the page down with
+it. Chinese labels get drawn using the fonts already on your device.

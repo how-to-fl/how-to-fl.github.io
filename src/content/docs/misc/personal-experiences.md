@@ -1,14 +1,14 @@
 ---
-title: "Personal experiences"
-description: "The longer, more honest pieces that do not fit anywhere else."
+title: "Personal write-ups"
+description: "The longer, more honest pieces that don't fit anywhere tidy."
 status: stub
 sidebar:
   order: 7
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## Add yours
 

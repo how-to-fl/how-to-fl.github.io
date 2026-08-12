@@ -1,14 +1,14 @@
 ---
-title: "Living as yourself"
-description: "Queer life, women's safety, being visibly foreign, religious practice, accessibility."
+title: "Living here as yourself"
+description: "Queer life, women's safety, being visibly foreign, faith, and getting around with a disability."
 status: stub
 sidebar:
   order: 6
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## Queer life in Beijing
 
@@ -18,14 +18,14 @@ _To be written._
 
 _To be written._
 
-## Being visibly foreign or a person of colour
+## Being visibly foreign, or a person of colour
 
 _To be written._
 
-## Religious practice
+## Practising your faith
 
 _To be written._
 
-## Accessibility
+## Getting around with a disability
 
 _To be written._

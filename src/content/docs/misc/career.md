@@ -1,16 +1,16 @@
 ---
-title: "Career and internships"
-description: "Internship legality on a student visa, and recruiting from six timezones away."
+title: "Internships and careers"
+description: "What you're allowed to do on a student visa, and recruiting six timezones from home."
 status: stub
 sidebar:
   order: 4
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
-## Internship legality on an X1 visa
+## What's legal on an X1 visa
 
 _To be written._
 
@@ -18,14 +18,14 @@ _To be written._
 
 _To be written._
 
-## Recruiting back home from Beijing
+## Recruiting back home from here
 
 _To be written._
 
-## LinkedIn's limits in China
+## LinkedIn barely works — what to do instead
 
 _To be written._
 
-## Networking
+## Meeting people
 
 _To be written._

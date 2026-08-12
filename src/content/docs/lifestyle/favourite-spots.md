@@ -1,14 +1,14 @@
 ---
-title: "Favourite spots in Beijing"
-description: "Restaurants worth the trip, by neighbourhood and by craving."
+title: "Where we actually eat"
+description: "Places worth the trip, by neighbourhood and by what you're craving."
 status: stub
 sidebar:
   order: 1
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## Near campus
 
@@ -18,11 +18,11 @@ _To be written._
 
 _To be written._
 
-## Regional Chinese cuisines
+## Regional Chinese food
 
 _To be written._
 
-## Non-Chinese food when you need it
+## When you need something that isn't Chinese
 
 _To be written._
 

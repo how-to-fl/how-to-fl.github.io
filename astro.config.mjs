@@ -26,11 +26,11 @@ export default defineConfig({
 			// contributor who adds a Markdown file gets it in the nav for free.
 			// Note: as of Starlight 0.39 `autogenerate` must sit inside `items`.
 			sidebar: [
-				{ label: 'How to use this guide', slug: 'how-to-use-this' },
+				{ label: 'How this guide works', slug: 'how-to-use-this' },
 				{ label: 'The map', slug: 'map' },
-				{ label: 'In an emergency', slug: 'emergency' },
+				{ label: "When something's gone wrong", slug: 'emergency' },
 				{
-					label: '1 · China — arriving & first 72h',
+					label: '1 · China — landing & first 72h',
 					items: [{ autogenerate: { directory: 'china' } }],
 				},
 				{
@@ -42,7 +42,7 @@ export default defineConfig({
 					items: [{ autogenerate: { directory: 'lifestyle' } }],
 				},
 				{
-					label: 'Miscellaneous',
+					label: 'Everything else',
 					collapsed: true,
 					items: [{ autogenerate: { directory: 'misc' } }],
 				},

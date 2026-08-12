@@ -1,16 +1,16 @@
 ---
-title: "Health and medical care"
-description: "Campus clinic vs international clinics, what insurance reimburses, mental health support."
+title: "Health and seeing a doctor"
+description: "Campus clinic vs international clinics, what insurance pays back, and mental health support."
 status: stub
 sidebar:
   order: 5
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
-## Campus clinic
+## The campus clinic
 
 _To be written._
 
@@ -18,11 +18,11 @@ _To be written._
 
 _To be written._
 
-## What PKU insurance reimburses, and how to claim
+## What PKU insurance actually pays back, and how to claim
 
 _To be written._
 
-## English-speaking mental health support
+## Mental health support in English
 
 _To be written._
 

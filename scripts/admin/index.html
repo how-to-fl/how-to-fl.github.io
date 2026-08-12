@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>how to FL — admin</title>
+<style>
+	:root {
+		--bg: #f3f6f4; --surface: #fff; --sunk: #eaefec;
+		--ink: #141d1b; --muted: #5f6d6a; --faint: #8a9793;
+		--jade: #1c6b58; --jade-soft: #e2efea;
+		--red: #a8442c; --red-soft: #f8e9e4;
+		--border: #dbe3e0;
+	}
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--bg: #0e1413; --surface: #161d1b; --sunk: #111817;
+			--ink: #e9f0ed; --muted: #94a29e; --faint: #6d7b77;
+			--jade: #63c4a7; --jade-soft: #142c26;
+			--red: #e08a6d; --red-soft: #2e1d17;
+			--border: #263230;
+		}
+	}
+	* { box-sizing: border-box; }
+	body {
+		margin: 0; background: var(--bg); color: var(--ink); line-height: 1.55;
+		font-family: system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 15px;
+	}
+	header {
+		background: var(--surface); border-bottom: 1px solid var(--border);
+		padding: 1rem 1.5rem; display: flex; align-items: center; gap: 1.25rem;
+		position: sticky; top: 0; z-index: 10; flex-wrap: wrap;
+	}
+	h1 { font-size: 1.05rem; margin: 0; font-weight: 650; }
+	h1 span { color: var(--jade); }
+	.tabs { display: flex; gap: .35rem; }
+	.tab {
+		font: inherit; font-size: .87rem; background: none; color: var(--muted);
+		border: 1px solid transparent; border-radius: .4rem; padding: .3rem .8rem; cursor: pointer;
+	}
+	.tab:hover { color: var(--ink); }
+	.tab.on { background: var(--jade); border-color: var(--jade); color: #fff; font-weight: 600; }
+	.hint { margin-left: auto; font-size: .78rem; color: var(--faint); }
+	main { max-width: 68rem; margin: 0 auto; padding: 1.5rem; }
+	.panel { display: none; }
+	.panel.on { display: block; }
+	.bar { display: flex; gap: .6rem; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; }
+	button {
+		font: inherit; font-size: .87rem; border-radius: .4rem; padding: .4rem .9rem;
+		cursor: pointer; border: 1px solid var(--border); background: var(--surface); color: var(--ink);
+	}
+	button:hover { border-color: var(--jade); }
+	button.primary { background: var(--jade); border-color: var(--jade); color: #fff; font-weight: 600; }
+	button.danger { color: var(--red); border-color: var(--red); background: transparent; }
+	button:disabled { opacity: .5; cursor: default; }
+	input, select, textarea {
+		font: inherit; font-size: .87rem; width: 100%; padding: .4rem .55rem;
+		border: 1px solid var(--border); border-radius: .35rem;
+		background: var(--surface); color: var(--ink);
+	}
+	textarea { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; line-height: 1.6; resize: vertical; }
+	input:focus, select:focus, textarea:focus { outline: 2px solid var(--jade); outline-offset: -1px; border-color: var(--jade); }
+	label { display: block; font-size: .7rem; text-transform: uppercase; letter-spacing: .08em;
+		color: var(--faint); font-weight: 650; margin-bottom: .2rem; }
+	.card { background: var(--surface); border: 1px solid var(--border); border-radius: .55rem; padding: 1rem 1.1rem; margin-bottom: .75rem; }
+	.grid { display: grid; gap: .7rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); }
+	.grid .wide { grid-column: 1 / -1; }
+	.row-head { display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem; }
+	.row-head strong { font-size: .95rem; }
+	.dot { width: .6rem; height: .6rem; border-radius: 50%; background: var(--faint); flex: none; }
+	.msg { border-radius: .45rem; padding: .7rem .9rem; margin-bottom: 1rem; font-size: .85rem; }
+	.msg.ok { background: var(--jade-soft); color: var(--jade); border-left: 3px solid var(--jade); }
+	.msg.bad { background: var(--red-soft); color: var(--red); border-left: 3px solid var(--red); }
+	.msg ul { margin: .4rem 0 0; padding-left: 1.1rem; }
+	.pagelist { display: grid; gap: .3rem; }
+	.pageitem {
+		display: flex; align-items: center; gap: .7rem; width: 100%; text-align: left;
+		padding: .5rem .7rem; border-radius: .4rem; border: 1px solid var(--border); background: var(--surface);
+	}
+	.pageitem:hover { border-color: var(--jade); }
+	.pageitem.on { border-color: var(--jade); background: var(--jade-soft); }
+	.pageitem .p { color: var(--faint); font-size: .74rem; margin-left: auto; font-family: ui-monospace, Menlo, monospace; }
+	.badge { font-size: .62rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 700;
+		padding: .1rem .4rem; border-radius: .8rem; border: 1px solid var(--border); color: var(--muted); }
+	.badge.stub { color: var(--red); border-color: var(--red); }
+	.badge.live { color: var(--jade); border-color: var(--jade); }
+	.split { display: grid; gap: 1.2rem; grid-template-columns: 1fr; }
+	@media (min-width: 60rem) { .split { grid-template-columns: 19rem 1fr; align-items: start; } }
+	.sticky { position: sticky; top: 5rem; max-height: 78vh; overflow-y: auto; }
+	.note { font-size: .78rem; color: var(--muted); margin: .3rem 0 0; }
+	.warn { background: var(--red-soft); border-left: 3px solid var(--red); padding: .7rem .9rem;
+		border-radius: .45rem; font-size: .82rem; margin-bottom: 1.2rem; }
+	.empty { color: var(--faint); font-size: .87rem; padding: 2rem; text-align: center; }
+</style>
+</head>
+<body>
+
+<header>
+	<h1>how to FL <span>admin</span></h1>
+	<div class="tabs">
+		<button class="tab on" data-panel="places">Places on the map</button>
+		<button class="tab" data-panel="pages">Page text</button>
+	</div>
+	<p class="hint">Editing files on your laptop — commit when you're done</p>
+</header>
+
+<main>
+	<!-- ============================ PLACES ============================ -->
+	<section class="panel on" id="panel-places">
+		<div class="warn">
+			<strong>Coordinates have to be WGS-84.</strong> Amap (高德) and Baidu use a deliberately
+			offset system, so anything you copy from them lands 300–500 m from where you meant.
+			Grab coordinates from <a href="https://www.openstreetmap.org" target="_blank" rel="noopener">openstreetmap.org</a>
+			— right-click the spot, "Show address", read the numbers out of the URL. Not sure? Leave
+			them blank and describe the place instead; we'd rather fill in a gap than chase a wrong pin.
+		</div>
+
+		<div class="bar">
+			<button class="primary" id="add-place">+ Add a place</button>
+			<button id="save-places">Save all places</button>
+			<input id="filter" placeholder="Filter…" style="max-width:14rem" aria-label="Filter places">
+			<span class="hint" id="place-count"></span>
+		</div>
+
+		<div id="places-msg"></div>
+		<div id="places-list"></div>
+	</section>
+
+	<!-- ============================= PAGES ============================= -->
+	<section class="panel" id="panel-pages">
+		<div class="split">
+			<div class="sticky">
+				<div class="bar"><input id="page-filter" placeholder="Filter pages…" aria-label="Filter pages"></div>
+				<div class="pagelist" id="pages-list"></div>
+			</div>
+			<div>
+				<div id="page-msg"></div>
+				<div id="page-editor"><p class="empty">Pick a page on the left to start editing.</p></div>
+			</div>
+		</div>
+	</section>
+</main>
+
+<script>
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const COLORS = { food:'#e07a3f', bar:'#8e5ea2', club:'#d4568c', cafe:'#a2703f', shop:'#3d8bcd',
+                 clinic:'#d64545', sport:'#4a9d5f', study:'#6b7b8c', landmark:'#1c6b58', service:'#8a8f98' };
+
+let CATEGORIES = [];
+let places = [];
+let pages = [];
+let current = null;
+
+function msg(el, kind, text, list) {
+	if (!text) return void (el.innerHTML = '');
+	el.innerHTML = `<div class="msg ${kind}">${esc(text)}${
+		list?.length ? `<ul>${list.map(p => `<li>${esc(p)}</li>`).join('')}</ul>` : ''}</div>`;
+}
+
+// ------------------------------- tabs -------------------------------
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+	document.querySelectorAll('.tab').forEach(x => x.classList.toggle('on', x === t));
+	document.querySelectorAll('.panel').forEach(p => p.classList.toggle('on', p.id === 'panel-' + t.dataset.panel));
+}));
+
+// ------------------------------ places ------------------------------
+function placeCard(p, i) {
+	const opts = CATEGORIES.map(c => `<option value="${c}"${p.category === c ? ' selected' : ''}>${c}</option>`).join('');
+	return `
+	<div class="card" data-i="${i}">
+		<div class="row-head">
+			<span class="dot" style="background:${COLORS[p.category] || '#8a8f98'}"></span>
+			<strong>${esc(p.name_en || 'New place')}</strong>
+			<button class="danger" data-del="${i}" style="margin-left:auto">Remove</button>
+		</div>
+		<div class="grid">
+			<div><label>Name (English)</label><input data-f="name_en" value="${esc(p.name_en)}"></div>
+			<div><label>Name (中文)</label><input data-f="name_zh" value="${esc(p.name_zh)}"></div>
+			<div><label>Category</label><select data-f="category">${opts}</select></div>
+			<div class="wide"><label>Address (中文) — this is what you show a taxi driver</label>
+				<input data-f="address_zh" value="${esc(p.address_zh)}"></div>
+			<div><label>Latitude (WGS-84)</label><input data-f="lat" value="${esc(p.lat)}" placeholder="39.9926"></div>
+			<div><label>Longitude (WGS-84)</label><input data-f="lng" value="${esc(p.lng)}" placeholder="116.3105"></div>
+			<div><label>Nearest metro</label><input data-f="metro" value="${esc(p.metro)}" placeholder="Line 4"></div>
+			<div><label>Price</label><input data-f="price" value="${esc(p.price)}" placeholder="¥¥"></div>
+			<div class="wide"><label>Why is it worth going?</label>
+				<input data-f="note" value="${esc(p.note)}" placeholder="Best 麻辣烫 near campus, open till 3am"></div>
+			<div><label>Who added it</label><input data-f="recommended_by" value="${esc(p.recommended_by)}" placeholder="Cohort 7"></div>
+			<div><label>Last checked</label><input data-f="last_verified" value="${esc(p.last_verified)}" placeholder="2026-08"></div>
+		</div>
+	</div>`;
+}
+
+function renderPlaces() {
+	const q = $('#filter').value.toLowerCase();
+	const list = $('#places-list');
+	const shown = places.map((p, i) => [p, i]).filter(([p]) =>
+		!q || JSON.stringify(p).toLowerCase().includes(q));
+	list.innerHTML = shown.length
+		? shown.map(([p, i]) => placeCard(p, i)).join('')
+		: '<p class="empty">Nothing matches that filter.</p>';
+	$('#place-count').textContent = `${places.length} place${places.length === 1 ? '' : 's'}`;
+}
+
+$('#places-list').addEventListener('input', e => {
+	const f = e.target.dataset.f; if (!f) return;
+	const i = +e.target.closest('[data-i]').dataset.i;
+	places[i][f] = e.target.value;
+	if (f === 'category') renderPlaces();
+});
+
+$('#places-list').addEventListener('click', e => {
+	const del = e.target.dataset.del; if (del === undefined) return;
+	const p = places[+del];
+	if (confirm(`Remove "${p.name_en || 'this place'}" from the map?`)) {
+		places.splice(+del, 1); renderPlaces();
+	}
+});
+
+$('#filter').addEventListener('input', renderPlaces);
+
+$('#add-place').addEventListener('click', () => {
+	const now = new Date();
+	places.unshift({
+		name_en: '', name_zh: '', address_zh: '', category: 'food',
+		lat: '', lng: '', metro: '', price: '', note: '', recommended_by: '',
+		last_verified: `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}`,
+	});
+	$('#filter').value = ''; renderPlaces();
+	$('#places-list .card input')?.focus();
+});
+
+$('#save-places').addEventListener('click', async () => {
+	const btn = $('#save-places'); btn.disabled = true; btn.textContent = 'Saving…';
+	const r = await fetch('/api/places', {
+		method: 'PUT', headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify({ places }),
+	});
+	const d = await r.json();
+	if (r.ok) msg($('#places-msg'), 'ok', `Saved ${d.count} places. Commit when you're ready.`);
+	else msg($('#places-msg'), 'bad', d.error || 'Could not save', d.problems);
+	btn.disabled = false; btn.textContent = 'Save all places';
+	window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ------------------------------- pages -------------------------------
+function renderPageList() {
+	const q = $('#page-filter').value.toLowerCase();
+	$('#pages-list').innerHTML = pages
+		.filter(p => !q || (p.title + p.path).toLowerCase().includes(q))
+		.map(p => `<button class="pageitem${current === p.path ? ' on' : ''}" data-path="${esc(p.path)}">
+			<span>${esc(p.title)}</span>
+			${p.status ? `<span class="badge ${esc(p.status)}">${esc(p.status)}</span>` : ''}
+			<span class="p">${esc(p.section)}</span></button>`).join('')
+		|| '<p class="empty">No pages match.</p>';
+}
+
+$('#page-filter').addEventListener('input', renderPageList);
+
+$('#pages-list').addEventListener('click', async e => {
+	const btn = e.target.closest('[data-path]'); if (!btn) return;
+	current = btn.dataset.path; renderPageList(); msg($('#page-msg'), '', '');
+	const d = await (await fetch('/api/page?path=' + encodeURIComponent(current))).json();
+	const fm = d.frontmatter || {};
+	$('#page-editor').innerHTML = `
+		<div class="card">
+			<div class="grid">
+				<div class="wide"><label>Title</label><input id="f-title" value="${esc(fm.title)}"></div>
+				<div class="wide"><label>Description — this is what shows up in search results</label>
+					<input id="f-desc" value="${esc(fm.description)}"></div>
+				<div><label>Status</label><select id="f-status">
+					${['stub','draft','live'].map(s => `<option${fm.status === s ? ' selected' : ''}>${s}</option>`).join('')}
+				</select></div>
+				<div><label>Last checked</label><input id="f-verified" value="${esc(fm.last_verified)}" placeholder="2026-08"></div>
+				<div><label>Who looks after it</label><input id="f-owner" value="${esc(fm.owner)}" placeholder="cohort-7-name"></div>
+			</div>
+			<p class="note">Bump "last checked" when you've <em>confirmed</em> something is still true —
+				not just when you edit the wording. Readers rely on that date, and anything over a year
+				old shouts a warning at them.</p>
+		</div>
+		<div class="card">
+			<label>Page content (Markdown)</label>
+			<textarea id="f-body" rows="26">${esc(d.body)}</textarea>
+			<div class="bar" style="margin:.8rem 0 0">
+				<button class="primary" id="save-page">Save this page</button>
+				<span class="hint">${esc(current)}</span>
+			</div>
+		</div>`;
+
+	$('#save-page').addEventListener('click', async () => {
+		const b = $('#save-page'); b.disabled = true; b.textContent = 'Saving…';
+		const frontmatter = { ...fm, title: $('#f-title').value, description: $('#f-desc').value,
+			status: $('#f-status').value };
+		const v = $('#f-verified').value.trim(); const o = $('#f-owner').value.trim();
+		if (v) frontmatter.last_verified = v; else delete frontmatter.last_verified;
+		if (o) frontmatter.owner = o; else delete frontmatter.owner;
+
+		const r = await fetch('/api/page', { method: 'PUT', headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ path: current, frontmatter, body: $('#f-body').value }) });
+		const res = await r.json();
+		if (r.ok) { msg($('#page-msg'), 'ok', 'Saved. Commit when you’re ready.'); await loadPages(); }
+		else msg($('#page-msg'), 'bad', res.error || 'Could not save');
+		b.disabled = false; b.textContent = 'Save this page';
+	});
+});
+
+// ------------------------------- boot -------------------------------
+async function loadPages() {
+	pages = (await (await fetch('/api/pages')).json()).pages;
+	renderPageList();
+}
+
+(async function boot() {
+	CATEGORIES = (await (await fetch('/api/meta')).json()).categories;
+	places = (await (await fetch('/api/places')).json()).places;
+	renderPlaces();
+	await loadPages();
+})();
+</script>
+</body>
+</html>

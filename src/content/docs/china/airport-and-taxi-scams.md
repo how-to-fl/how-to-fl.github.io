@@ -6,19 +6,19 @@ sidebar:
   order: 2
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
-## Which airport you land at: PEK vs Daxing
-
-_To be written._
-
-## The taxi scam, specifically, and how to avoid it
+## PEK or Daxing — which one you're landing at
 
 _To be written._
 
-## Metro, Airport Express, Didi, official taxi — what to actually take
+## The taxi scam, and how to not fall for it
+
+_To be written._
+
+## Metro, Airport Express, Didi, official taxi — what we'd actually take
 
 _To be written._
 
@@ -26,6 +26,6 @@ _To be written._
 
 _To be written._
 
-## Roughly what it should cost
+## Roughly what it should cost you
 
 _To be written._

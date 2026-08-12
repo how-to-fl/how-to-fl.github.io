@@ -1,14 +1,14 @@
 name: Add a place to the map
-description: A restaurant, bar, café, clinic, gym, study spot — anything worth pinning.
+description: A restaurant, bar, café, clinic, gym, study spot — anything you'd send a friend to.
 title: "[place] "
 labels: ["place"]
 body:
   - type: markdown
     attributes:
       value: |
-        Fill in what you know. If you can't find the coordinates, leave them blank
-        and say roughly where it is — a maintainer will look them up. Don't let a
-        missing field stop you submitting.
+        Fill in what you know. Can't find the coordinates? Leave them blank and tell us
+        roughly where it is — one of us will look them up. Please don't let a missing
+        field stop you hitting submit.
 
   - type: input
     id: name_en
@@ -30,7 +30,7 @@ body:
     id: address_zh
     attributes:
       label: Address in Chinese
-      description: This is what gets a copy button on the site, for showing a taxi driver or pasting into Didi. Worth getting right.
+      description: This is the bit we put a copy button on, so you can show it to a taxi driver or paste it into Didi. Worth getting right.
       placeholder: 北京市朝阳区三里屯...
     validations:
       required: true
@@ -59,8 +59,8 @@ body:
       label: Coordinates (optional)
       description: >
         WGS-84 only. Find it on openstreetmap.org, right-click the spot, "Show address" —
-        the numbers in the URL are correct. Do NOT copy from Amap/高德 or Baidu: they use a
-        different, deliberately offset system, and the pin will land 300–500m away.
+        the numbers in the URL are the ones we want. Please don't copy from Amap/高德 or
+        Baidu: they use a deliberately offset system and your pin will land 300–500m away.
       placeholder: "39.9345, 116.4477"
 
   - type: input
@@ -84,7 +84,7 @@ body:
     id: note
     attributes:
       label: Why is it worth going?
-      description: One or two sentences. Specific beats enthusiastic — "best 麻辣烫 near campus, open till 3am" tells someone more than "amazing place!!".
+      description: A sentence or two. Specific beats enthusiastic — "best 麻辣烫 near campus, open till 3am" tells us far more than "amazing place!!".
 
   - type: input
     id: recommended_by

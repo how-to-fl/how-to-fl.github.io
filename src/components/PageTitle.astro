@@ -42,10 +42,12 @@ const verifiedLabel = last_verified
 {
 	status === 'stub' && (
 		<p class="fl-note fl-note--stub">
-			<strong>This page is a stub.</strong> The structure is here but nobody has written it yet.
-			{owner ? ` Owner: ${owner}.` : ' It has no owner — claim it.'} See{' '}
+			<strong>Nobody's written this one yet.</strong> We've laid out the headings; the words are
+			missing.
+			{owner ? ` ${owner} looks after it.` : " It's nobody's yet — take it?"} Filling in a single
+			heading counts, and{' '}
 			<a href="https://github.com/how-to-fl/how-to-fl.github.io/blob/main/CONTRIBUTING.md">
-				how to contribute
+				here's how
 			</a>
 			.
 		</p>
@@ -55,14 +57,15 @@ const verifiedLabel = last_verified
 {
 	isStale && (
 		<p class="fl-note fl-note--stale">
-			<strong>Not checked since {verifiedLabel}.</strong> Visa rules, prices and opening hours all
-			move. Treat this as a starting point and verify anything that matters.
+			<strong>None of us has checked this since {verifiedLabel}.</strong> Prices move, places
+			close, and visa rules change without telling anyone — so treat this as a starting point and
+			double-check anything that actually matters to you.
 		</p>
 	)
 }
 
 {
 	!isStale && verifiedLabel && status !== 'stub' && (
-		<p class="fl-verified">Last checked {verifiedLabel}{owner ? ` · ${owner}` : ''}</p>
+		<p class="fl-verified">One of us checked this in {verifiedLabel}{owner ? ` · ${owner}` : ''}</p>
 	)
 }

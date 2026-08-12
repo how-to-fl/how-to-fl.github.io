@@ -1,14 +1,14 @@
 ---
-title: "The year, month by month"
-description: "Air quality, weather, festivals, and when campus goes quiet or mad."
+title: "What each month is actually like"
+description: "Air quality, weather, festivals, and when campus goes quiet or completely mad."
 status: stub
 sidebar:
   order: 3
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## Autumn semester
 

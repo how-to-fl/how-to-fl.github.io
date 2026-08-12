@@ -1,27 +1,27 @@
 ---
 title: "Scams and staying safe"
-description: "The specific scams that target new arrivals, beyond the taxi one."
+description: "The cons that specifically target new arrivals — beyond the taxi one."
 status: stub
 sidebar:
   order: 6
 ---
 
-The headings below are the intended structure. Replace each `_To be written._`
-with what you actually know — short and specific beats long and vague, and filling
-in a single heading is a complete contribution.
+We've laid out the headings we think this page needs. Swap each `_To be written._`
+for what you actually know — short and specific beats long and vague, and filling in
+one heading is a proper contribution. You don't have to do the whole thing.
 
 ## Tea house and bar scams
 
 _To be written._
 
-## Fake goods and payment scams
+## Fake goods and dodgy payments
 
 _To be written._
 
-## Street safety
+## Out and about
 
 _To be written._
 
-## What to do if something happens
+## If something does happen
 
 _To be written._
