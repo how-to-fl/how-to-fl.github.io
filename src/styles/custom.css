@@ -43,6 +43,45 @@
 	letter-spacing: 0.02em;
 }
 
+/* --- Landing page: the row of function buttons --- */
+
+.fl-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.6rem;
+	margin-block: 1.5rem 0;
+}
+
+/* --- Landing page: the three big categories --- */
+
+.fl-categories {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1rem;
+	margin-block: 1.5rem;
+}
+
+@media (min-width: 60rem) {
+	.fl-categories {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* Starlight's Card carries a top margin for vertical stacking, which knocks the
+   second and third cards 16px lower than the first once they sit in a grid row.
+   The gap handles spacing here, so clear it.
+   Note: plain `.card`, not `:global(.card)` — :global() is Astro scoped-style
+   syntax and is silently dropped from a stylesheet loaded via customCss. */
+.fl-categories > .card {
+	margin: 0;
+	height: 100%;
+	border-top: 3px solid var(--sl-color-accent);
+}
+
+.fl-categories p {
+	font-size: var(--sl-text-sm);
+}
+
 /* --- Copy-to-clipboard button for Chinese addresses --- */
 
 .fl-copy {

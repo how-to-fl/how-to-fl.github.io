@@ -2,65 +2,139 @@
 title: how to FL
 description: A survival guide for Future Leaders arriving in Beijing. Written by the cohorts, for the cohorts.
 template: splash
+editUrl: false
 hero:
-  tagline: Everything the last cohort wishes someone had told them. Written by people who just did it.
-  actions:
-    - text: Landing in Beijing soon?
-      link: /arrival/first-72-hours/
-      icon: right-arrow
-      variant: primary
-    - text: The map
-      link: /explore/map/
-      icon: external
-      variant: minimal
+  tagline: Everything the last cohort wishes someone had told them — arriving in China, surviving PKU, and actually living in Beijing.
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid, LinkButton, LinkCard } from '@astrojs/starlight/components';
 
-<CardGrid stagger>
-  <Card title="Before you fly" icon="rocket">
-    Visa mechanics, the physical exam, insurance — and the medications you genuinely
-    cannot bring into China.
+## 欢迎 — welcome to Beijing
 
-    [Read this first →](/arrival/before-you-fly/)
-  </Card>
+You are about to move to a city of twenty-two million people, in a country where your
+phone, your bank card and your usual way of finding a restaurant all work differently.
+Roughly two hundred people have already done exactly this, on exactly this program.
 
-  <Card title="Your first 72 hours" icon="approve-check">
-    Police registration within 24 hours is a legal requirement and the single most
-    forgotten thing on this site. A tickable list.
+This site is what they learned, written down before they forgot it.
 
-    [Open the checklist →](/arrival/first-72-hours/)
-  </Card>
+It is not official. It is written by students in Cohorts 6 and 7 and everyone after,
+and it is only as good as what we bother to write down — which is why **every page
+tells you when it was last checked**, and says so loudly when that was too long ago.
 
+<div class="fl-actions">
+  <LinkButton href="/china/before-you-fly/" variant="primary" icon="rocket">
+    I'm arriving soon
+  </LinkButton>
+  <LinkButton href="/map/" variant="secondary" icon="map-pin">
+    Open the map
+  </LinkButton>
+  <LinkButton href="/emergency/" variant="minimal" icon="warning">
+    In an emergency
+  </LinkButton>
+  <LinkButton href="/how-to-use-this/" variant="minimal" icon="open-book">
+    How this guide works
+  </LinkButton>
+</div>
+
+---
+
+## The three parts of this guide
+
+<div class="fl-categories">
+
+<Card title="1 · China" icon="rocket">
+  **Getting here, and your first three days.** The half of the move that has deadlines
+  attached — and where the mistakes are expensive rather than merely annoying.
+
+  Visas and the JW202 · what you cannot legally pack · the airport taxi scam · police
+  registration within 24 hours · residence permit within 30 days · SIM, bank account,
+  Alipay · the scams that target new arrivals
+
+  <LinkButton href="/china/before-you-fly/" variant="primary">Start here →</LinkButton>
+</Card>
+
+<Card title="2 · PKU & academics" icon="star">
+  **Campus, courses, canteens, clubs.** How the university actually works, as opposed
+  to how the handbook says it works.
+
+  Global Village and your room · course registration and the bidding system · grading
+  reality versus your home school · the canteens ranked honestly · the club fair ·
+  credit transfer rules for each partner school
+
+  <LinkButton href="/pku/campus-life/" variant="secondary">Explore PKU →</LinkButton>
+</Card>
+
+<Card title="3 · Lifestyle" icon="heart">
+  **The part that makes Beijing somewhere you live**, rather than somewhere you study
+  for a year.
+
+  Favourite restaurants and bars · 美团 must-haves · nightlife and queer parties ·
+  embassy events and the expat community · doctors and clinics that speak English ·
+  living here as yourself · getting out of the city at weekends
+
+  <LinkButton href="/lifestyle/favourite-spots/" variant="secondary">Go exploring →</LinkButton>
+</Card>
+
+</div>
+
+<LinkCard
+  title="Miscellaneous"
+  description="淘宝, the phrasebook, the month-by-month calendar, internships and visa legality, the exit checklist — and the honest personal write-ups from people who have finished the year."
+  href="/misc/taobao/"
+/>
+
+---
+
+## Two things that are not articles
+
+<CardGrid>
   <Card title="The map" icon="map-pin">
-    Every restaurant, bar, clinic and running route the cohorts have recommended —
-    with the Chinese address ready to show a taxi driver.
+    Every restaurant, bar, clinic, gym and study spot the cohorts have recommended, on
+    one map — each with its **Chinese address ready to copy**, for showing a taxi driver
+    or pasting into Didi.
 
-    [Open the map →](/explore/map/)
+    [Open the map →](/map/)
   </Card>
 
-  <Card title="Add what you know" icon="pencil">
-    You do not need to know how to code, and you do not need GitHub to work from
-    your dorm. Three ways in, one of them just sending a message.
+  <Card title="Search" icon="magnifier">
+    Press <kbd>⌘</kbd><kbd>K</kbd> — or <kbd>Ctrl</kbd><kbd>K</kbd> — anywhere on the
+    site. It searches every page, and it works offline once the site has loaded once.
 
-    [How to contribute →](/start/how-to-use-this/)
+    Useful when you half-remember reading something about insurance at 1am.
+  </Card>
+</CardGrid>
+
+---
+
+## Add what you know
+
+The person best placed to explain the first week is someone who just had it. If you have
+just arrived and something confused you, **that confusion is the most valuable thing on
+this site** — and it has a shelf life of about a fortnight before you forget it was ever
+confusing.
+
+<CardGrid>
+  <Card title="If GitHub loads for you" icon="github">
+    Click the pencil at the bottom of any page to edit it, or fill in a short form to add
+    a place to the map. Five fields, no code, no pull request.
+
+    [Open a form →](https://github.com/how-to-fl/how-to-fl.github.io/issues/new/choose)
+  </Card>
+
+  <Card title="If GitHub does not load" icon="comment">
+    From a Beijing connection it often won't, and that is not your problem to solve.
+    Send it by WeChat or email, or bring it to the next contribution sprint — someone
+    will type it in, and your name still goes on it.
+
+    [How that works →](/how-to-use-this/#how-to-add-what-you-know)
   </Card>
 </CardGrid>
 
 ## Who this is for
 
-Students on the **Future Leaders International Undergraduate Double Degree Program**
-at Peking University — Guanghua's flagship international undergraduate initiative,
-now a network of 15 partner business schools.
+Students on the **Future Leaders International Undergraduate Double Degree Program** at
+Peking University — Guanghua's flagship international undergraduate initiative, now a
+network of 15 partner business schools.
 
-Cohort 7 lands in September. Cohort 6 is already here. This site is written for both,
-and for every cohort after.
-
-## How to trust this
-
-Every page says when it was last checked. Anything older than a year gets a visible
-warning at the top, because restaurants close, visa rules change and apps get
-redesigned — and a guide you can trust is worth more than a guide that is merely
-comprehensive.
-
-If something here is wrong, [it takes two minutes to say so](/start/how-to-use-this/).
+Cohort 7 lands in September. Cohort 6 is already here. This is written for both, and for
+every cohort after.
