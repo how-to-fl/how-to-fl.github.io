@@ -295,9 +295,16 @@ h2 {
 	line-height: 1.6;
 }
 
-.fl-note--stale {
-	border-left-color: var(--fl-ember);
-	background: color-mix(in srgb, var(--fl-ember) 12%, var(--sl-color-bg));
+/* Deliberately understated. This used to be a full orange banner, which meant
+   most content pages opened by shouting at the reader — the information is
+   worth having, the volume was not. Same date, same honesty, quieter. */
+.fl-verified--stale {
+	color: var(--fl-ember);
+}
+
+.fl-verified--stale::before {
+	content: '⚠ ';
+	font-size: 0.9em;
 }
 
 .fl-note--stub {

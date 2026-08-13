@@ -66,8 +66,9 @@ What we'd suggest:
 - **Have a second option installed.** Reliability varies week to week and a single point of
   failure is a poor plan for your email
 - Know **how you'll pay from abroad**, and whether it renews on a card that'll still work
-- **Download things while you can:** offline maps of Beijing, your arrival documents, and
-  this guide (it installs as an app and works offline)
+- **Download things while you can:** offline maps of Beijing and your arrival documents.
+  Worth saving the pages of this guide you'll need on day one too — the site needs a
+  connection, and yours may be patchy for the first few days
 
 **On the legal side.** Personal use by foreign students is extremely common and openly
 discussed on campus. It also sits in a genuine grey area under Chinese law, and the rules
