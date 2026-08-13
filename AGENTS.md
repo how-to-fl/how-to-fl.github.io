@@ -74,6 +74,15 @@ That has already caused one silent bug.
 **Starlight icon names fail silently.** An invalid `icon=` renders *nothing*. Starlight has
 no map/subway/passport icon — use `src/components/Ico.astro` for those.
 
+**Never add `.nojekyll` to the repo root.** Pages publishes from `deploy.yml`, so nothing
+runs Jekyll and the file has no job to do. It only matters if the Pages source setting ever
+reverts to the legacy branch builder — and then it is actively dangerous. That builder fails
+on the `---` fence at the top of any `.astro` file, and the failure is the only thing
+stopping it publishing. `.nojekyll` makes it **succeed** instead: it publishes the repo root
+verbatim over the top of `dist/`, and there is no `index.html` in the repo root. A red X on
+`pages-build-deployment` means the Pages source moved back to "Deploy from a branch" — fix
+the setting, never the symptom.
+
 ---
 
 ## Conventions
