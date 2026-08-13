@@ -31,7 +31,7 @@ export default defineConfig({
 						as: 'font',
 						type: 'font/woff2',
 						crossorigin: 'anonymous',
-						href: '/fonts/playfair-display-latin-normal.woff2',
+						href: '/fonts/bodoni-moda-latin-normal.woff2',
 					},
 				},
 				{ tag: 'meta', attrs: { name: 'theme-color', content: '#8e1b2c' } },

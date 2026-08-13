@@ -9,7 +9,7 @@
  *
  *   npm run fetch:fonts
  *
- * Playfair Display — the high-contrast Didone from our Instagram. Display only.
+ * Bodoni Moda — the high-contrast Didone from our Instagram. Display only.
  * DM Sans — body and UI. Geometric, warm, unfussy at small sizes.
  * Both are SIL Open Font License, so vendoring and redistributing is fine.
  */
@@ -26,8 +26,12 @@ const UA =
 
 const FAMILIES = [
 	{
-		css: 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap',
-		slug: 'playfair-display',
+		// Bodoni Moda, not Playfair: our posters are a condensed, very high-contrast
+		// Didone, which Playfair (softer, wider, transitional) does not match. Its
+		// ampersand is also a conventional one — Playfair's is an ornate Et-ligature
+		// that looks wrong in "PKU & academics".
+		css: 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap',
+		slug: 'bodoni-moda',
 	},
 	{
 		css: 'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,400..500&display=swap',

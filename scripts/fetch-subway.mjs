@@ -29,10 +29,10 @@ const ENDPOINTS = [
 // A bounding box rather than an area lookup: resolving "Beijing" as an admin
 // area is a lot more work for a shared public service, and the box is exactly
 // the region our basemap covers anyway.
-const BBOX = '39.5,115.8,40.5,117.0';
+const BBOX = '39.70,116.10,40.15,116.70';
 
 const QUERY = `
-[out:json][timeout:180];
+[out:json][timeout:120];
 (
   relation["type"="route"]["route"="subway"](${BBOX});
 );

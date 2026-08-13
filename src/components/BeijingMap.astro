@@ -207,11 +207,50 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 		const origin = window.location.origin;
 		const subwayMode = container.dataset.subway === 'geojson' ? 'geojson' : 'basemap';
 
+		// Beijing Subway only — not every piece of track in the city.
+		const SUBWAY_FILTER: any = [
+			'all',
+			['==', ['get', 'kind'], 'rail'],
+			['==', ['get', 'kind_detail'], 'subway'],
+		];
+
+		// Official line colours, matched on the basemap's own line names. Anything
+		// we haven't listed falls back to a neutral transit blue rather than
+		// pretending to be a line it isn't.
+		const LINE_COLOUR: any = [
+			'match',
+			['coalesce', ['get', 'name:en'], ['get', 'name'], ''],
+			'Beijing Subway Line 1', '#a12b2f',
+			'Beijing Subway Line 2', '#006ab7',
+			'Beijing Subway Line 4', '#008e9c',
+			'Beijing Subway Daxing Line', '#008e9c',
+			'Beijing Subway Line 5', '#a6228c',
+			'Beijing Subway Line 6', '#b6a12b',
+			'Beijing Subway Line 7', '#f2a900',
+			'Beijing Subway Line 8', '#009b77',
+			'Beijing Subway Line 9', '#8fc31f',
+			'Beijing Subway Line 10', '#009bc0',
+			'Beijing Subway Line 11', '#5f2d8c',
+			'Beijing Subway Line 13', '#f7c800',
+			'Beijing Subway Line 14', '#d5a3ce',
+			'Beijing Subway Line 15', '#653279',
+			'Beijing Subway Line 16', '#6bae45',
+			'Beijing Subway Line 17', '#00a1a5',
+			'Beijing Subway Line 19', '#0079c1',
+			'Beijing Subway Changping Line', '#e56db1',
+			'Beijing Subway Fangshan Line', '#d4802a',
+			'Beijing Subway Yizhuang Line', '#d40f5a',
+			'Beijing Subway Airport Express', '#a28e6b',
+			'#2f6ea8',
+		];
+
 		// Every layer the subway toggle switches on and off.
-		const SUBWAY_LAYERS =
-			subwayMode === 'geojson'
-				? ['subway-casing', 'subway-line', 'subway-osm-line', 'subway-osm-station', 'subway-osm-station-label']
-				: ['subway-casing', 'subway-line', 'subway-station-label'];
+		const SUBWAY_LAYERS = [
+			'subway-casing',
+			'subway-line',
+			'subway-line-label',
+			...(subwayMode === 'geojson' ? ['subway-osm-station', 'subway-osm-station-label'] : []),
+		];
 
 		function buildStyle(dark: boolean) {
 			const flavorName = dark ? 'dark' : 'light';
@@ -234,21 +273,24 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 					...layers('protomaps', namedFlavor(flavorName), { lang: 'en' }),
 
 					// ---- Subway overlay -------------------------------------------
-					// Drawn above the basemap but below our pins, so the pins stay
-					// clickable and the network reads as context rather than content.
-					// A pale casing under each line keeps it legible over parks and
-					// water, which is where the basemap gets busiest.
+					// Filtered on kind_detail === 'subway'. Filtering on kind === 'rail'
+					// alone (as this first did) also catches mainline and freight track,
+					// which is why the overlay looked nothing like the metro.
+					//
+					// The basemap carries each segment's line name, so we can colour the
+					// lines officially and label them. It has no station POIs — those
+					// need `npm run fetch:subway`.
 					{
 						id: 'subway-casing',
 						type: 'line' as const,
 						source: 'protomaps',
 						'source-layer': 'roads',
-						filter: ['==', ['get', 'kind'], 'rail'],
+						filter: SUBWAY_FILTER,
 						layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
 						paint: {
 							'line-color': dark ? '#0e1413' : '#ffffff',
-							'line-opacity': 0.85,
-							'line-width': ['interpolate', ['linear'], ['zoom'], 9, 3.2, 16, 8],
+							'line-opacity': 0.9,
+							'line-width': ['interpolate', ['linear'], ['zoom'], 9, 3.4, 16, 9],
 						},
 					},
 					{
@@ -256,31 +298,40 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 						type: 'line' as const,
 						source: 'protomaps',
 						'source-layer': 'roads',
-						filter: ['==', ['get', 'kind'], 'rail'],
+						filter: SUBWAY_FILTER,
 						layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
 						paint: {
-							'line-color': dark ? '#7fb2e0' : '#2f6ea8',
-							'line-opacity': 0.9,
-							'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1.1, 16, 4],
+							'line-color': LINE_COLOUR,
+							'line-opacity': 0.95,
+							'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1.3, 16, 5],
+						},
+					},
+					{
+						id: 'subway-line-label',
+						type: 'symbol' as const,
+						source: 'protomaps',
+						'source-layer': 'roads',
+						filter: SUBWAY_FILTER,
+						minzoom: 12,
+						layout: {
+							'symbol-placement': 'line' as const,
+							'text-field': ['coalesce', ['get', 'name:en'], ['get', 'name'], ''],
+							'text-font': ['Noto Sans Medium'],
+							'text-size': 10,
+							'text-letter-spacing': 0.04,
+							'symbol-spacing': 260,
+							'text-optional': true,
+						},
+						paint: {
+							'text-color': LINE_COLOUR,
+							'text-halo-color': dark ? '#0e1413' : '#ffffff',
+							'text-halo-width': 1.6,
 						},
 					},
 					// Real route relations, if someone has run `npm run fetch:subway`.
-					// These carry each line's official colour, so they replace the
-					// generic blue above rather than sitting alongside it.
+					// Those add station dots and names, which the basemap lacks.
 					...(subwayMode === 'geojson'
 						? [
-								{
-									id: 'subway-osm-line',
-									type: 'line' as const,
-									source: 'subway',
-									filter: ['==', ['get', 'kind'], 'line'],
-									layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
-									paint: {
-										'line-color': ['coalesce', ['get', 'colour'], '#2f6ea8'],
-										'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1.4, 16, 4.5],
-										'line-opacity': 0.95,
-									},
-								},
 								{
 									id: 'subway-osm-station',
 									type: 'circle' as const,
@@ -316,31 +367,7 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 									},
 								},
 							]
-						: [
-								// Baseline: station names straight from the basemap POIs.
-								{
-									id: 'subway-station-label',
-									type: 'symbol' as const,
-									source: 'protomaps',
-									'source-layer': 'pois',
-									filter: ['==', ['get', 'kind'], 'station'],
-									minzoom: 12,
-									layout: {
-										'text-field': ['coalesce', ['get', 'name:en'], ['get', 'name']],
-										'text-font': ['Noto Sans Regular'],
-										'text-size': 10.5,
-										'text-offset': [0, 0.8],
-										'text-anchor': 'top' as const,
-										'text-optional': true,
-										'text-padding': 4,
-									},
-									paint: {
-										'text-color': dark ? '#9fc4e4' : '#2f6ea8',
-										'text-halo-color': dark ? '#0e1413' : '#ffffff',
-										'text-halo-width': 1.4,
-									},
-								},
-							]),
+						: []),
 
 					{
 						id: 'places-halo',
@@ -465,6 +492,46 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 
 		// --- Popups -------------------------------------------------------------
 
+		// --- WGS-84 → GCJ-02 ----------------------------------------------------
+		// We store WGS-84 because that is what OSM, GPS and this map use. Amap and
+		// Baidu use GCJ-02, China's mandated offset system, so handing them a raw
+		// WGS-84 pair drops you 300–500 m from the door. This is the standard
+		// conversion; it is only valid inside China, hence the bounds check.
+		const GCJ_A = 6378245.0;
+		const GCJ_EE = 0.00669342162296594323;
+
+		const outOfChina = (lat: number, lng: number) =>
+			!(lng > 73.66 && lng < 135.05 && lat > 3.86 && lat < 53.55);
+
+		function tfLat(x: number, y: number) {
+			let r = -100 + 2 * x + 3 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+			r += ((20 * Math.sin(6 * x * Math.PI) + 20 * Math.sin(2 * x * Math.PI)) * 2) / 3;
+			r += ((20 * Math.sin(y * Math.PI) + 40 * Math.sin((y / 3) * Math.PI)) * 2) / 3;
+			r += ((160 * Math.sin((y / 12) * Math.PI) + 320 * Math.sin((y * Math.PI) / 30)) * 2) / 3;
+			return r;
+		}
+
+		function tfLng(x: number, y: number) {
+			let r = 300 + x + 2 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+			r += ((20 * Math.sin(6 * x * Math.PI) + 20 * Math.sin(2 * x * Math.PI)) * 2) / 3;
+			r += ((20 * Math.sin(x * Math.PI) + 40 * Math.sin((x / 3) * Math.PI)) * 2) / 3;
+			r += ((150 * Math.sin((x / 12) * Math.PI) + 300 * Math.sin((x / 30) * Math.PI)) * 2) / 3;
+			return r;
+		}
+
+		function wgsToGcj(lat: number, lng: number): [number, number] {
+			if (outOfChina(lat, lng)) return [lat, lng];
+			let dLat = tfLat(lng - 105, lat - 35);
+			let dLng = tfLng(lng - 105, lat - 35);
+			const rad = (lat / 180) * Math.PI;
+			let magic = Math.sin(rad);
+			magic = 1 - GCJ_EE * magic * magic;
+			const sqrtMagic = Math.sqrt(magic);
+			dLat = (dLat * 180) / (((GCJ_A * (1 - GCJ_EE)) / (magic * sqrtMagic)) * Math.PI);
+			dLng = (dLng * 180) / ((GCJ_A / sqrtMagic) * Math.cos(rad) * Math.PI);
+			return [lat + dLat, lng + dLng];
+		}
+
 		const monthsSince = (stamp: string) => {
 			const m = /^(\d{4})-(\d{2})$/.exec(stamp);
 			if (!m) return null;
@@ -479,7 +546,14 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 					({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c] as string
 			);
 
-		function popupHtml(p: Record<string, string>) {
+		function popupHtml(p: Record<string, string>, lngLat: [number, number]) {
+			// Both apps want GCJ-02. Baidu accepts coord_type=gcj02 and does the
+			// second hop to BD-09 itself, so one conversion covers both.
+			const [gLat, gLng] = wgsToGcj(lngLat[1], lngLat[0]);
+			const label = encodeURIComponent(p.name_zh || p.name_en || '');
+			const amap = `https://uri.amap.com/marker?position=${gLng.toFixed(6)},${gLat.toFixed(6)}&name=${label}&src=howtofl&coordinate=gaode`;
+			const baidu = `https://api.map.baidu.com/marker?location=${gLat.toFixed(6)},${gLng.toFixed(6)}&title=${label}&content=${label}&output=html&coord_type=gcj02&src=howtofl`;
+
 			const age = p.last_verified ? monthsSince(p.last_verified) : null;
 			const stale = age !== null && age > 12;
 			const meta = [p.metro, p.price].filter(Boolean).map(esc).join(' · ');
@@ -501,6 +575,10 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 								</div>`
 							: ''
 					}
+					<div class="fl-pop-nav">
+						<a href="${amap}" target="_blank" rel="noopener">Open in Amap</a>
+						<a href="${baidu}" target="_blank" rel="noopener">Baidu</a>
+					</div>
 					<p class="fl-pop-foot">
 						${p.recommended_by ? `Added by ${esc(p.recommended_by)}` : ''}
 						${
@@ -523,7 +601,7 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 			popup?.remove();
 			popup = new Popup({ closeButton: true, maxWidth: '280px', offset: 12 })
 				.setLngLat(coords)
-				.setHTML(popupHtml(f.properties))
+				.setHTML(popupHtml(f.properties, coords))
 				.addTo(map);
 		});
 

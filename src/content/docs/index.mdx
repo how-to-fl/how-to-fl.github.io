@@ -6,8 +6,8 @@ editUrl: false
 tableOfContents: false
 ---
 
-import { Card, CardGrid, LinkButton, LinkCard } from '@astrojs/starlight/components';
 import Logo from '../../components/Logo.astro';
+import Ico from '../../components/Ico.astro';
 
 <div class="fl-hero">
   <div class="fl-hero-seal"><Logo size={96} /></div>
@@ -43,18 +43,10 @@ only as good as what we bother to write down, so **every page tells you when one
 checked it**, and shouts at you if that was ages ago.
 
 <div class="fl-actions">
-  <LinkButton href="/china/before-you-fly/" variant="primary" icon="rocket">
-    I'm landing soon
-  </LinkButton>
-  <LinkButton href="/map/" variant="secondary" icon="map-pin">
-    Open the map
-  </LinkButton>
-  <LinkButton href="/emergency/" variant="minimal" icon="warning">
-    Something's gone wrong
-  </LinkButton>
-  <LinkButton href="/how-to-use-this/" variant="minimal" icon="open-book">
-    How this works
-  </LinkButton>
+  <a class="fl-btn fl-btn--primary" href="/china/before-you-fly/"><Ico name="plane" /> I'm landing soon</a>
+  <a class="fl-btn" href="/map/"><Ico name="pin" /> Open the map</a>
+  <a class="fl-btn" href="/emergency/"><Ico name="siren" /> Something's gone wrong</a>
+  <a class="fl-btn" href="/how-to-use-this/"><Ico name="compass" /> How this works</a>
 </div>
 
 ---
@@ -62,66 +54,67 @@ checked it**, and shouts at you if that was ages ago.
 ## Three parts
 
 <div class="fl-categories">
+  <div class="fl-card">
+    <div class="fl-card-head"><Ico name="passport" size={26} /><h3>1 · China</h3></div>
+    <p><strong>Getting here, and your first three days.</strong> The half with actual
+    deadlines attached, where a mistake costs you real money or a trip to the police station.</p>
+    <p class="fl-card-list">Visas and the JW202 · what you genuinely can't pack · VPNs, sorted
+    before you fly · the airport taxi scam · registering with the police within 24 hours ·
+    SIM, bank, Alipay</p>
+    <a class="fl-card-cta" href="/china/before-you-fly/">Start here →</a>
+  </div>
 
-<Card title="1 · China" icon="rocket">
-  **Getting here, and your first three days.** This is the half with actual deadlines
-  attached, where a mistake costs you real money or a trip to the police station.
+  <div class="fl-card">
+    <div class="fl-card-head"><Ico name="cap" size={26} /><h3>2 · PKU &amp; academics</h3></div>
+    <p><strong>Campus, courses, canteens, clubs.</strong> How the university actually works,
+    rather than how the handbook says it does.</p>
+    <p class="fl-card-list">Global Village and your room · course registration and the bidding
+    system · what grades really look like compared to home · the canteens, ranked honestly ·
+    the club fair · credit transfer for each partner school</p>
+    <a class="fl-card-cta" href="/pku/campus-life/">Have a look →</a>
+  </div>
 
-  Visas and the JW202 · what you genuinely can't pack · VPNs, sorted before you fly · the
-  airport taxi scam · registering with the police within 24 hours · SIM, bank, Alipay
-
-  <LinkButton href="/china/before-you-fly/" variant="primary">Start here →</LinkButton>
-</Card>
-
-<Card title="2 · PKU & academics" icon="star">
-  **Campus, courses, canteens, clubs.** How the university actually works, rather than how
-  the handbook says it does.
-
-  Global Village and your room · course registration and the bidding system · what grades
-  really look like compared to home · the canteens, ranked honestly · the club fair ·
-  credit transfer for each partner school
-
-  <LinkButton href="/pku/campus-life/" variant="secondary">Have a look →</LinkButton>
-</Card>
-
-<Card title="3 · Lifestyle" icon="heart">
-  **The bit that makes Beijing somewhere you live**, not just somewhere you study for a year.
-
-  Where we actually eat and drink · 美团 must-haves · nights out, including queer ones ·
-  embassy things and the expat scene · doctors who speak English · living here as yourself ·
-  getting out of the city at weekends
-
-  <LinkButton href="/lifestyle/favourite-spots/" variant="secondary">Go exploring →</LinkButton>
-</Card>
-
+  <div class="fl-card">
+    <div class="fl-card-head"><Ico name="bowl" size={26} /><h3>3 · Lifestyle</h3></div>
+    <p><strong>The bit that makes Beijing somewhere you live</strong>, not just somewhere you
+    study for a year.</p>
+    <p class="fl-card-list">Where we actually eat and drink · 美团 must-haves · nights out,
+    including queer ones · embassy things and the expat scene · doctors who speak English ·
+    living here as yourself · getting out of the city at weekends</p>
+    <a class="fl-card-cta" href="/lifestyle/favourite-spots/">Go exploring →</a>
+  </div>
 </div>
 
-<LinkCard
-  title="Everything else"
-  description="淘宝, the phrasebook, what each month is actually like, internships and visa legality, the leaving checklist — plus the honest write-ups from people who've finished the year."
-  href="/misc/taobao/"
-/>
+<div class="fl-card">
+  <div class="fl-card-head"><Ico name="stethoscope" size={26} /><h3>Everything else</h3></div>
+  <p>淘宝, the phrasebook, what each month is actually like, internships and visa legality,
+  the leaving checklist — plus the honest write-ups from people who've finished the year.</p>
+  <a class="fl-card-cta" href="/misc/taobao/">Have a rummage →</a>
+</div>
 
 ---
 
 ## Two things that aren't articles
 
-<CardGrid>
-  <Card title="The map" icon="map-pin">
-    Everywhere we've recommended — restaurants, bars, clinics, gyms, study spots — laid over
-    the **Beijing subway network**, so you can see at a glance how you'd actually get there.
-    Every pin carries its **Chinese address, ready to copy**.
+<div class="fl-duo">
+  <div class="fl-card">
+    <div class="fl-card-head"><Ico name="pin" size={26} /><h3>The map</h3></div>
+    <p>Everywhere we've recommended — restaurants, bars, clinics, gyms, study spots — laid
+    over the <strong>Beijing subway network</strong>, so you can see at a glance how you'd
+    actually get there.</p>
+    <p class="fl-card-list">Every pin carries its Chinese address ready to copy, and opens
+    straight into Amap or Baidu if you'd rather navigate there.</p>
+    <a class="fl-card-cta" href="/map/">Open the map →</a>
+  </div>
 
-    [Open the map →](/map/)
-  </Card>
-
-  <Card title="Search" icon="magnifier">
-    Hit <kbd>⌘</kbd><kbd>K</kbd> (or <kbd>Ctrl</kbd><kbd>K</kbd>) anywhere on the site. It
-    searches everything, and it keeps working offline once you've loaded the site once.
-
-    Handy at 1am when you half-remember reading something about insurance.
-  </Card>
-</CardGrid>
+  <div class="fl-card">
+    <div class="fl-card-head"><Ico name="search" size={26} /><h3>Search</h3></div>
+    <p>Hit <kbd>⌘</kbd><kbd>K</kbd> (or <kbd>Ctrl</kbd><kbd>K</kbd>) anywhere on the site.
+    It searches everything, and keeps working offline once you've loaded the site once.</p>
+    <p class="fl-card-list">Handy at 1am when you half-remember reading something about
+    insurance.</p>
+  </div>
+</div>
 
 ---
 
@@ -131,22 +124,22 @@ The best person to explain the first week is someone who just had it. If you've 
 and something threw you, **that confusion is the most useful thing you own right now** — and
 you'll have forgotten it was ever confusing within a fortnight.
 
-<CardGrid>
-  <Card title="If GitHub loads for you" icon="github">
-    Hit the pencil at the bottom of any page, or fill in a short form to add a place to the
-    map. Five fields. No code, no pull request, nothing scary.
+<div class="fl-duo">
+  <div class="fl-card">
+    <div class="fl-card-head"><Ico name="pencil" size={26} /><h3>If GitHub loads for you</h3></div>
+    <p>Hit the pencil at the bottom of any page, or fill in a short form to add a place to
+    the map. Five fields. No code, no pull request, nothing scary.</p>
+    <a class="fl-card-cta" href="https://github.com/how-to-fl/how-to-fl.github.io/issues/new/choose">Open a form →</a>
+  </div>
 
-    [Open a form →](https://github.com/how-to-fl/how-to-fl.github.io/issues/new/choose)
-  </Card>
-
-  <Card title="If GitHub won't load" icon="comment">
-    On a Beijing connection it often won't, and that's not your problem to fix. WeChat it to
-    one of us, email it, or bring it to the next pizza session — someone will type it in and
-    your name still goes on it.
-
-    [How that works →](/how-to-use-this/#tell-us-what-you-know)
-  </Card>
-</CardGrid>
+  <div class="fl-card">
+    <div class="fl-card-head"><Ico name="chat" size={26} /><h3>If GitHub won't load</h3></div>
+    <p>On a Beijing connection it often won't, and that's not your problem to fix. WeChat it
+    to one of us, email it, or bring it to the next pizza session — someone will type it in
+    and your name still goes on it.</p>
+    <a class="fl-card-cta" href="/how-to-use-this/#tell-us-what-you-know">How that works →</a>
+  </div>
+</div>
 
 ## Who we are
 

@@ -150,6 +150,46 @@ const server = createServer(async (req, res) => {
 			return json(res, 200, { categories: CATEGORIES, beijing: BEIJING });
 		}
 
+		// Look a place up by name and get WGS-84 coordinates back.
+		//
+		// This exists because coordinates typed from memory are silently wrong —
+		// the first two pins in this repo were 500-600m out. Searching by name and
+		// taking OSM's answer removes the guesswork, and OSM is already the
+		// coordinate system our map uses, so there is no conversion to get wrong.
+		if (path === '/api/geocode' && req.method === 'GET') {
+			const q = (url.searchParams.get('q') ?? '').trim();
+			if (!q) return json(res, 400, { error: 'nothing to search for' });
+
+			// Bounded to greater Beijing so "Global Village" doesn't return Henan.
+			const search = new URL('https://nominatim.openstreetmap.org/search');
+			search.searchParams.set('q', q);
+			search.searchParams.set('format', 'json');
+			search.searchParams.set('limit', '6');
+			search.searchParams.set('viewbox', '116.10,40.15,116.70,39.70');
+			search.searchParams.set('bounded', '1');
+
+			try {
+				const r = await fetch(search, {
+					// Nominatim requires an identifying User-Agent and asks for
+					// at most one request a second. This is a hand-driven form, so
+					// we are well inside that.
+					headers: { 'User-Agent': 'how-to-fl-guide/1.0 (student guide; admin panel lookup)' },
+					signal: AbortSignal.timeout(20_000),
+				});
+				if (!r.ok) return json(res, 502, { error: `lookup service said ${r.status}` });
+				const found = await r.json();
+				return json(res, 200, {
+					results: found.map((f) => ({
+						name: f.display_name,
+						lat: Number(f.lat).toFixed(5),
+						lng: Number(f.lon).toFixed(5),
+					})),
+				});
+			} catch (e) {
+				return json(res, 502, { error: `could not reach the lookup service: ${e.message}` });
+			}
+		}
+
 		if (path === '/api/places' && req.method === 'GET') {
 			const doc = parse(await readFile(PLACES, 'utf8')) ?? {};
 			return json(res, 200, { places: doc.places ?? [] });

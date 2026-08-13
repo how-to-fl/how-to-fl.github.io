@@ -31,24 +31,40 @@
 # last_verified    required  YYYY-MM. When someone last confirmed it exists.
 
 places:
+  # Coordinates below are from OpenStreetMap (WGS-84), looked up by name — not
+  # estimated. Please keep it that way: an eyeballed coordinate can be hundreds
+  # of metres out and nothing catches it. Use the admin panel's "Find" button,
+  # or openstreetmap.org directly.
   - name_en: Peking University, West Gate
     name_zh: 北京大学西门
     address_zh: 北京市海淀区颐和园路5号
     category: landmark
-    lat: 39.99154
-    lng: 116.30507
-    metro: East Gate of Peking University (Line 4)
-    note: The classic entrance. Where every visiting parent wants their photo.
+    lat: 39.99381
+    lng: 116.29826
+    metro: Peking University East Gate (Line 4) is the other side of campus
+    note: The classic red gate everyone photographs. A long walk from the metro.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+
+  - name_en: Peking University, East Gate
+    name_zh: 北京大学东门
+    address_zh: 北京市海淀区中关村北大街
+    category: landmark
+    lat: 39.99078
+    lng: 116.30973
+    metro: East Gate of Peking University (Line 4), right outside
+    note: The gate you'll actually use — the metro comes up next to it.
     recommended_by: Cohort 6
     last_verified: 2026-08
 
   - name_en: Global Village
     name_zh: 北京大学中关新园
-    address_zh: 北京市海淀区中关村北大街126号
+    address_zh: 北京市海淀区成府路
     category: landmark
-    lat: 39.99310
-    lng: 116.31480
-    note: Where you will live. Reception handles dorm check-in.
+    lat: 39.98870
+    lng: 116.31333
+    metro: East Gate of Peking University (Line 4)
+    note: Where you'll live. Reception handles dorm check-in.
     recommended_by: Cohort 6
     last_verified: 2026-08
 

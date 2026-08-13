@@ -3,11 +3,21 @@
  * The FL seal, drawn as SVG so it stays crisp at any size, recolours with the
  * theme, and costs one same-origin request instead of a raster download.
  *
- * Cohort 6's badge has a "6" and the Peking University seal in it. Both are
- * deliberately left out here: the guide outlives any one cohort, so the mark
- * shouldn't be stamped with one — and the university's seal is theirs, not ours
- * to redraw. If the programme office ever blesses the project, drop the real
- * artwork in and swap this component out.
+ * Geometry notes, because the first attempt got all of this wrong:
+ *  - "FUTURE LEADERS" is 14 characters on a 180° arc of radius 35.5, whose
+ *    length is about 111 units. At 7.6px with 1.3 of tracking each character
+ *    costs roughly 6.2, so the string runs ~87 — comfortably inside the path.
+ *    Overrun does not wrap or shrink, it silently clips the ends, which is how
+ *    the first version ended up reading "UTURE LEADER".
+ *  - There is deliberately no arched text along the bottom. Text on a bottom arc
+ *    renders mirrored unless the path is traversed right-to-left, and it fought
+ *    the monogram for space. The cohort badge has a mark down there, not words,
+ *    so we use a four-pointed sparkle — the same one on the Instagram slides.
+ *
+ * Cohort 6's badge carries a "6" and the Peking University seal. Both are left
+ * out on purpose: the guide outlives any one cohort, and the university's seal
+ * is theirs, not ours to redraw. If the programme office ever blesses this,
+ * drop the real artwork in and replace this component.
  */
 interface Props {
 	/** Rendered size in px. */
@@ -15,7 +25,7 @@ interface Props {
 	class?: string;
 }
 const { size = 44, class: className = '' } = Astro.props;
-const id = `fl-seal-${Math.random().toString(36).slice(2, 8)}`;
+const uid = `fl-${Math.random().toString(36).slice(2, 8)}`;
 ---
 
 <svg
@@ -25,43 +35,37 @@ const id = `fl-seal-${Math.random().toString(36).slice(2, 8)}`;
 	viewBox="0 0 100 100"
 	role="img"
 	aria-label="How to FL"
-	fill="none"
 	xmlns="http://www.w3.org/2000/svg"
 >
 	<defs>
-		<path id={`${id}-arc-top`} d="M 16,50 A 34,34 0 0 1 84,50" />
-		<path id={`${id}-arc-bottom`} d="M 21,50 A 29,29 0 0 0 79,50" />
+		<!-- Left-to-right over the top: sweep-flag 1 keeps the glyphs upright. -->
+		<path id={`${uid}-arc`} d="M 14.5,50 A 35.5,35.5 0 0 1 85.5,50" fill="none" />
 	</defs>
 
-	<!-- Seal ground -->
 	<circle cx="50" cy="50" r="49" class="fl-logo-ground" />
+	<circle cx="50" cy="50" r="47.1" class="fl-logo-ring" stroke-width="1.8" />
+	<circle cx="50" cy="50" r="42.4" class="fl-logo-ring" stroke-width="0.7" />
 
-	<!-- Double ring: a heavy outer keyline and a hairline inside it -->
-	<circle cx="50" cy="50" r="47.2" class="fl-logo-ring" stroke-width="1.7" />
-	<circle cx="50" cy="50" r="42.5" class="fl-logo-ring" stroke-width="0.7" />
-
-	<!-- FUTURE LEADERS, arched over the top -->
 	<text class="fl-logo-arc">
-		<textPath href={`#${id}-arc-top`} startOffset="50%" text-anchor="middle">
+		<textPath href={`#${uid}-arc`} startOffset="50%" text-anchor="middle">
 			FUTURE LEADERS
 		</textPath>
 	</text>
 
-	<!-- The FL monogram -->
-	<text x="50" y="50" class="fl-logo-mark" text-anchor="middle" dominant-baseline="central">
+	<!-- Monogram sits slightly above centre to leave the sparkle room below. -->
+	<text x="50" y="47" class="fl-logo-mark" text-anchor="middle" dominant-baseline="central">
 		FL
 	</text>
 
-	<!-- Flanking rules, echoing the inner arcs on the cohort badge -->
-	<path d="M 18.5,58 A 32,32 0 0 0 30,76" class="fl-logo-ring" stroke-width="0.7" />
-	<path d="M 81.5,58 A 32,32 0 0 1 70,76" class="fl-logo-ring" stroke-width="0.7" />
+	<!-- Rules flanking the sparkle, echoing the inner arcs on the cohort badge -->
+	<path d="M 26,70 L 39,70" class="fl-logo-ring" stroke-width="0.8" stroke-linecap="round" />
+	<path d="M 61,70 L 74,70" class="fl-logo-ring" stroke-width="0.8" stroke-linecap="round" />
 
-	<!-- PEKING UNIVERSITY, arched along the bottom -->
-	<text class="fl-logo-arc fl-logo-arc--small">
-		<textPath href={`#${id}-arc-bottom`} startOffset="50%" text-anchor="middle">
-			PEKING UNIVERSITY
-		</textPath>
-	</text>
+	<!-- Four-pointed sparkle, straight off the first Instagram slide -->
+	<path
+		class="fl-logo-spark"
+		d="M 50,63.5 C 50.7,67.4 52.6,69.3 56.5,70 C 52.6,70.7 50.7,72.6 50,76.5 C 49.3,72.6 47.4,70.7 43.5,70 C 47.4,69.3 49.3,67.4 50,63.5 Z"
+	/>
 </svg>
 
 <style>
@@ -71,32 +75,31 @@ const id = `fl-seal-${Math.random().toString(36).slice(2, 8)}`;
 	}
 
 	.fl-logo-ground {
-		fill: var(--fl-cream);
+		fill: var(--fl-cream, #f4ecdc);
 	}
 
 	.fl-logo-ring {
-		stroke: var(--fl-crimson);
+		stroke: var(--fl-crimson, #8e1b2c);
 		fill: none;
 	}
 
-	.fl-logo-arc {
-		fill: var(--fl-crimson);
-		font-family: var(--fl-font-display);
-		font-size: 9.5px;
-		font-weight: 500;
-		letter-spacing: 0.34em;
+	.fl-logo-spark {
+		fill: var(--fl-crimson, #8e1b2c);
 	}
 
-	.fl-logo-arc--small {
-		font-size: 6.4px;
-		letter-spacing: 0.2em;
+	.fl-logo-arc {
+		fill: var(--fl-crimson, #8e1b2c);
+		font-family: var(--fl-font-display), Georgia, serif;
+		font-size: 7.6px;
+		font-weight: 600;
+		letter-spacing: 1.3px;
 	}
 
 	.fl-logo-mark {
-		fill: var(--fl-crimson);
-		font-family: var(--fl-font-display);
-		font-size: 40px;
+		fill: var(--fl-crimson, #8e1b2c);
+		font-family: var(--fl-font-display), Georgia, serif;
+		font-size: 34px;
 		font-weight: 700;
-		letter-spacing: -0.02em;
+		letter-spacing: 0.5px;
 	}
 </style>

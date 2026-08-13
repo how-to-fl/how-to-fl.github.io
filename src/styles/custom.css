@@ -16,7 +16,7 @@
 	--fl-parchment: #fbf6ee;
 	--fl-ink: #2a1216; /* warm near-black, never neutral grey */
 
-	--fl-font-display: 'Playfair Display', 'Iowan Old Style', Georgia, serif;
+	--fl-font-display: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
 	--fl-font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
 	/* Grain. An inline SVG turbulence — no external texture to fetch or block. */
@@ -579,5 +579,140 @@ header.header {
 	* {
 		transition-duration: 0.01ms !important;
 		animation-duration: 0.01ms !important;
+	}
+}
+
+/* Hand-off to the apps people actually navigate with here. We keep our own
+   WGS-84 map; these links convert to GCJ-02 on the way out. */
+.fl-pop-nav {
+	display: flex;
+	gap: 0.4rem;
+	margin-top: 0.6rem;
+}
+
+.fl-pop-nav a {
+	flex: 1;
+	text-align: center;
+	font-size: var(--sl-text-xs);
+	text-decoration: none;
+	color: var(--sl-color-accent);
+	border: 1px solid var(--sl-color-gray-5);
+	border-radius: 0.3rem;
+	padding: 0.25rem 0.4rem;
+}
+
+.fl-pop-nav a:hover {
+	border-color: var(--sl-color-accent);
+	background: var(--sl-color-accent-low);
+}
+
+/* ==========================================================================
+   Cards and buttons carrying our own icon set (src/components/Ico.astro)
+   ========================================================================== */
+
+.fl-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	font-family: var(--fl-font-body);
+	font-size: 0.92rem;
+	font-weight: 500;
+	text-decoration: none;
+	border-radius: 0.45rem;
+	padding: 0.55rem 1.1rem;
+	border: 1px solid var(--sl-color-gray-5);
+	color: var(--sl-color-white);
+	background: var(--sl-color-bg-nav);
+	transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.fl-btn:hover {
+	border-color: var(--sl-color-accent);
+	background: var(--sl-color-accent-low);
+}
+
+.fl-btn--primary {
+	background: var(--sl-color-accent);
+	border-color: var(--sl-color-accent);
+	color: var(--fl-cream);
+	font-weight: 600;
+}
+
+.fl-btn--primary:hover {
+	filter: brightness(1.12);
+	background: var(--sl-color-accent);
+	color: var(--fl-cream);
+}
+
+.fl-btn:focus-visible {
+	outline: 2px solid var(--sl-color-accent);
+	outline-offset: 2px;
+}
+
+.fl-card {
+	display: flex;
+	flex-direction: column;
+	gap: 0.55rem;
+	border: 1px solid var(--sl-color-gray-5);
+	border-top: 3px solid var(--sl-color-accent);
+	border-radius: 0.6rem;
+	background: var(--sl-color-bg-nav);
+	padding: 1.25rem 1.35rem;
+	height: 100%;
+}
+
+.fl-card-head {
+	display: flex;
+	align-items: center;
+	gap: 0.6rem;
+	color: var(--sl-color-accent);
+}
+
+.fl-card-head h3 {
+	font-family: var(--fl-font-display);
+	font-size: 1.15rem;
+	font-weight: 700;
+	margin: 0;
+	color: var(--sl-color-white);
+	letter-spacing: -0.01em;
+}
+
+.fl-card p {
+	margin: 0;
+	font-size: 0.92rem;
+	line-height: 1.6;
+	color: var(--sl-color-gray-2);
+}
+
+.fl-card .fl-card-list {
+	font-size: 0.85rem;
+	color: var(--sl-color-gray-3);
+	line-height: 1.6;
+	margin: 0;
+}
+
+.fl-card a.fl-card-cta {
+	margin-top: auto;
+	padding-top: 0.4rem;
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: var(--sl-color-accent);
+	text-decoration: none;
+}
+
+.fl-card a.fl-card-cta:hover {
+	text-decoration: underline;
+}
+
+.fl-duo {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1rem;
+	margin-block: 1.5rem;
+}
+
+@media (min-width: 50rem) {
+	.fl-duo {
+		grid-template-columns: 1fr 1fr;
 	}
 }

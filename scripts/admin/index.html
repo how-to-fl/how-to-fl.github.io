@@ -91,6 +91,11 @@
 	.warn { background: var(--red-soft); border-left: 3px solid var(--red); padding: .7rem .9rem;
 		border-radius: .45rem; font-size: .82rem; margin-bottom: 1.2rem; }
 	.empty { color: var(--faint); font-size: .87rem; padding: 2rem; text-align: center; }
+	.geo-results { display: grid; gap: .25rem; margin-top: .5rem; }
+	.geo-hit { text-align: left; font-size: .8rem; padding: .35rem .6rem; line-height: 1.4;
+		border: 1px solid var(--border); border-radius: .35rem; background: var(--sunk); cursor: pointer; }
+	.geo-hit:hover { border-color: var(--jade); }
+	.geo-hit strong { font-family: ui-monospace, Menlo, monospace; color: var(--jade); margin-right: .4rem; }
 </style>
 </head>
 <body>
@@ -182,6 +187,11 @@ function placeCard(p, i) {
 				<input data-f="address_zh" value="${esc(p.address_zh)}"></div>
 			<div><label>Latitude (WGS-84)</label><input data-f="lat" value="${esc(p.lat)}" placeholder="39.9926"></div>
 			<div><label>Longitude (WGS-84)</label><input data-f="lng" value="${esc(p.lng)}" placeholder="116.3105"></div>
+			<div class="wide">
+				<button type="button" data-find="${i}">Find these coordinates for me</button>
+				<span class="note" style="margin-left:.5rem">Searches OpenStreetMap by name — always WGS-84, never guessed.</span>
+				<div class="geo-results" data-geo="${i}"></div>
+			</div>
 			<div><label>Nearest metro</label><input data-f="metro" value="${esc(p.metro)}" placeholder="Line 4"></div>
 			<div><label>Price</label><input data-f="price" value="${esc(p.price)}" placeholder="¥¥"></div>
 			<div class="wide"><label>Why is it worth going?</label>
@@ -210,7 +220,43 @@ $('#places-list').addEventListener('input', e => {
 	if (f === 'category') renderPlaces();
 });
 
-$('#places-list').addEventListener('click', e => {
+$('#places-list').addEventListener('click', async e => {
+	// --- Look up coordinates by name -------------------------------------
+	const find = e.target.dataset.find;
+	if (find !== undefined) {
+		const i = +find;
+		const box = document.querySelector(`.geo-results[data-geo="${i}"]`);
+		const q = (places[i].name_zh || places[i].name_en || '').trim();
+		if (!q) { box.innerHTML = '<p class="note">Give it a name first — Chinese works best.</p>'; return; }
+		box.innerHTML = '<p class="note">Searching…</p>';
+		try {
+			const r = await fetch('/api/geocode?q=' + encodeURIComponent(q));
+			const d = await r.json();
+			if (!r.ok) { box.innerHTML = `<p class="note">${esc(d.error)}</p>`; return; }
+			if (!d.results.length) {
+				box.innerHTML = '<p class="note">Nothing found in Beijing. Try the Chinese name, or grab it from openstreetmap.org.</p>';
+				return;
+			}
+			box.innerHTML = d.results.map(r2 =>
+				`<button type="button" class="geo-hit" data-lat="${r2.lat}" data-lng="${r2.lng}" data-i="${i}">
+					<strong>${r2.lat}, ${r2.lng}</strong> ${esc(r2.name)}
+				</button>`).join('');
+		} catch (err) {
+			box.innerHTML = '<p class="note">Lookup failed — are you online?</p>';
+		}
+		return;
+	}
+
+	// --- Accept a lookup result ------------------------------------------
+	const hit = e.target.closest('.geo-hit');
+	if (hit) {
+		const i = +hit.dataset.i;
+		places[i].lat = hit.dataset.lat;
+		places[i].lng = hit.dataset.lng;
+		renderPlaces();
+		return;
+	}
+
 	const del = e.target.dataset.del; if (del === undefined) return;
 	const p = places[+del];
 	if (confirm(`Remove "${p.name_en || 'this place'}" from the map?`)) {
