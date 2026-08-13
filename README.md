@@ -87,6 +87,29 @@ Overpass rate-limits by IP and will hand you `429`s if you hammer it or if you s
 address with a lot of other people. Check your quota at
 <https://overpass-api.de/api/status> and try again in a few minutes.
 
+## Analytics
+
+Off by default. To switch on Cloudflare Web Analytics, paste your token into
+`CF_BEACON_TOKEN` in [`src/components/Head.astro`](src/components/Head.astro).
+Empty token means no script and no third-party request at all.
+
+Get one from the Cloudflare dashboard under **Web Analytics → Add a site**. It's
+free and doesn't require moving your DNS to Cloudflare. The token is a public
+site identifier, not a secret — it's meant to be visible in the page source.
+
+Two caveats worth knowing before you trust the numbers:
+
+- This is the **only** external origin the site loads. Everything else is
+  same-origin on purpose. `scripts/validate.mjs` enforces that with an
+  allowlist, and `static.cloudflareinsights.com` is the single documented
+  exception.
+- It's **probably unreachable from mainland China**, so it under-counts readers
+  in Beijing — most of the point of this guide. Read the data as "people
+  looking before they fly", not "our readers".
+
+If you want to know what devices the cohort actually uses, asking three people
+in the group chat will beat this.
+
 ## Keeping it alive
 
 This outlives any one of us. The **Guide Steward** hands over from one cohort to the next

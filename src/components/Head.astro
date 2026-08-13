@@ -67,6 +67,28 @@ if (!isHome) {
 	});
 }
 
+// ---------------------------------------------------------------------------
+// Cloudflare Web Analytics
+//
+// PASTE YOUR TOKEN HERE to switch analytics on. Leave it empty and nothing is
+// emitted at all — no script, no request, no third-party origin. Get one at
+// Cloudflare dashboard -> Web Analytics -> Add a site (free, no Cloudflare DNS
+// or proxying required).
+//
+// The token is a public site identifier, not a secret; it is visible in the
+// page source by design, so it is fine to commit.
+//
+// Chosen because it is cookieless and needs no consent banner. Two things to be
+// honest about, recorded here so nobody has to rediscover them:
+//   1. This is the ONLY external origin the site loads. Everything else —
+//      fonts, map, basemap, search — is same-origin on purpose, because a
+//      third-party origin can be blocked independently of us.
+//   2. It is likely unreachable from mainland China. That means the numbers
+//      under-count readers in Beijing, who are most of the point of this guide.
+//      Treat the data as "people reading before they fly", not "our readers".
+// `defer` so it can never block rendering, even if the host hangs.
+const CF_BEACON_TOKEN = '';
+
 const jsonld = { '@context': 'https://schema.org', '@graph': graph };
 ---
 
@@ -79,3 +101,14 @@ const jsonld = { '@context': 'https://schema.org', '@graph': graph };
 <meta name="twitter:card" content="summary_large_image" />
 
 <script type="application/ld+json" set:html={JSON.stringify(jsonld)} is:inline />
+
+{
+	CF_BEACON_TOKEN && (
+		<script
+			is:inline
+			defer
+			src="https://static.cloudflareinsights.com/beacon.min.js"
+			data-cf-beacon={JSON.stringify({ token: CF_BEACON_TOKEN })}
+		/>
+	)
+}

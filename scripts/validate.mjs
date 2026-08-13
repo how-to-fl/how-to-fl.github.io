@@ -80,18 +80,34 @@ places.forEach((p, i) => {
 
 // ------------------------------------------------------- external asset check
 
-const BANNED = [
-	'fonts.googleapis.com',
-	'fonts.gstatic.com',
-	'ajax.googleapis.com',
-	'www.google-analytics.com',
-	'maps.googleapis.com',
-	'cdn.jsdelivr.net',
-	'unpkg.com',
-	'cdnjs.cloudflare.com',
-	'raw.githubusercontent.com',
-	'www.youtube.com/embed',
-	'use.fontawesome.com',
+// Hosts we are allowed to load assets from. This is an ALLOWLIST on purpose.
+//
+// It used to be a denylist of known-bad CDNs, which meant the rule the project
+// claims to enforce — everything same-origin — wasn't actually enforced: any
+// CDN nobody had thought to list would sail straight through. Inverting it
+// means a new external dependency has to be added here deliberately, by
+// someone who has read this comment.
+//
+// Note this checks assets the browser *loads* (scripts, styles, fonts, images,
+// imports), not ordinary hyperlinks. Linking to openstreetmap.org is fine;
+// fetching a script from it is not.
+const ALLOWED_HOSTS = [
+	// Cloudflare Web Analytics beacon. Added deliberately 2026-08-14 as the
+	// single exception to same-origin, on the understanding that it is
+	// cookieless, loaded with `defer` so it can never block rendering, and that
+	// it is likely unreachable from mainland China — which means the numbers it
+	// reports systematically under-count the readers this guide is actually for.
+	'static.cloudflareinsights.com',
+];
+
+/** Contexts where a URL means "the browser will fetch this", vs a mere link. */
+const ASSET_PATTERNS = [
+	/\bsrc=["']([^"']+)["']/g,
+	/\burl\(\s*["']?([^"')]+)["']?\s*\)/g,
+	/@import\s+["']([^"']+)["']/g,
+	/\bfrom\s+["'](https?:[^"']+)["']/g,
+	/\bimport\(\s*["'](https?:[^"']+)["']\s*\)/g,
+	/<link\b[^>]*rel=["'](?:stylesheet|preload|preconnect|dns-prefetch)["'][^>]*href=["']([^"']+)["']/g,
 ];
 
 const SCAN_EXT = new Set(['.astro', '.css', '.js', '.mjs', '.ts', '.tsx', '.jsx', '.html', '.mdx', '.md']);
@@ -103,18 +119,32 @@ function walk(dir) {
 		if (statSync(full).isDirectory()) walk(full);
 		else if (SCAN_EXT.has(extname(full))) {
 			const text = readFileSync(full, 'utf8');
-			for (const host of BANNED) {
-				// Ignore it when it appears inside a comment explaining the rule.
-				const lines = text.split('\n');
-				lines.forEach((line, n) => {
-					if (!line.includes(host)) return;
-					const trimmed = line.trim();
-					if (trimmed.startsWith('//') || trimmed.startsWith('*') || trimmed.startsWith('#')) return;
+			const lines = text.split('\n');
+
+			for (const pattern of ASSET_PATTERNS) {
+				pattern.lastIndex = 0;
+				let m;
+				while ((m = pattern.exec(text)) !== null) {
+					const url = m[1];
+					if (!/^https?:\/\//i.test(url)) continue; // same-origin or relative
+					let host;
+					try {
+						host = new URL(url).host;
+					} catch {
+						continue;
+					}
+					if (ALLOWED_HOSTS.includes(host)) continue;
+
+					const line = text.slice(0, m.index).split('\n').length;
+					const src = lines[line - 1]?.trim() ?? '';
+					if (src.startsWith('//') || src.startsWith('*') || src.startsWith('#')) continue;
+
 					errors.push(
-						`${relative(ROOT, full)}:${n + 1} references ${host}. ` +
-							`Assets must be same-origin — self-host it instead.`
+						`${relative(ROOT, full)}:${line} loads an asset from ${host}. ` +
+							`Assets must be same-origin — self-host it, or add the host to ` +
+							`ALLOWED_HOSTS in scripts/validate.mjs with a reason.`
 					);
-				});
+				}
 			}
 		}
 	}
