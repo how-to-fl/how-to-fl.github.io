@@ -207,50 +207,10 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 		const origin = window.location.origin;
 		const subwayMode = container.dataset.subway === 'geojson' ? 'geojson' : 'basemap';
 
-		// Beijing Subway only — not every piece of track in the city.
-		const SUBWAY_FILTER: any = [
-			'all',
-			['==', ['get', 'kind'], 'rail'],
-			['==', ['get', 'kind_detail'], 'subway'],
-		];
-
-		// Official line colours, matched on the basemap's own line names. Anything
-		// we haven't listed falls back to a neutral transit blue rather than
-		// pretending to be a line it isn't.
-		const LINE_COLOUR: any = [
-			'match',
-			['coalesce', ['get', 'name:en'], ['get', 'name'], ''],
-			'Beijing Subway Line 1', '#a12b2f',
-			'Beijing Subway Line 2', '#006ab7',
-			'Beijing Subway Line 4', '#008e9c',
-			'Beijing Subway Daxing Line', '#008e9c',
-			'Beijing Subway Line 5', '#a6228c',
-			'Beijing Subway Line 6', '#b6a12b',
-			'Beijing Subway Line 7', '#f2a900',
-			'Beijing Subway Line 8', '#009b77',
-			'Beijing Subway Line 9', '#8fc31f',
-			'Beijing Subway Line 10', '#009bc0',
-			'Beijing Subway Line 11', '#5f2d8c',
-			'Beijing Subway Line 13', '#f7c800',
-			'Beijing Subway Line 14', '#d5a3ce',
-			'Beijing Subway Line 15', '#653279',
-			'Beijing Subway Line 16', '#6bae45',
-			'Beijing Subway Line 17', '#00a1a5',
-			'Beijing Subway Line 19', '#0079c1',
-			'Beijing Subway Changping Line', '#e56db1',
-			'Beijing Subway Fangshan Line', '#d4802a',
-			'Beijing Subway Yizhuang Line', '#d40f5a',
-			'Beijing Subway Airport Express', '#a28e6b',
-			'#2f6ea8',
-		];
-
-		// Every layer the subway toggle switches on and off.
-		const SUBWAY_LAYERS = [
-			'subway-casing',
-			'subway-line',
-			'subway-line-label',
-			...(subwayMode === 'geojson' ? ['subway-osm-station', 'subway-osm-station-label'] : []),
-		];
+		const SUBWAY_LAYERS =
+			subwayMode === 'geojson'
+				? ['subway-casing', 'subway-line', 'subway-line-label', 'subway-station', 'subway-station-label']
+				: ['subway-line'];
 
 		function buildStyle(dark: boolean) {
 			const flavorName = dark ? 'dark' : 'light';
@@ -273,86 +233,76 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 					...layers('protomaps', namedFlavor(flavorName), { lang: 'en' }),
 
 					// ---- Subway overlay -------------------------------------------
-					// Filtered on kind_detail === 'subway'. Filtering on kind === 'rail'
-					// alone (as this first did) also catches mainline and freight track,
-					// which is why the overlay looked nothing like the metro.
+					// Drawn from our own GeoJSON (scripts/fetch-subway.mjs), NOT from the
+					// basemap. The Protomaps extract only carries subway features in z14
+					// tiles — z8 to z13 have none at all — so a basemap-derived overlay
+					// disappears the moment you zoom out. This renders at every zoom,
+					// which is the whole point of having it.
 					//
-					// The basemap carries each segment's line name, so we can colour the
-					// lines officially and label them. It has no station POIs — those
-					// need `npm run fetch:subway`.
-					{
-						id: 'subway-casing',
-						type: 'line' as const,
-						source: 'protomaps',
-						'source-layer': 'roads',
-						filter: SUBWAY_FILTER,
-						layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
-						paint: {
-							'line-color': dark ? '#0e1413' : '#ffffff',
-							'line-opacity': 0.9,
-							'line-width': ['interpolate', ['linear'], ['zoom'], 9, 3.4, 16, 9],
-						},
-					},
-					{
-						id: 'subway-line',
-						type: 'line' as const,
-						source: 'protomaps',
-						'source-layer': 'roads',
-						filter: SUBWAY_FILTER,
-						layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
-						paint: {
-							'line-color': LINE_COLOUR,
-							'line-opacity': 0.95,
-							'line-width': ['interpolate', ['linear'], ['zoom'], 9, 1.3, 16, 5],
-						},
-					},
-					{
-						id: 'subway-line-label',
-						type: 'symbol' as const,
-						source: 'protomaps',
-						'source-layer': 'roads',
-						filter: SUBWAY_FILTER,
-						minzoom: 10.5,
-						layout: {
-							'symbol-placement': 'line' as const,
-							'text-field': ['coalesce', ['get', 'name:en'], ['get', 'name'], ''],
-							'text-font': ['Noto Sans Medium'],
-							'text-size': 10,
-							'text-letter-spacing': 0.04,
-							'symbol-spacing': 260,
-							'text-optional': true,
-						},
-						paint: {
-							'text-color': LINE_COLOUR,
-							'text-halo-color': dark ? '#0e1413' : '#ffffff',
-							'text-halo-width': 1.6,
-						},
-					},
-					// Every stop on the network, from `npm run fetch:subway`.
-					// Deliberately no minzoom on the dots: the whole point of the
-					// overlay is that you can see how a place connects to the network
-					// at whatever zoom you happen to be at.
+					// Colours come from the data: the official palette where we could
+					// identify the line, the way's own colour tag otherwise.
 					...(subwayMode === 'geojson'
 						? [
 								{
-									id: 'subway-osm-station',
+									id: 'subway-casing',
+									type: 'line' as const,
+									source: 'subway',
+									filter: ['==', ['get', 'kind'], 'line'],
+									layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
+									paint: {
+										'line-color': dark ? '#0e1413' : '#ffffff',
+										'line-opacity': 0.75,
+										'line-width': ['interpolate', ['linear'], ['zoom'], 8, 2.4, 12, 4.5, 16, 8],
+									},
+								},
+								{
+									id: 'subway-line',
+									type: 'line' as const,
+									source: 'subway',
+									filter: ['==', ['get', 'kind'], 'line'],
+									layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
+									paint: {
+										'line-color': ['coalesce', ['get', 'colour'], '#4a7fb5'],
+										'line-opacity': 0.92,
+										'line-width': ['interpolate', ['linear'], ['zoom'], 8, 1, 12, 2, 16, 4.5],
+									},
+								},
+								{
+									id: 'subway-line-label',
+									type: 'symbol' as const,
+									source: 'subway',
+									filter: ['all', ['==', ['get', 'kind'], 'line'], ['!=', ['get', 'line'], '']],
+									minzoom: 11,
+									layout: {
+										'symbol-placement': 'line' as const,
+										'text-field': ['get', 'line'],
+										'text-font': ['Noto Sans Medium'],
+										'text-size': 10,
+										'symbol-spacing': 300,
+										'text-optional': true,
+									},
+									paint: {
+										'text-color': ['coalesce', ['get', 'colour'], '#4a7fb5'],
+										'text-halo-color': dark ? '#0e1413' : '#ffffff',
+										'text-halo-width': 1.8,
+									},
+								},
+								// Every stop. No minzoom — the network should read as a
+								// network however far out you are.
+								{
+									id: 'subway-station',
 									type: 'circle' as const,
 									source: 'subway',
 									filter: ['==', ['get', 'kind'], 'station'],
 									paint: {
-										'circle-radius': [
-											'interpolate', ['linear'], ['zoom'],
-											9, 1.6, 12, 3, 16, 5.5,
-										],
+										'circle-radius': ['interpolate', ['linear'], ['zoom'], 8, 1.2, 12, 2.6, 16, 5],
 										'circle-color': dark ? '#0e1413' : '#ffffff',
-										'circle-stroke-width': [
-											'interpolate', ['linear'], ['zoom'], 9, 1, 16, 2,
-										],
+										'circle-stroke-width': ['interpolate', ['linear'], ['zoom'], 8, 0.8, 16, 1.8],
 										'circle-stroke-color': dark ? '#cfe0ee' : '#33506b',
 									},
 								},
 								{
-									id: 'subway-osm-station-label',
+									id: 'subway-station-label',
 									type: 'symbol' as const,
 									source: 'subway',
 									filter: ['==', ['get', 'kind'], 'station'],
@@ -361,7 +311,7 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 										'text-field': ['get', 'name'],
 										'text-font': ['Noto Sans Regular'],
 										'text-size': ['interpolate', ['linear'], ['zoom'], 12.5, 9.5, 16, 11.5],
-										'text-offset': [0, 0.85],
+										'text-offset': [0, 0.8],
 										'text-anchor': 'top' as const,
 										'text-optional': true,
 										'text-padding': 3,
@@ -373,7 +323,26 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 									},
 								},
 							]
-						: []),
+						: [
+								// Fallback if nobody has run `npm run fetch:subway`: the
+								// basemap's own rail, which only exists from z14 up.
+								{
+									id: 'subway-line',
+									type: 'line' as const,
+									source: 'protomaps',
+									'source-layer': 'roads',
+									filter: [
+										'all',
+										['==', ['get', 'kind'], 'rail'],
+										['==', ['get', 'kind_detail'], 'subway'],
+									],
+									layout: { 'line-cap': 'round' as const, 'line-join': 'round' as const },
+									paint: {
+										'line-color': dark ? '#7fb2e0' : '#2f6ea8',
+										'line-width': ['interpolate', ['linear'], ['zoom'], 14, 2, 16, 4],
+									},
+								},
+							]),
 
 					{
 						id: 'places-halo',
