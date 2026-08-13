@@ -312,7 +312,7 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 						source: 'protomaps',
 						'source-layer': 'roads',
 						filter: SUBWAY_FILTER,
-						minzoom: 12,
+						minzoom: 10.5,
 						layout: {
 							'symbol-placement': 'line' as const,
 							'text-field': ['coalesce', ['get', 'name:en'], ['get', 'name'], ''],
@@ -328,8 +328,10 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 							'text-halo-width': 1.6,
 						},
 					},
-					// Real route relations, if someone has run `npm run fetch:subway`.
-					// Those add station dots and names, which the basemap lacks.
+					// Every stop on the network, from `npm run fetch:subway`.
+					// Deliberately no minzoom on the dots: the whole point of the
+					// overlay is that you can see how a place connects to the network
+					// at whatever zoom you happen to be at.
 					...(subwayMode === 'geojson'
 						? [
 								{
@@ -337,12 +339,16 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 									type: 'circle' as const,
 									source: 'subway',
 									filter: ['==', ['get', 'kind'], 'station'],
-									minzoom: 11,
 									paint: {
-										'circle-radius': ['interpolate', ['linear'], ['zoom'], 11, 2, 16, 4.5],
+										'circle-radius': [
+											'interpolate', ['linear'], ['zoom'],
+											9, 1.6, 12, 3, 16, 5.5,
+										],
 										'circle-color': dark ? '#0e1413' : '#ffffff',
-										'circle-stroke-width': 1.4,
-										'circle-stroke-color': dark ? '#9fc4e4' : '#2f6ea8',
+										'circle-stroke-width': [
+											'interpolate', ['linear'], ['zoom'], 9, 1, 16, 2,
+										],
+										'circle-stroke-color': dark ? '#cfe0ee' : '#33506b',
 									},
 								},
 								{
@@ -350,20 +356,20 @@ const present = [...new Set(geojson.features.map((f: any) => f.properties.catego
 									type: 'symbol' as const,
 									source: 'subway',
 									filter: ['==', ['get', 'kind'], 'station'],
-									minzoom: 13,
+									minzoom: 12.5,
 									layout: {
 										'text-field': ['get', 'name'],
 										'text-font': ['Noto Sans Regular'],
-										'text-size': 10.5,
-										'text-offset': [0, 0.9],
+										'text-size': ['interpolate', ['linear'], ['zoom'], 12.5, 9.5, 16, 11.5],
+										'text-offset': [0, 0.85],
 										'text-anchor': 'top' as const,
 										'text-optional': true,
-										'text-padding': 4,
+										'text-padding': 3,
 									},
 									paint: {
-										'text-color': dark ? '#9fc4e4' : '#2f6ea8',
+										'text-color': dark ? '#cfe0ee' : '#33506b',
 										'text-halo-color': dark ? '#0e1413' : '#ffffff',
-										'text-halo-width': 1.4,
+										'text-halo-width': 1.5,
 									},
 								},
 							]

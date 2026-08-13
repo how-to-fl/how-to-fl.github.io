@@ -31,12 +31,12 @@ const ENDPOINTS = [
 // the region our basemap covers anyway.
 const BBOX = '39.70,116.10,40.15,116.70';
 
+// Stations only. The line geometry already comes from our own basemap (which
+// carries kind_detail=subway plus each line's name), so asking Overpass for
+// route relations as well made the query several times heavier for no gain —
+// and heavy queries are exactly what gets rate-limited or timed out.
 const QUERY = `
-[out:json][timeout:120];
-(
-  relation["type"="route"]["route"="subway"](${BBOX});
-);
-out geom;
+[out:json][timeout:90];
 (
   node["station"="subway"](${BBOX});
   node["railway"="station"]["subway"="yes"](${BBOX});
@@ -93,23 +93,6 @@ const features = [];
 const seenStation = new Set();
 
 for (const el of data.elements ?? []) {
-	if (el.type === 'relation' && el.tags?.route === 'subway') {
-		const colour = el.tags.colour || el.tags.color || FALLBACK;
-		const name = el.tags['name:en'] || el.tags.name || '';
-		const nameZh = el.tags.name || '';
-		// `out geom` gives each member way its own coordinate list; keep them as a
-		// MultiLineString so a line with branches stays one feature.
-		const coords = (el.members ?? [])
-			.filter((m) => m.type === 'way' && Array.isArray(m.geom) && m.geom.length > 1)
-			.map((m) => m.geom.map((p) => [p.lon, p.lat]));
-		if (!coords.length) continue;
-		features.push({
-			type: 'Feature',
-			geometry: { type: 'MultiLineString', coordinates: coords },
-			properties: { kind: 'line', name, name_zh: nameZh, colour, ref: el.tags.ref ?? '' },
-		});
-	}
-
 	if (el.type === 'node') {
 		const name = el.tags?.['name:en'] || el.tags?.name || '';
 		if (!name || typeof el.lat !== 'number' || typeof el.lon !== 'number') continue;
@@ -119,16 +102,21 @@ for (const el of data.elements ?? []) {
 		features.push({
 			type: 'Feature',
 			geometry: { type: 'Point', coordinates: [el.lon, el.lat] },
-			properties: { kind: 'station', name, name_zh: el.tags?.name ?? '' },
+			properties: {
+				kind: 'station',
+				name,
+				name_zh: el.tags?.name ?? '',
+				// Which lines stop here, when OSM knows.
+				lines: el.tags?.['subway:lines'] ?? el.tags?.line ?? '',
+			},
 		});
 	}
 }
 
-const lines = features.filter((f) => f.properties.kind === 'line');
 const stations = features.filter((f) => f.properties.kind === 'station');
 
-if (!lines.length) {
-	console.error('\n  No subway lines came back — refusing to overwrite the existing file.');
+if (!stations.length) {
+	console.error('\n  No stations came back — refusing to overwrite the existing file.');
 	console.error('  Usually this means Overpass rate-limited you. Check your quota at');
 	console.error('  https://overpass-api.de/api/status and try again in a few minutes.\n');
 	process.exit(1);
@@ -138,5 +126,5 @@ await mkdir(join(ROOT, 'public', 'data'), { recursive: true });
 await writeFile(OUT, JSON.stringify({ type: 'FeatureCollection', features }), 'utf8');
 
 const kb = (JSON.stringify(features).length / 1024).toFixed(0);
-console.log(`\n  ✔ ${lines.length} lines, ${stations.length} stations → public/data/beijing-subway.geojson (${kb} KB)`);
+console.log(`\n  ✔ ${stations.length} stations → public/data/beijing-subway.geojson (${kb} KB)`);
 console.log('    Commit it: the site builds from the committed file, not from Overpass.\n');

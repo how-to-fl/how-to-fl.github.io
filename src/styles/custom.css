@@ -716,3 +716,89 @@ header.header {
 		grid-template-columns: 1fr 1fr;
 	}
 }
+
+/* ==========================================================================
+   Content furniture — number tiles, key-fact rows, emergency block
+   ========================================================================== */
+
+.fl-stats {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+	gap: 0.75rem;
+	margin-block: 1.5rem;
+	padding: 0;
+	list-style: none;
+}
+
+.fl-stats li {
+	border: 1px solid var(--sl-color-gray-5);
+	border-top: 3px solid var(--sl-color-accent);
+	border-radius: 0.5rem;
+	background: var(--sl-color-bg-nav);
+	padding: 0.9rem 1rem;
+	margin: 0;
+}
+
+.fl-stats .n {
+	display: block;
+	font-family: var(--fl-font-display);
+	font-size: 1.65rem;
+	font-weight: 700;
+	line-height: 1.05;
+	color: var(--sl-color-white);
+	font-variant-numeric: tabular-nums;
+}
+
+.fl-stats .l {
+	display: block;
+	font-size: 0.78rem;
+	color: var(--sl-color-gray-3);
+	margin-top: 0.25rem;
+	line-height: 1.4;
+}
+
+/* Emergency numbers — must read at a glance, in a panic, on a phone */
+.fl-emergency {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+	gap: 0.6rem;
+	margin-block: 1.25rem;
+	padding: 0;
+	list-style: none;
+}
+
+.fl-emergency li {
+	border: 1px solid var(--fl-ember);
+	border-radius: 0.5rem;
+	background: color-mix(in srgb, var(--fl-ember) 10%, var(--sl-color-bg));
+	padding: 0.8rem 0.9rem;
+	margin: 0;
+	text-align: center;
+}
+
+.fl-emergency .num {
+	display: block;
+	font-family: var(--fl-font-display);
+	font-size: 2rem;
+	font-weight: 800;
+	line-height: 1;
+	color: var(--fl-ember);
+	font-variant-numeric: tabular-nums;
+	letter-spacing: 0.01em;
+}
+
+.fl-emergency .who {
+	display: block;
+	font-size: 0.78rem;
+	color: var(--sl-color-gray-2);
+	margin-top: 0.3rem;
+}
+
+/* Source note — where a fact came from and when */
+.fl-source {
+	font-size: 0.82rem;
+	color: var(--sl-color-gray-3);
+	border-left: 2px solid var(--sl-color-gray-5);
+	padding: 0.15rem 0 0.15rem 0.8rem;
+	margin-block: 1.25rem;
+}

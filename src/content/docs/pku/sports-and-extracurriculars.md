@@ -1,35 +1,80 @@
 ---
 title: "Sports and societies"
-description: "The club fair, PKU's gyms and pitches, and how to actually join something."
-status: stub
+description: "The club fest, PKU's gyms and pitches, and how to actually join something."
+status: draft
+last_verified: 2024-05
 sidebar:
   order: 4
 ---
 
-We've laid out the headings we think this page needs. Swap each `_To be written._`
-for what you actually know — short and specific beats long and vague, and filling in
-one heading is a proper contribution. You don't have to do the whole thing.
+PKU has **over a hundred student societies**, and they recruit twice a year — **March and
+September**. Joining one is the single easiest way to stop being "the exchange student" and
+start having a life here.
 
-## The club fair, and how to actually join something
+## Club Fest
 
-_To be written._
+**End of September, near PKU Hall and the New Sun Student Center.** Over a hundred clubs
+with stalls, covering sport, music, business, cooking, calligraphy, robotics, debating and
+a long tail of things you'd never guess existed.
 
-## PKU sports facilities
+How it actually works:
 
-_To be written._
+- Sign-up is usually **through WeChat**, at the start of the semester, often with a small fee
+- **Team sports hold tryouts, and often before the fest** — so if you want to play something
+  competitively, ask a Chinese classmate or an older FL cohort *early*, don't wait for the
+  stalls
+- Societies for exchange students specifically are less of a thing — you'll mostly be
+  joining regular PKU clubs, which is the point
 
-## Societies worth knowing about
+Be a bit shameless in that first fortnight. Everyone is new to something.
 
-_To be written._
+## Gyms and facilities
 
-## Running and cycling on and around campus
+There are **two gyms on campus**, membership around **€20 a month**.
 
-_To be written._
+| Where | What's there |
+|---|---|
+| **May 4th Playground** *(southeast)* | Running track, basketball, badminton, football |
+| **PKU Gymnasium** *(east)* | Badminton, swimming, basketball, general recreation |
+| **Gymnasium No.1** *(east of Weiming Lake)* | **Rock climbing**, football |
+| **Gymnasium No.2** *(south of Jing Yuan)* | Tennis, basketball |
+| Kang Mei Le Recreation Centre | B1, Computer Service Center |
+| **Kang Le Recreation Centre** | B1, Building 4, **Global Village** — pool, small gym, bowling |
 
-## Climbing, swimming, martial arts
+That last one is in your own accommodation, which makes it the one you'll actually use on a
+cold Tuesday.
 
-_To be written._
+Some facilities charge a fee. Look after the kit, and don't wander into someone's class or
+fixture.
 
-## Student government
+## Running and cycling
 
-_To be written._
+The campus itself is genuinely pleasant to run in — Weiming Lake early morning, before it
+fills up. Beyond campus, shared bikes (through [Meituan](/lifestyle/meituan/)) are
+everywhere and cost almost nothing, and are the fastest way across Haidian.
+
+## Finding your people
+
+- **GISA** — the Guanghua international students' association. WeChat: `gsmGISA`. Start here
+- **PKU Western Students Union** — pkuwsu@gmail.com
+- Country-specific associations exist for Singapore, Korea, Japan, Malaysia, Africa and
+  Latin America, and the ISD can point you at them
+- The **International Students Division** runs cultural events, trips and tours around the
+  city — watch `isd.pku.edu.cn` under "Notice" and "Events"
+- The **FL programme team and Guanghua** run their own things. Read those emails
+
+## Competitions
+
+If you're competitive: there are sports competitions all year, the Top 10 Singers
+competition, and subject ones worth knowing about — the **Bain Cup case contest** run by
+PKU's Consulting Association each April, and **Guanghua's annual business competition** at
+the end of the year.
+
+## Volunteering
+
+Plenty of it, through the clubs and through Guanghua's own Youth Volunteer Association.
+A good route in if the club fest feels overwhelming.
+
+<p class="fl-source">Facilities, club fest timing, associations and competitions from the
+official FL Student Handbook, 2024 edition; gym costs, tryout timing and sign-up process
+from the Mannheim cohort's 2025 guide.</p>
