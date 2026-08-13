@@ -19,6 +19,10 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const OUT = join(ROOT, 'public', 'fonts');
+// The @font-face sheet lives in src/styles so Astro bundles it into the main
+// stylesheet — as a separate <link> it was a second render-blocking request
+// (156ms in Lighthouse) for rules that only declare fonts.
+const CSS_OUT = join(ROOT, 'src', 'styles', 'fonts.css');
 
 // A modern UA is required, otherwise Google serves ttf instead of woff2.
 const UA =
@@ -87,5 +91,5 @@ for (const family of FAMILIES) {
 	console.log(`  ${family.slug}: ${n} files`);
 }
 
-await writeFile(join(OUT, 'fonts.css'), css, 'utf8');
-console.log(`\n  ✔ ${(total / 1024).toFixed(0)} KB → public/fonts/ (+ fonts.css)\n`);
+await writeFile(CSS_OUT, css, 'utf8');
+console.log(`\n  ✔ ${(total / 1024).toFixed(0)} KB → public/fonts/ (+ src/styles/fonts.css)\n`);

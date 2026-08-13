@@ -14,7 +14,8 @@
     "vendor": "node scripts/sync-vendor.mjs",
     "admin": "node scripts/admin-server.mjs",
     "fetch:subway": "node scripts/fetch-subway.mjs",
-    "fetch:fonts": "node scripts/fetch-fonts.mjs"
+    "fetch:fonts": "node scripts/fetch-fonts.mjs",
+    "make:og": "node scripts/make-og.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.41.7",

@@ -16,14 +16,8 @@ export default defineConfig({
 			],
 			// Every font and icon must be served from our own origin — see CONTRIBUTING.md.
 			// Nothing here may reference a CDN, Google Fonts, or raw.githubusercontent.com.
-			customCss: ['./src/styles/custom.css'],
+			customCss: ['./src/styles/fonts.css', './src/styles/custom.css'],
 			head: [
-				{
-					// Playfair Display + DM Sans, vendored by scripts/fetch-fonts.mjs.
-					// Same-origin: a webfont that hangs takes the page's text with it.
-					tag: 'link',
-					attrs: { rel: 'stylesheet', href: '/fonts/fonts.css' },
-				},
 				{
 					tag: 'link',
 					attrs: {
@@ -37,6 +31,8 @@ export default defineConfig({
 				{ tag: 'meta', attrs: { name: 'theme-color', content: '#8e1b2c' } },
 			],
 			components: {
+				// Adds JSON-LD + Open Graph image on top of Starlight's head.
+				Head: './src/components/Head.astro',
 				// The seal + wordmark in the header.
 				SiteTitle: './src/components/SiteTitle.astro',
 				// Adds the "last checked" line under every page title.

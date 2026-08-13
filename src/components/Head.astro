@@ -1,0 +1,81 @@
+---
+/**
+ * Extends Starlight's <head> with JSON-LD and an Open Graph image.
+ *
+ * Why bother on a guide nobody is trying to rank: roughly two thirds of US
+ * searches now end without a click, and when an AI Overview appears CTR falls
+ * sharply. Structured data is what gets a page quoted accurately — with its
+ * "last checked" date attached — rather than paraphrased from a snippet. Given
+ * this guide's whole trust model is "we tell you when we last verified this",
+ * having that date machine-readable is the difference between being cited
+ * correctly and being cited as if it were current.
+ *
+ * Also: the site is shared almost entirely by WeChat message and QR poster, so
+ * the OG image is the real first impression far more often than any SERP.
+ */
+import Default from '@astrojs/starlight/components/Head.astro';
+
+const { entry } = Astro.locals.starlightRoute;
+const data = entry.data as {
+	title: string;
+	description?: string;
+	last_verified?: string;
+	owner?: string;
+	template?: string;
+};
+
+const site = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const url = new URL(Astro.url.pathname, Astro.site ?? 'https://how-to-fl.github.io').toString();
+const isHome = data.template === 'splash';
+
+const org = {
+	'@type': 'Organization',
+	'@id': `${site}/#org`,
+	name: 'How to FL',
+	url: site + '/',
+	description:
+		'A student-written guide for the Future Leaders International Undergraduate Double Degree Programme at Peking University.',
+};
+
+const graph: Record<string, unknown>[] = [
+	org,
+	{
+		'@type': 'WebSite',
+		'@id': `${site}/#website`,
+		url: site + '/',
+		name: 'How to FL',
+		publisher: { '@id': `${site}/#org` },
+		inLanguage: 'en',
+	},
+];
+
+if (!isHome) {
+	graph.push({
+		'@type': 'Article',
+		'@id': `${url}#article`,
+		headline: data.title,
+		description: data.description,
+		url,
+		inLanguage: 'en',
+		isPartOf: { '@id': `${site}/#website` },
+		publisher: { '@id': `${site}/#org` },
+		// The whole point: the verification date travels with the claim.
+		...(data.last_verified ? { dateModified: `${data.last_verified}-01` } : {}),
+		author: data.owner
+			? { '@type': 'Person', name: data.owner }
+			: { '@type': 'Organization', name: 'The Future Leaders cohorts', '@id': `${site}/#org` },
+	});
+}
+
+const jsonld = { '@context': 'https://schema.org', '@graph': graph };
+---
+
+<Default><slot /></Default>
+
+<meta property="og:image" content={`${site}/og.png`} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="How to FL — a survival guide for Future Leaders arriving in Beijing" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonld)} is:inline />
