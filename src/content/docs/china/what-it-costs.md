@@ -11,7 +11,7 @@ Short version: **your rent and your health insurance are paid for, and you get a
 stipend on top.** What you spend beyond that is mostly flights and how much of China you
 want to see.
 
-These are real figures from the Mannheim cohort. Yours will differ — but the shape is right.
+These are real figures from an earlier cohort. Yours will differ — but the shape is right.
 
 ## The year, roughly
 
@@ -122,7 +122,7 @@ So take out international health insurance at home **as well**, before you fly. 
 national scholarships bundle a good policy — check yours before buying separately. This is
 the cheapest regret to avoid on the whole list.
 
-<p class="fl-source">All figures from the Mannheim cohort's 2025 student guide, which
+<p class="fl-source">All figures from an earlier cohort's own 2025 student guide, which
 reflects the 2024/25 year. Prices and exchange rates drift — treat these as the right order
 of magnitude rather than a quote, and please
 <a href="https://github.com/how-to-fl/how-to-fl.github.io/issues/new/choose">update them</a>

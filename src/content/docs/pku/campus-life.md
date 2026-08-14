@@ -146,4 +146,4 @@ in the snow.
 
 <p class="fl-source">Facilities, card rules, network and contact details from the official
 FL Student Handbook, 2024 edition; Global Village layout, room description and cleaning
-from the Mannheim cohort's 2025 guide.</p>
+from an earlier cohort's own 2025 student guide.</p>

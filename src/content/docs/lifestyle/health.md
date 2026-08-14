@@ -106,5 +106,5 @@ Bring from home: anything prescription, plus whatever your body specifically nee
 bother bringing paracetamol or plasters — they're here and cheaper.
 
 <p class="fl-source">Hospitals, counselling service and contact details from the official FL
-Student Handbook, 2024 edition; insurance costs and comparison from the Mannheim cohort's
+Student Handbook, 2024 edition; insurance costs and comparison from an earlier cohort's own
 2025 guide. The practical bits are ours.</p>

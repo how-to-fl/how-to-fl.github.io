@@ -102,5 +102,5 @@ planning than it does at home, and it's worth arriving with a strategy rather th
 assumption.
 
 <p class="fl-source">Canteen list, cafés, shops and payment rules from the official FL
-Student Handbook, 2024 edition; Tong Yuan recommendation and prices from the Mannheim
-cohort's 2025 guide.</p>
+Student Handbook, 2024 edition; Tong Yuan recommendation and prices from an earlier cohort's
+own 2025 student guide.</p>

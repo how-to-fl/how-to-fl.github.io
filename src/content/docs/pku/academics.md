@@ -103,9 +103,11 @@ busier.
 
 ### What the numbers mean in practice
 
-If you're converting to a German grade: **98+ is very rarely awarded** in the Chinese
-system, so a 1.0 is not really the target. A **1.3–1.7 is realistic** with sensible course
-choices, which means sitting somewhere around 85–95 in most subjects.
+Whatever scale you convert back to, the thing to understand is that **98+ is very rarely
+awarded** in the Chinese system. So the very top of your home scale usually isn't a realistic
+target here, and it isn't a reflection on you. **85–95 across most subjects** is a good
+semester with sensible course choices — work out what that maps to at home before you start
+worrying about a number.
 
 ### The rules with teeth
 
@@ -160,8 +162,8 @@ credit transfer, order it earlier than you think you need to.
 
 ## Your professors
 
-Mostly Chinese faculty with excellent English, very often with doctorates from Wharton,
-Princeton, Yale or Oxbridge, and many of them advise government or sit close to Chinese
+Mostly Chinese faculty with excellent English, very often with doctorates from top American
+and British universities, and many of them advise government or sit close to Chinese
 industry. The guest lectures and company visits are genuinely one of the best parts of the
 year — go to them.
 
@@ -170,5 +172,5 @@ their province in the gaokao, out of a population the size of a large European c
 It's a humbling and quite motivating room to be in.
 
 <p class="fl-source">Rules, times and thresholds from the official FL Student Handbook,
-2024 edition; grading experience and German conversion from the Mannheim cohort's 2025
+2024 edition; grading experience and conversion advice from an earlier cohort's own 2025
 student guide. Check the current academic calendar for exact dates each year.</p>

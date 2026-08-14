@@ -57,9 +57,10 @@ other things:
   during the breaks rather than only being in Beijing — Japanese encephalitis is the one that
   comes up. Some courses need weeks and several doses, so this is an early job, not a
   July one.
-- **Register with your own foreign ministry's citizen service** before you go. Most countries
-  run one — Germany's is ELEFAND — and it's how your embassy reaches you in an emergency.
-  Five minutes, and the sort of thing you only regret not doing.
+- **Register with your own foreign ministry's citizen service** before you go. Almost every
+  country runs one under some name — search for your foreign ministry plus "citizens abroad"
+  — and it's how your embassy reaches you in an emergency. Five minutes, and the sort of
+  thing you only regret not doing.
 
 ## Two things PKU makes you do online, before you arrive
 
@@ -214,6 +215,6 @@ few weeks of **Pleco** and an app like **tandem** before you fly pays off immedi
 the willingness to try is what gets you looked after. Numbers, food words, and "how much is
 it" go a very long way.
 
-<p class="fl-source">Visa, insurance and packing detail from the Mannheim cohort's 2025
+<p class="fl-source">Visa, insurance and packing detail from an earlier cohort's own 2025
 student guide; the PKU VPN and residence permit process from the FL Student Handbook 2024.
 Medication guidance is general — verify your own prescription against current customs rules.</p>

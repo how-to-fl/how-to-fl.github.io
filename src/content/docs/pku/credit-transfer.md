@@ -1,6 +1,6 @@
 ---
 title: "Credit transfer, school by school"
-description: "One section per partner school, because Bocconi's rules look nothing like Mannheim's."
+description: "The PKU half is the same for everyone. The half at your own university is not."
 status: draft
 last_verified: 2025-04
 sidebar:
@@ -14,9 +14,9 @@ Credit transfer has two halves, and they behave completely differently.
 **The PKU half is the same for all of us** and it's written down — that's the first section
 below, and it's the part we can tell you confidently.
 
-**The partner-school half is different at every school**, isn't written down anywhere central,
-and is the reason this page exists. Those sections are still empty. If you've been through it
-at your school, filling in even a few lines is a proper contribution.
+**The half at your own university is different everywhere**, isn't written down anywhere
+central, and is the reason this page exists. That section is still empty. If you've been
+through it, filling in even a few lines for your school is a proper contribution.
 
 ## The PKU side, which is the same for everyone
 
@@ -92,17 +92,22 @@ The two degrees are issued **independently**, and can arrive at different times.
 institution's requirements and not the other's means you get that degree and still owe the
 other one its remaining work.
 
-## Mannheim
+## Your own university's half
 
-_To be written._
+_To be written._ — and this is the section that needs the most hands, because there is no
+single answer to write. Every partner university has its own list of what it will recognise,
+its own deadlines, and its own opinion about what counts as an equivalent course.
 
-## Bocconi
+If you've been through the process, add a heading for your university and put down whatever
+you know:
 
-_To be written._
+- **Who** you had to deal with — the department, the exam office, a specific role
+- **When** you had to file, and whether the deadline was real
+- **What** they wanted to see: syllabus, contact hours, reading list, a grade conversion
+- **What surprised you** — the requirement nobody mentioned until late
 
-## Other partner schools
-
-_To be written._
+Even three lines under your university's name is more than exists anywhere right now, and it
+is the single most useful thing you can leave behind for the cohort after you.
 
 ## Getting your PKU credits back home
 
@@ -117,6 +122,7 @@ The **Programme Coordinator** is the first point of contact, and the FL team add
 orientation week, which is the moment to ask the awkward questions rather than the polite
 ones.
 
-For anything that touches your home degree, ask your home school **as well** — the FL team
-can tell you what PKU requires and genuinely cannot tell you what Mannheim or Bocconi will
-accept.
+For anything that touches your home degree, ask your home university **as well** — the FL
+team can tell you what PKU requires and genuinely cannot tell you what your own university
+will accept. Only your home exam office can answer that, and the answer differs at every
+school in the programme.

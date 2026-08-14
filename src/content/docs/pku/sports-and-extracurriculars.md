@@ -116,4 +116,4 @@ A good route in if the club fest feels overwhelming.
 
 <p class="fl-source">Facilities, club fest timing, associations and competitions from the
 official FL Student Handbook, 2024 edition; gym costs, tryout timing and sign-up process
-from the Mannheim cohort's 2025 guide.</p>
+from an earlier cohort's own 2025 student guide.</p>

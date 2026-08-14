@@ -67,6 +67,6 @@ Bad days cluster in winter. Some weeks are flawless blue sky.
 - Something for **36 °C and humid**
 - Both of these, given spring and autumn barely happen
 
-<p class="fl-source">Climate figures, AQI guidance and holiday structure from the Mannheim
-cohort's 2025 guide; academic calendar and Club Fest timing from the FL Student Handbook
+<p class="fl-source">Climate figures, AQI guidance and holiday structure from an earlier cohort's
+own 2025 student guide; academic calendar and Club Fest timing from the FL Student Handbook
 2024. Exact dates move every year — check the academic calendar.</p>

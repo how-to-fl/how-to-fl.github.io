@@ -84,5 +84,5 @@ bookings, campus card top-ups, your landlord, your professor — all WeChat. It 
 app here, it's infrastructure.
 
 <p class="fl-source">App list, SIM/bank ordering, WeChat warnings and the Global Village
-phone tents from the Mannheim cohort's 2025 student guide; campus card details from the FL
+phone tents from an earlier cohort's own 2025 student guide; campus card details from the FL
 Student Handbook 2024.</p>
