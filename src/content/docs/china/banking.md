@@ -40,7 +40,20 @@ means going back:
 - **Have them bind the account to WeChat Pay and Alipay**, install the bank's own app, and turn
   on WeChat payment notifications (微信提醒功能).
 
-Expect it to take a while. Every account we know of took longer than anyone budgeted for.
+Expect it to take a while. Every account we know of took longer than anyone budgeted for —
+**go in the morning, and joining the queue before the branch opens is not an overreaction.**
+The account itself is free.
+
+## Why you need a Chinese card and not just your own
+
+Everything here is paid for by phone — taxis, the canteen, a stall at a food market. Several
+of us went months without touching a banknote.
+
+But **some payments simply refuse foreign cards**, with no warning and no fallback, and that
+is the moment you discover you needed a Chinese one. Linking a home Visa or Mastercard to
+Alipay and WeChat Pay covers a surprising amount and does not cover everything.
+
+Keep a bit of **cash** anyway. Not for daily life — for the evening the app fails.
 
 ## Where the banks are
 

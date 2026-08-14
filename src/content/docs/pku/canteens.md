@@ -77,6 +77,35 @@ Tong Yuan being halal-certified makes it the reliable option for a lot of people
 everything else, printable cards are on our list to add here — if you've already made one
 that works, **please send it to us**, it'll be the most-used thing on this site.
 
+### Vegetarian, honestly
+
+We'd rather tell you this now than let you find out in October.
+
+**Eating vegetarian on campus is possible but genuinely harder than you're expecting.** There
+is **less tofu in the canteens than most people assume**, and "vegetable" dishes are often
+cooked with meat.
+
+The two places that reliably work:
+
+- **A vegan stall on the second floor of the largest canteen.**
+- **The 麻辣 málà stall on the third floor**, where you pick your ingredients and they cook
+  them — so you can build something vegetarian with tofu.
+
+Past those two, the options thin out quickly. That leaves cooking for yourself, and the
+Global Village kitchens are sparse enough to make that a chore rather than a plan. The
+realistic result is a **low-protein diet unless you're deliberate about it**, and more than
+one of us arrived vegetarian and stopped being vegetarian here.
+
+None of that is meant to talk you out of it. Plenty of people manage — it just takes more
+planning than it does at home, and it's worth arriving with a strategy rather than an
+assumption.
+
+:::note[Help us sharpen this]
+We know the vegan stall is on the second floor of the biggest canteen; we haven't pinned down
+which canteen that is by name. If you know, tell us — a name would make this paragraph
+twice as useful.
+:::
+
 <p class="fl-source">Canteen list, cafés, shops and payment rules from the official FL
 Student Handbook, 2024 edition; Tong Yuan recommendation and prices from the Mannheim
 cohort's 2025 guide.</p>

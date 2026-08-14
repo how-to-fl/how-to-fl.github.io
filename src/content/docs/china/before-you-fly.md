@@ -48,6 +48,19 @@ Two layers, and you want both:
 If you're German and applying for **DAAD**, a very good international policy is included.
 Details on [what the year costs](/china/what-it-costs/).
 
+### While you're at the doctor anyway
+
+You're having a medical examination for the visa regardless, so use the appointment for two
+other things:
+
+- **Ask about travel vaccinations.** Worth doing properly if you intend to travel around Asia
+  during the breaks rather than only being in Beijing — Japanese encephalitis is the one that
+  comes up. Some courses need weeks and several doses, so this is an early job, not a
+  July one.
+- **Register with your own foreign ministry's citizen service** before you go. Most countries
+  run one — Germany's is ELEFAND — and it's how your embassy reaches you in an emergency.
+  Five minutes, and the sort of thing you only regret not doing.
+
 ## Sort your VPN before you fly
 
 This is the one that catches the most people, so it gets the most space.
@@ -116,8 +129,11 @@ This is not a rule to find out about at the airport.
   specifically needs
 - **Deodorant** if you're attached to a particular kind — it's oddly hard to find
 - Shoes and clothes in your size if you're tall or take a large shoe size
-- **Passport photos**. You'll be asked for them repeatedly
+- **Passport photos — bring 5 to 10 printed.** Not a spare pair. Registration, the residence
+  permit, the medical examination and assorted forms each want one, and the queue for the
+  photo booth in the New Sun basement is not where you want to spend arrival week
 - Your **health certificate, JW202 and admission letter**, in print
+- A **small first-aid kit** — the specific things you reach for at home, not a generic one
 
 **Don't bother:**
 

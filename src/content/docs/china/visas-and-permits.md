@@ -25,8 +25,13 @@ public security bureau. This is the one people read backwards: the window is the
 illegally, and the fines are real.
 
 Bring more time than you think. The authorities have **up to 15 days** to decide once you've
-filed, and they keep your passport while they do — so a renewal and a trip abroad cannot
-overlap.
+filed, and in practice people have been without their passport for **around two weeks**. They
+keep it while they process — so a renewal and a trip abroad cannot overlap, at all.
+
+You aren't stranded in the meantime: you're given a **receipt slip** that stands in for the
+passport for travel *inside* China. It is not good enough to leave the country, and it is not
+good enough for everything a passport does, so keep the trip planning modest until the real
+one is back in your hands.
 
 The ISD runs an agent service on the third floor of the New Sun Student Center, which is the
 path of least resistance and the one most of us take.

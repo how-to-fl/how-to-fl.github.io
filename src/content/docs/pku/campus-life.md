@@ -81,6 +81,16 @@ there are three fixes:
 2. The WeChat mini-program 北大人脸采集 — log in and take the photo
 3. Room 1158, 1st floor, No.1 Science Building, with your card
 
+### Getting visitors onto campus
+
+PKU is a tourist destination in its own right and access is controlled, so **your friends and
+family cannot simply walk in** — which is a nasty surprise the morning your parents arrive.
+
+You book them in yourself: open the **PKU app**, search **"Appointment"**, and follow it
+through. Do it **before** they turn up at the gate, not while they're standing at it. Visitor
+slots can run out in peak season, so for a visit you've planned around, book as early as the
+system lets you.
+
 ## Getting online
 
 PKU **prepays your internet for September and October**; after that you pay it yourself at

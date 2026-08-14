@@ -44,8 +44,17 @@ There are **two gyms on campus**, membership around **€20 a month**.
 That last one is in your own accommodation, which makes it the one you'll actually use on a
 cold Tuesday.
 
+There's a **50-metre pool** on campus, which is a proper swimming pool rather than a token
+one — worth knowing if swimming is your thing, because it's the sort of facility most
+universities don't have and nobody mentions in the welcome talks.
+
 Some facilities charge a fee. Look after the kit, and don't wander into someone's class or
 fixture.
+
+**The sheer number of clubs and competitions is the surprise.** People have played **ice
+hockey, pickleball and volleyball** here without any prior connection to the sport — the
+barrier to joining a club or entering a competition is genuinely low, and much lower than it
+would be at home. If you've ever wanted to try something, this is the year.
 
 ## Running and cycling
 
@@ -69,6 +78,15 @@ If you're competitive: there are sports competitions all year, the Top 10 Singer
 competition, and subject ones worth knowing about — the **Bain Cup case contest** run by
 PKU's Consulting Association each April, and **Guanghua's annual business competition** at
 the end of the year.
+
+## Concerts and things to go to
+
+**PKU Hall** (北大讲堂) puts on a steady stream of concerts, theatre and cultural events on
+campus, and they're cheap. It's one of the easiest good evenings available to you, and it's
+a two-minute walk from where you live.
+
+**Getting tickets:** search WeChat for the official account **北大讲堂online** and book
+through it. It's in Chinese, but it's a short flow and translation handles it fine.
 
 ## Volunteering
 
