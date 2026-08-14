@@ -952,3 +952,318 @@ header.header {
 		transition: none;
 	}
 }
+
+/* --- The PKU campus map ---------------------------------------------------
+   Inline SVG, so it themes with tokens rather than needing two image files.
+   Selectors are doubled up (.fl-campus ul.fl-campus-key) because Starlight's
+   .sl-markdown-content ul is 0,2,0 and would otherwise win — the same
+   specificity trap that already cost us one silent bug with .fl-strip. */
+.fl-campus {
+	margin-block: 1.75rem;
+	padding: 0;
+}
+
+.fl-campus .fl-campus-svg {
+	display: block;
+	width: 100%;
+	height: auto;
+	max-width: 42rem;
+	margin-inline: auto;
+	/* Campus walls are a real thing you can see; the ground reads as enclosed. */
+	border-radius: 0.5rem;
+	background: var(--sl-color-bg-nav);
+}
+
+.fl-campus-ground {
+	fill: var(--sl-color-gray-6, #2c1c1a);
+	stroke: var(--sl-color-gray-4);
+	stroke-width: 1.5;
+}
+
+.fl-campus-water {
+	fill: #2f6d86;
+	fill-opacity: 0.55;
+	stroke: none;
+}
+
+.fl-campus-dot {
+	fill: var(--campus-c, var(--sl-color-accent));
+	stroke: var(--sl-color-bg-nav);
+	stroke-width: 2;
+}
+
+.fl-campus-label {
+	font-family: var(--fl-font-body);
+	font-size: 11px;
+	font-weight: 500;
+	fill: var(--sl-color-white);
+	/* Labels cross both the ground and the lake, so they need a halo. Painting
+	   the stroke under the fill keeps the letterforms from being eaten. */
+	stroke: var(--sl-color-bg-nav);
+	stroke-width: 3;
+	paint-order: stroke fill;
+}
+
+.fl-campus-scale line {
+	stroke: var(--sl-color-gray-3);
+	stroke-width: 1.5;
+}
+
+.fl-campus-scale text {
+	font-family: var(--fl-font-body);
+	font-size: 10px;
+	fill: var(--sl-color-gray-3);
+	stroke: none;
+}
+
+.fl-campus-pin[data-kind='home'] { --campus-c: #d94f5c; }
+.fl-campus-pin[data-kind='study'] { --campus-c: #4f8fd0; }
+.fl-campus-pin[data-kind='admin'] { --campus-c: #a97ac9; }
+.fl-campus-pin[data-kind='health'] { --campus-c: #e2606a; }
+.fl-campus-pin[data-kind='sport'] { --campus-c: #5cb877; }
+.fl-campus-pin[data-kind='food'] { --campus-c: #eb9350; }
+.fl-campus-pin[data-kind='landmark'] { --campus-c: #e6b34a; }
+.fl-campus-pin[data-kind='metro'] { --campus-c: #45a8c4; }
+.fl-campus-pin[data-kind='gate'] { --campus-c: #b0a49f; }
+
+.fl-campus figcaption,
+.fl-campus > figcaption {
+	font-size: 0.82rem;
+	color: var(--sl-color-gray-3);
+	line-height: 1.5;
+	max-width: 42rem;
+	margin: 0.7rem auto 0;
+	text-align: left;
+}
+
+/* The same places again as text — a screen reader's route through the map,
+   and the list you actually scroll when you need the Chinese name to show
+   somebody. */
+.fl-campus ul.fl-campus-key {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+	gap: 0.35rem 1rem;
+	margin: 1rem auto 0;
+	padding: 0;
+	max-width: 42rem;
+	list-style: none;
+	font-size: 0.84rem;
+}
+
+.fl-campus ul.fl-campus-key li {
+	margin: 0;
+	padding-left: 0.85rem;
+	position: relative;
+	line-height: 1.45;
+}
+
+.fl-campus ul.fl-campus-key li::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0.5em;
+	width: 0.45rem;
+	height: 0.45rem;
+	border-radius: 50%;
+	background: var(--campus-c, var(--sl-color-accent));
+}
+
+.fl-campus ul.fl-campus-key li[data-kind='home'] { --campus-c: #d94f5c; }
+.fl-campus ul.fl-campus-key li[data-kind='study'] { --campus-c: #4f8fd0; }
+.fl-campus ul.fl-campus-key li[data-kind='admin'] { --campus-c: #a97ac9; }
+.fl-campus ul.fl-campus-key li[data-kind='health'] { --campus-c: #e2606a; }
+.fl-campus ul.fl-campus-key li[data-kind='sport'] { --campus-c: #5cb877; }
+.fl-campus ul.fl-campus-key li[data-kind='food'] { --campus-c: #eb9350; }
+.fl-campus ul.fl-campus-key li[data-kind='landmark'] { --campus-c: #e6b34a; }
+.fl-campus ul.fl-campus-key li[data-kind='metro'] { --campus-c: #45a8c4; }
+.fl-campus ul.fl-campus-key li[data-kind='gate'] { --campus-c: #b0a49f; }
+
+.fl-campus ul.fl-campus-key strong {
+	font-weight: 600;
+	color: var(--sl-color-white);
+}
+
+.fl-campus ul.fl-campus-key span {
+	display: block;
+	color: var(--sl-color-gray-3);
+}
+
+:root[data-theme='light'] .fl-campus-ground {
+	fill: #efe4d8;
+	stroke: var(--sl-color-gray-4);
+}
+
+:root[data-theme='light'] .fl-campus-water {
+	fill: #7fb3c9;
+	fill-opacity: 0.75;
+}
+
+:root[data-theme='light'] .fl-campus-pin[data-kind='landmark'],
+:root[data-theme='light'] .fl-campus ul.fl-campus-key li[data-kind='landmark'] {
+	/* The gold that reads on a dark ground washes out on parchment. */
+	--campus-c: #b07d16;
+}
+
+/* --- The arrival chain ----------------------------------------------------
+   An <ol> with a rail down the left. Doubled-up selectors again, because
+   .sl-markdown-content ol / li / h3 all out-specify a single class. */
+.fl-chain {
+	list-style: none;
+	margin: 1.75rem 0;
+	padding: 0;
+	position: relative;
+}
+
+/* The rail. Stops at the last node rather than running past it, which is why
+   it's a pseudo-element on the list and not a border on each item. */
+.fl-chain::before {
+	content: '';
+	position: absolute;
+	left: 0.97rem;
+	top: 1.1rem;
+	bottom: 1.6rem;
+	width: 2px;
+	background: var(--sl-color-gray-5);
+}
+
+.fl-chain li.fl-chain-step {
+	position: relative;
+	display: grid;
+	grid-template-columns: 2rem 1fr;
+	gap: 0 0.9rem;
+	margin: 0 0 1.1rem;
+	padding: 0;
+}
+
+.fl-chain .fl-chain-num {
+	grid-column: 1;
+	z-index: 1;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	display: grid;
+	place-items: center;
+	font-family: var(--fl-font-display);
+	font-size: 0.95rem;
+	font-weight: 700;
+	color: var(--sl-color-white);
+	background: var(--sl-color-bg-nav);
+	border: 2px solid var(--sl-color-gray-5);
+	font-variant-numeric: tabular-nums;
+}
+
+.fl-chain .fl-chain-body {
+	grid-column: 2;
+	padding-top: 0.1rem;
+}
+
+.fl-chain p.fl-chain-when {
+	margin: 0;
+	font-size: 0.72rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+}
+
+.fl-chain h3.fl-chain-title {
+	margin: 0.1rem 0 0.3rem;
+	font-size: 1.02rem;
+	line-height: 1.25;
+	font-weight: 600;
+	color: var(--sl-color-white);
+	/* Starlight gives markdown headings a big top margin and an anchor link;
+	   these are neither. */
+	border: 0;
+	padding: 0;
+}
+
+.fl-chain p.fl-chain-text {
+	margin: 0;
+	font-size: 0.9rem;
+	line-height: 1.55;
+	color: var(--sl-color-gray-2);
+}
+
+.fl-chain p.fl-chain-gate {
+	margin: 0.4rem 0 0;
+	font-size: 0.76rem;
+	color: var(--sl-color-gray-3);
+	border-left: 2px solid var(--sl-color-gray-5);
+	padding-left: 0.5rem;
+}
+
+/* The two steps with legal deadlines. Colour alone can't carry that, so they
+   also get a heavier ring and the word "deadline" in the timing line. */
+.fl-chain li.is-deadline .fl-chain-num {
+	background: var(--fl-crimson);
+	border-color: var(--fl-crimson);
+	color: var(--fl-cream);
+}
+
+.fl-chain li.is-deadline p.fl-chain-when {
+	color: var(--sl-color-accent);
+	font-weight: 700;
+}
+
+.fl-chain li.is-deadline .fl-chain-body {
+	border-left: 3px solid var(--fl-crimson);
+	margin-left: -0.9rem;
+	padding-left: 0.9rem;
+}
+
+@media (max-width: 30rem) {
+	.fl-chain li.fl-chain-step {
+		grid-template-columns: 1.6rem 1fr;
+		gap: 0 0.65rem;
+	}
+	.fl-chain .fl-chain-num {
+		width: 1.6rem;
+		height: 1.6rem;
+		font-size: 0.8rem;
+	}
+	.fl-chain::before {
+		left: 0.78rem;
+	}
+}
+
+/* --- Show-this-to-someone cards -------------------------------------------
+   Reuses .fl-card's frame. The Chinese is set large on purpose: these exist to
+   be held up at arm's length to a taxi driver, not read by the owner of the
+   phone. Chinese renders in the reader's own system font — we deliberately
+   vendor no CJK webfont, as it would cost tens of megabytes. */
+.fl-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	gap: 1rem;
+	margin-block: 1.5rem;
+}
+
+.fl-cards p.fl-card-label {
+	margin: 0;
+	font-size: 0.72rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+}
+
+.fl-cards p.fl-card-zh {
+	margin: 0;
+	font-size: 1.3rem;
+	line-height: 1.45;
+	font-weight: 600;
+	color: var(--sl-color-white);
+}
+
+.fl-cards p.fl-card-en {
+	margin: 0;
+	font-size: 0.85rem;
+	line-height: 1.45;
+	color: var(--sl-color-gray-2);
+}
+
+.fl-cards p.fl-card-tel {
+	margin: 0;
+	font-size: 0.8rem;
+	color: var(--sl-color-gray-3);
+	font-variant-numeric: tabular-nums;
+}

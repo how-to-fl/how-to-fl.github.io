@@ -1,0 +1,229 @@
+---
+/**
+ * The PKU campus map.
+ *
+ * Plain inline SVG, drawn at build time from public/data/pku-campus.geojson.
+ *
+ * Why not MapLibre, like the Beijing map:
+ * a campus is one screen at one zoom. Panning and tiling buy nothing here, and
+ * a second WebGL canvas would cost another basemap fetch, break in every
+ * environment where rAF is throttled, and — as AGENTS.md records — fail
+ * silently when it does. An SVG renders in a screenshot, in a print, and in a
+ * browser pane that has paused animation frames.
+ *
+ * Why not PKU's own map, which is prettier:
+ * it is PKU's artwork, and it is drawn for charm rather than accuracy —
+ * buildings sit where they looked good. It was used as the *naming* source (it
+ * is the authoritative bilingual list of what everything is called) and for
+ * nothing else. Every coordinate below comes from OpenStreetMap.
+ *
+ * Coordinates are WGS-84, like everywhere else on this site. Nothing here is
+ * eyeballed off an image — see `npm run fetch:campus`.
+ */
+import { parse } from 'yaml';
+// ?raw for the same reason BeijingMap does it: reading with fs and
+// import.meta.url resolves against the bundled chunk at build time, not this
+// file, and dies with ENOENT during `astro build`.
+import campusRaw from '../../public/data/pku-campus.geojson?raw';
+import placesRaw from '../../data/places.yaml?raw';
+
+type Pt = [number, number];
+const campus = JSON.parse(campusRaw) as {
+	features: { geometry: any; properties: Record<string, string> }[];
+};
+
+const boundary = campus.features.find((f) => f.properties.layer === 'boundary');
+const placePts = campus.features.filter((f) => f.properties.layer === 'place');
+
+const ringOf = (f: any) => f.geometry.coordinates[0] as Pt[];
+const pointInRing = ([x, y]: Pt, r: Pt[]) => {
+	let inside = false;
+	for (let i = 0, j = r.length - 1; i < r.length; j = i++) {
+		const [xi, yi] = r[i];
+		const [xj, yj] = r[j];
+		if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+	}
+	return inside;
+};
+const centroid = (r: Pt[]): Pt => [
+	r.reduce((s, c) => s + c[0], 0) / r.length,
+	r.reduce((s, c) => s + c[1], 0) / r.length,
+];
+
+// The fetch keeps any pond within 350 m of the wall, which is right for the data
+// and wrong for the drawing: it pulls in Yuanmingyuan's lakes, and they render
+// as blue shapes floating outside the campus outline, looking like a bug rather
+// than a neighbouring park. On the map, water has to be water we're standing in.
+const campusRing = boundary ? ringOf(boundary) : [];
+const water = campus.features.filter(
+	(f) => f.properties.layer === 'water' && pointInRing(centroid(ringOf(f)), campusRing),
+);
+
+/**
+ * What a new arrival actually needs to find, in the order they'll need it.
+ *
+ * `zh` matches the OSM name exactly, so a pin can never drift onto the wrong
+ * building — if OSM renames something the pin disappears rather than lying.
+ * `side` and `dy` are label placement only; they move text, never the dot.
+ */
+const WANTED: { zh: string; label: string; kind: string; side: 'l' | 'r'; dy?: number }[] = [
+	{ zh: '北京大学中关新园', label: 'Global Village — home', kind: 'home', side: 'r' },
+	{ zh: '光华管理学院', label: 'Guanghua 1 — classes', kind: 'study', side: 'r', dy: 4 },
+	{ zh: '光华管理学院2号楼', label: 'Guanghua 2', kind: 'study', side: 'r', dy: -4 },
+	{ zh: '新太阳学生中心（16楼-18楼）', label: 'New Sun — ISD, visas, card', kind: 'admin', side: 'l' },
+	{ zh: '北京大学图书馆', label: 'Library', kind: 'study', side: 'l' },
+	{ zh: '第二教学楼（李兆基楼）', label: 'Teaching Building 2', kind: 'study', side: 'l', dy: 10 },
+	{ zh: '北京大学校医院', label: 'Campus hospital', kind: 'health', side: 'l' },
+	{ zh: '燕园派出所', label: 'Yanyuan police station', kind: 'admin', side: 'r' },
+	{ zh: '邱德拔体育馆', label: 'Gym & 50 m pool', kind: 'sport', side: 'r' },
+	{ zh: '农园餐厅', label: 'Nong Yuan canteen', kind: 'food', side: 'r' },
+	{ zh: '博雅塔', label: 'Boya Tower', kind: 'landmark', side: 'r' },
+	{ zh: '中国农业银行', label: 'ABC bank', kind: 'admin', side: 'l', dy: -4 },
+	{ zh: '北京大学东门', label: 'East Gate — Line 4', kind: 'metro', side: 'r' },
+];
+
+const byName = new Map<string, Pt>();
+for (const f of placePts) {
+	const n = f.properties.name_zh;
+	if (n && !byName.has(n)) byName.set(n, f.geometry.coordinates as Pt);
+}
+
+// West Gate comes from places.yaml, where it was looked up and verified for the
+// Beijing map. OSM's gate nodes around here are a mess — three separate nodes
+// called 西门, one of which belongs to Yuanmingyuan.
+//
+// Only the west gate: places.yaml also has the east gate, and it sits on top of
+// the Line 4 station pin to within a few metres, so drawing both put two dots
+// and two labels in the same spot.
+const gates = (parse(placesRaw)?.places ?? []).filter(
+	(p: any) => typeof p?.lat === 'number' && /West Gate$/.test(p.name_en ?? ''),
+);
+
+const pins = [
+	...WANTED.flatMap((w) => {
+		const c = byName.get(w.zh);
+		return c ? [{ ...w, lng: c[0], lat: c[1], zhLabel: w.zh }] : [];
+	}),
+	...gates.map((g: any) => ({
+		zh: g.name_zh,
+		zhLabel: g.name_zh,
+		label: g.name_en.replace('Peking University, ', ''),
+		kind: 'gate',
+		side: (g.name_en.includes('West') ? 'l' : 'r') as 'l' | 'r',
+		dy: g.name_en.includes('West') ? 0 : 14,
+		lng: g.lng,
+		lat: g.lat,
+	})),
+];
+
+// ── Projection ──────────────────────────────────────────────────────────────
+// Equirectangular, scaled by cos(latitude). Over 1.5 km the difference from a
+// proper Mercator is far under a pixel, and it keeps this file free of a
+// projection dependency.
+const all: Pt[] = [
+	...(boundary ? (boundary.geometry.coordinates[0] as Pt[]) : []),
+	...pins.map((p) => [p.lng, p.lat] as Pt),
+];
+const lons = all.map((c) => c[0]);
+const lats = all.map((c) => c[1]);
+const PAD = 0.0012;
+const minLon = Math.min(...lons) - PAD;
+const maxLon = Math.max(...lons) + PAD;
+const minLat = Math.min(...lats) - PAD;
+const maxLat = Math.max(...lats) + PAD;
+
+const midLat = (minLat + maxLat) / 2;
+const kx = Math.cos((midLat * Math.PI) / 180);
+
+// The geography gets MAP_W; GUTTER either side is where the labels live. Without
+// the gutters the two pins furthest east and west — Global Village and the west
+// gate, which are precisely the two a new arrival cares about — have their
+// labels run off the edge and get clipped.
+const MAP_W = 620;
+const GUTTER = 150;
+const W = MAP_W + GUTTER * 2;
+const MAP_H = Math.round((MAP_W * (maxLat - minLat)) / ((maxLon - minLon) * kx));
+const H = MAP_H;
+
+const px = (lon: number) => GUTTER + ((lon - minLon) / (maxLon - minLon)) * MAP_W;
+const py = (lat: number) => H - ((lat - minLat) / (maxLat - minLat)) * MAP_H;
+const path = (ring: Pt[]) =>
+	ring.map(([lo, la], i) => `${i ? 'L' : 'M'}${px(lo).toFixed(1)} ${py(la).toFixed(1)}`).join('') +
+	'Z';
+
+// A scale bar beats a ratio nobody can use. 300 m in projected pixels:
+const mPerDegLon = 111_320 * kx;
+const barM = 300;
+const barPx = ((barM / mPerDegLon) / (maxLon - minLon)) * MAP_W;
+---
+
+<figure class="fl-campus">
+	<svg
+		viewBox={`0 0 ${W} ${H}`}
+		role="img"
+		aria-labelledby="campus-title campus-desc"
+		class="fl-campus-svg"
+	>
+		<title id="campus-title">Map of the Peking University campus</title>
+		<desc id="campus-desc">
+			The walled campus with Weiming Lake at its centre, Zhongguanyuan Global Village just
+			outside the east side, and the buildings a new Future Leaders student needs: Guanghua,
+			the New Sun Student Center, the library, the campus hospital and the Line 4 station.
+			Every place shown is also listed in text below this map.
+		</desc>
+
+		{boundary && <path d={path(boundary.geometry.coordinates[0])} class="fl-campus-ground" />}
+
+		{
+			water.map((w) => (
+				<path d={path(w.geometry.coordinates[0])} class="fl-campus-water" />
+			))
+		}
+
+		{
+			pins.map((p) => {
+				const x = px(p.lng);
+				const y = py(p.lat);
+				const r = p.kind === 'home' ? 7 : 5;
+				const lx = p.side === 'l' ? x - r - 7 : x + r + 7;
+				return (
+					<g class="fl-campus-pin" data-kind={p.kind}>
+						<circle cx={x} cy={y} r={r} class="fl-campus-dot" />
+						<text
+							x={lx}
+							y={y + 4 + (p.dy ?? 0)}
+							text-anchor={p.side === 'l' ? 'end' : 'start'}
+							class="fl-campus-label"
+						>
+							{p.label}
+						</text>
+					</g>
+				);
+			})
+		}
+
+		<g class="fl-campus-scale" aria-hidden="true">
+			<line x1={GUTTER} y1={H - 22} x2={GUTTER + barPx} y2={H - 22} />
+			<line x1={GUTTER} y1={H - 27} x2={GUTTER} y2={H - 17} />
+			<line x1={GUTTER + barPx} y1={H - 27} x2={GUTTER + barPx} y2={H - 17} />
+			<text x={GUTTER + barPx / 2} y={H - 30} text-anchor="middle">{barM} m</text>
+		</g>
+	</svg>
+
+	<figcaption>
+		Drawn from OpenStreetMap, not from PKU's own map — so the distances are real. Names are
+		the ones on the official campus map, in both languages, because the Chinese one is what
+		you show somebody when you're lost.
+	</figcaption>
+
+	<ul class="fl-campus-key">
+		{
+			pins.map((p) => (
+				<li data-kind={p.kind}>
+					<strong>{p.label}</strong>
+					<span lang="zh-CN">{p.zhLabel}</span>
+				</li>
+			))
+		}
+	</ul>
+</figure>

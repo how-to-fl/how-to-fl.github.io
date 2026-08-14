@@ -36,8 +36,11 @@ permit** — that's what actually lets you stay, and it's on your
 
 Two layers, and you want both:
 
-- **PKU's insurance is compulsory — ¥800 per semester.** No choice, and it's fine for
-  ordinary things.
+- **PKU's insurance is compulsory — ¥800 per year**, and you have to have bought it
+  *before* you enter the mainland. No choice, and it's fine for ordinary things. Worth
+  knowing: **Guanghua pays the basic premium back to you along with your stipend**, so the
+  real cost to you is the cashflow, not the ¥800. You renew it before each autumn
+  registration.
 - **A proper international policy from home**, because PKU's cover doesn't stretch far in
   private or English-speaking hospitals — precisely the ones you'll want if something
   serious happens.

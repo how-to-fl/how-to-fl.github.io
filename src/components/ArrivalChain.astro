@@ -1,0 +1,92 @@
+---
+/**
+ * The arrival chain.
+ *
+ * Every one of these steps exists in some official PDF, but the PDFs are
+ * separate documents and none of them draws the dependency: the police
+ * registration produces the slip that the pre-registration form demands, and
+ * the medical certificate gates the residence permit. Read as prose it's a list
+ * of eight errands. Drawn, it's a chain with two legal deadlines on it, and you
+ * can see which link you're standing on.
+ *
+ * HTML and CSS rather than SVG on purpose — this is an ordered list with extra
+ * paint. It reflows on a phone, it reads correctly to a screen reader as <ol>,
+ * and it needs no label-collision arithmetic.
+ */
+const STEPS = [
+	{
+		n: 1,
+		title: 'Land',
+		when: 'Hour zero',
+		body: 'Your X1 visa is valid for <strong>30 days</strong>, and the clock starts the moment you clear immigration. Everything below hangs off that.',
+	},
+	{
+		n: 2,
+		title: 'Get a Chinese SIM',
+		when: 'Same day',
+		body: 'Not admin — a dependency. The police registration form sends an <strong>SMS code to a Chinese number</strong>, so without a SIM you cannot do the next step. Carriers set up tents in Global Village during arrival week. Bring your passport; SIMs need real-name registration.',
+	},
+	{
+		n: 3,
+		title: 'Register your address with the police',
+		when: 'Within 24 hours',
+		deadline: true,
+		body: 'A legal requirement, not a university one. Online at the Beijing police portal, or in person at the station. If you check into Global Village, reception normally does it with you — <strong>confirm out loud that they have, and take the slip.</strong> Every separate address needs its own registration within 24 hours of you moving in, hotels included.',
+	},
+	{
+		n: 4,
+		title: 'Collect the temporary residence form',
+		when: 'Straight after',
+		body: 'Global Village reception issues it against your passport. <strong>Two later steps ask for it</strong> and neither will take an explanation instead.',
+		gates: 'Needed by steps 5 and 8',
+	},
+	{
+		n: 5,
+		title: 'Online pre-registration',
+		when: 'The days before on-site registration',
+		body: 'Through the <em>Study at PKU</em> app or studyatpku.com. The last thing it asks for is <strong>a photo of the temporary residence form</strong> — which is why step 3 has to have happened first.',
+	},
+	{
+		n: 6,
+		title: 'Register in person at the ISD',
+		when: 'Registration day',
+		body: 'New Sun Student Center, ground floor and B1. Bring your <strong>passport and visa, admission notification, JW201/JW202, a 2-inch white-background photo, the residence form</strong> and your medical paperwork if you have it. You walk out with your campus card.',
+	},
+	{
+		n: 7,
+		title: 'Register again, at Guanghua',
+		when: 'Usually the next day',
+		body: 'Registration has two halves and this is the one people forget. The FL team emails the steps and the deadline — watch that inbox.',
+	},
+	{
+		n: 8,
+		title: 'Medical examination, or verification of your home one',
+		when: 'Book it early',
+		body: 'At the Beijing International Travel Health Care Center, by appointment, <strong>in person — no proxies</strong>. The report takes about <strong>4 working days</strong>, so go at least 5 working days before your visa runs out. If you did the examination at home, you still have to bring it here to be verified.',
+		gates: 'Gates step 9',
+	},
+	{
+		n: 9,
+		title: 'Convert the X1 into a residence permit',
+		when: 'Within 30 days of landing',
+		deadline: true,
+		body: 'The permit is what actually lets you stay; overstaying the X1 is an illegal stay and is fined. The ISD runs an agent service on the third floor of New Sun, which is the easy route. Once filed, the authorities have <strong>up to 15 days</strong> to decide — and they keep your passport while they do, so do not plan a trip.',
+	},
+];
+---
+
+<ol class="fl-chain">
+	{
+		STEPS.map((s) => (
+			<li class:list={['fl-chain-step', s.deadline && 'is-deadline']}>
+				<span class="fl-chain-num" aria-hidden="true">{s.n}</span>
+				<div class="fl-chain-body">
+					<p class="fl-chain-when">{s.when}</p>
+					<h3 class="fl-chain-title">{s.title}</h3>
+					<p class="fl-chain-text" set:html={s.body} />
+					{s.gates && <p class="fl-chain-gate">{s.gates}</p>}
+				</div>
+			</li>
+		))
+	}
+</ol>

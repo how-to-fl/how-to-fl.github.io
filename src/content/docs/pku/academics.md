@@ -24,6 +24,30 @@ Chinese public holiday calendar, so if you're used to a December break, plan for
 existing. The long ones are summer, and the winter break around Chinese New Year — which
 moves every year with the lunar calendar.
 
+### The dates for 2026–27
+
+Straight off PKU's own calendar, so these are firm rather than approximate:
+
+| | |
+|---|---|
+| New international undergraduates arrive | **Sun 30 August 2026** |
+| PKU opening ceremony | Fri 4 September |
+| **First day of classes** | **Mon 7 September** |
+| Mid-Autumn Festival, no classes | Fri 25 September |
+| National Day holiday, no classes | 1–7 October |
+| Autumn exams | 28 Dec – 10 Jan 2027 |
+| Winter break | 11 Jan – 21 Feb |
+| Spring classes resume | Mon 22 February 2027 |
+| Spring exams | 14–27 June |
+| Summer break from | 28 June |
+
+:::caution[Public holidays you still have class on]
+China moves working days around public holidays, and PKU follows suit. In 2026–27 that means
+**20 September, 26–27 September, 10 October and 8–9 May are public holidays on which classes
+still run.** Everyone gets caught by this once; the calendar says so in small print and
+nobody reads it until they've missed a lecture.
+:::
+
 Within the semester, [Golden Week](/misc/seasonal-calendar/) in early October and the May
 break are the two big pauses.
 
@@ -34,7 +58,7 @@ on your course choices.
 
 | | | | |
 |---|---|---|---|
-| **I** 08:00–08:50 | **II** 09:00–09:50 | **III** 10:00–11:00 | **IV** 11:10–12:00 |
+| **I** 08:00–08:50 | **II** 09:00–09:50 | **III** 10:10–11:00 | **IV** 11:10–12:00 |
 | **V** 13:00–13:50 | **VI** 14:00–14:50 | **VII** 15:10–16:00 | **VIII** 16:10–17:00 |
 | **IX** 17:10–18:00 | **X** 18:40–19:30 | **XI** 19:40–20:30 | **XII** 20:40–21:30 |
 

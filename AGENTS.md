@@ -100,6 +100,17 @@ AI summary can't present 2024 facts as current. That's the point of it.
 means touching `places.yaml`'s documented list, `scripts/validate.mjs`, and the colour map in
 both `BeijingMap.astro` and `custom.css`.
 
+**Two maps, on purpose.** The Beijing map is MapLibre over our own pmtiles; the campus map
+(`CampusMap.astro`) is plain inline SVG projected at build time from
+`public/data/pku-campus.geojson`. A campus is one screen at one zoom, so tiling buys nothing
+— and an SVG survives a screenshot, a print, and a browser pane with animation frames paused,
+which is exactly where the WebGL map cannot be checked.
+
+**Source documents live outside the repo**, in `../source-documents/` with a `CATALOGUE.md`
+that logs what each one covers and which page it feeds. They're third-party copyright and one
+is another student's personal report, so they stay out of git. The catalogue is the place to
+look before writing anything factual.
+
 ---
 
 ## Brand
@@ -128,6 +139,7 @@ npm run admin            # local editing panel on localhost:4400 — 127.0.0.1 o
 npm run validate         # coordinate sanity + same-origin allowlist
 npm run build
 npm run fetch:subway     # regenerate the subway GeoJSON from OSM
+npm run fetch:campus     # regenerate the PKU campus GeoJSON from OSM
 npm run fetch:fonts      # re-vendor the typefaces
 npm run make:og          # regenerate the link-preview image
 ```
@@ -155,7 +167,11 @@ exactly like a broken map. Verify canvas/WebGL work in a real browser, or ask.
 ## Outstanding
 
 - **25–30 real map pins.** Only 3 exist. Biggest gap, and it needs Toni rather than code.
-- **17 of 31 pages are still stubs** — those need lived experience, not documents.
+- **13 of 32 pages are still stubs** — and the remaining ones genuinely can't be written from
+  documents. The four closed in Aug 2026 (banking, credit transfer, phrasebook, visas) came
+  out of the official PDFs; what's left is lived experience, plus two specific safety gaps
+  worth naming: **how to state a food allergy in Chinese**, and **what to do if you lose your
+  passport**.
 - A **second GitHub org owner**, so the project survives graduation.
 - Analytics is wired but **off** — paste a token into `CF_BEACON_TOKEN` in `Head.astro`.
   It's probably unreachable from mainland China, so it under-counts the actual readers.

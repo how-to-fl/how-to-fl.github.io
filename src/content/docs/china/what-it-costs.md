@@ -26,12 +26,39 @@ These are real figures from the Mannheim cohort. Yours will differ — but the s
 ## What you get
 
 - **A free room in Global Village.** A comparable room would otherwise be €300–500 a month,
-  so this is the single biggest number on the page.
-- **Health insurance** through the programme.
-- **¥2,500 a month** stipend, during term (not the semester holidays).
+  so this is the single biggest number on the page. You still pay your own electricity,
+  water, gas, laundry and internet, and there's a **¥1,000 damage deposit** at check-in.
+- **Health insurance** through the programme — see below.
+- **¥2,500 a month**, ¥30,000 a year before tax, for 24 months.
 
 Living on ¥2,500 alone is genuinely possible if you're careful and eat on campus. It is not
-much if you want to be in Sanlitun every weekend. Most people top it up.
+much if you want to be in Sanlitun every weekend. Most people top it up. For scale, PKU's own
+estimate of what a student spends on food is about **¥2,000 a month** — so the stipend covers
+eating and not a great deal else.
+
+## How the stipend actually reaches you
+
+It is not automatic, and it is the part most likely to go wrong in your first month.
+
+1. **Open an ICBC or Bank of China account** — no other bank counts. See
+   [banking](/china/banking/).
+2. **Complete scholarship registration**: verify your status in person, hand in the
+   documents, and send your account opening slip to the FL team.
+3. **Link your bank card number to your PKU ID**, from about mid-September.
+4. **Re-register every month.** The Scholarship Committee approves payments monthly, and
+   missing your registration means missing that month.
+
+The **first payment lands around late September or late October** — plan on having your own
+money for the first six weeks or so, because it will not be there when you land.
+
+:::caution[Two rules that stop the money]
+**You have to be in Beijing.** The stipend is explicitly conditional on you actually residing
+here, and it is not paid for months when you're not — whatever the reason for the absence.
+
+**Fail two courses and the rest of it stops.** Losing the remaining stipend is a stated
+consequence of failing two courses, and breaking university, school or dorm rules can cost it
+too. Summer and winter breaks have their own arrangements, so ask rather than assume.
+:::
 
 ## What things cost
 
@@ -81,7 +108,12 @@ equivalent almost always exists, and the FL team will know.
 
 Two separate things, and you need to understand both:
 
-- **PKU's insurance is compulsory: ¥800 per semester.** You don't get a choice.
+- **PKU's insurance is compulsory: ¥800 per year**, bought *before* you enter the mainland
+  and renewed before each autumn registration. You don't get a choice — but **Guanghua
+  disburses the basic premium back to you with your stipend**, so it isn't really a cost.
+- **It only covers general departments of public hospitals** in the mainland. If you're
+  admitted, the scheme can pay up front, but somebody has to ring **4008105119** to start
+  that — they have an English line. Ask the doctor to print your records; you'll need them.
 - **It is not as good as a proper international policy.** In private or English-speaking
   hospitals — exactly the ones you'll want when something's actually wrong — costs climb
   fast and PKU's cover doesn't stretch far.
