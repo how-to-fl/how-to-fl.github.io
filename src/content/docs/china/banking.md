@@ -101,16 +101,28 @@ Most ATMs take Maestro, Visa (Plus) and Cirrus.
 **Check your daily withdrawal limit with your home bank before you fly** — it's a five-minute
 call that saves an unpleasant afternoon.
 
-One specific trap: when you pay a PKU bill online at `studyatpku.com`, the payment page offers
-to charge you in your own currency or in RMB. **Choose your own currency**, and know that
-foreign cards carry a fee that domestic UnionPay cards don't:
+## The plan that works
 
-| Card | Fee |
-|---|---|
-| Domestic UnionPay | 0% |
-| International UnionPay, Visa, Mastercard | 1.8% |
-| American Express | 2.0% |
-| JCB, Diners | 2.6% |
+This is the sequence Cohort 6 settled on, and it solves the awkward fortnight before your
+Chinese account exists and your first stipend hasn't landed.
+
+**Before you fly:**
+
+1. **Set up Alipay and WeChat Pay at home and link a card to each.** Do this while you can
+   still reach the app stores and the verification SMS easily. Arriving with both already
+   working is the single biggest difference between a smooth first week and a stressful one.
+2. **Get a card that doesn't punish you for using it abroad.** The cohort's recommendation is
+   **Revolut** — low-friction currency exchange and it works with Alipay and WeChat Pay. Any
+   card with decent foreign-exchange terms does the job; the point is not to be relying on a
+   card that charges you 3% and a fixed fee every time.
+
+**When you arrive:**
+
+3. **Bring cash and change it at a bank.** Enough to cover the first few weeks.
+4. **Deposit it into your Chinese account** once that's open, and you're running on local
+   money from then on.
+
+That order matters. Steps 1 and 2 have to happen at home, and they're the ones people put off.
 
 ## Getting money back home
 

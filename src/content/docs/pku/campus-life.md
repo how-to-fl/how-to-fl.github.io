@@ -18,7 +18,7 @@ road rather than on it — and about **ten minutes' walk from the Guanghua lectu
 <ul class="fl-stats">
   <li><span class="n">10 min</span><span class="l">walk to Guanghua</span></li>
   <li><span class="n">~20</span><span class="l">rooms share a floor kitchen and laundry</span></li>
-  <li><span class="n">2×</span><span class="l">a week, corridors and bathrooms cleaned</span></li>
+  <li><span class="n">3×</span><span class="l">a week, corridors and bathrooms cleaned</span></li>
   <li><span class="n">¥0</span><span class="l">rent — the scholarship covers it</span></li>
 </ul>
 
@@ -28,10 +28,12 @@ road rather than on it — and about **ten minutes' walk from the Guanghua lectu
 
 A single room in a two-person flat — you get your own bedroom, and share a small living
 room and bathroom with one other person. Comparable to a decent European hall of residence.
+**Building 4's rooms have all been renovated**, so if you get a say in where you land, that's
+the one to ask for.
 
 There's **no kitchen in the flat**, but there are shared kitchens and washing machines on
 each floor, between about twenty rooms. Corridors, common rooms and bathrooms get cleaned
-twice a week; **your own room is yours to clean.**
+three times a week; **your own room is yours to clean.**
 
 ### What else is in the complex
 
@@ -40,8 +42,9 @@ Global Village is several buildings, not one. Among them:
 - **Canteens** right in the complex, doing breakfast, lunch and dinner — which is why a lot
   of us barely cook
 - A **small supermarket**, and a PKU hotel
-- A **leisure centre** with a small gym, a swimming pool and bowling lanes
-  (Kang Le Recreation Center, B1 of Building 4)
+- A **leisure centre** with a small gym, a swimming pool, a sauna and bowling lanes
+  (Kang Le Recreation Center, B1 of Building 4) — the refurbishment is finished and the pool
+  and sauna are open again
 - The **Learning Commons** on the 2nd floor of Building 5 — group study rooms, a quiet
   self-study space, a conference room for 60–70, and a library of books on Chinese history
   and culture in English and Chinese

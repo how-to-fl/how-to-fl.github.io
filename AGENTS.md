@@ -71,6 +71,14 @@ is silently dropped from a stylesheet loaded via `customCss`. Use plain selector
 **Watch your own specificity.** `.sl-markdown-content p` (0,2,0) beats `.fl-strip` (0,1,0).
 That has already caused one silent bug.
 
+**Grid children need their top margin zeroed, and the rule must not name a class.**
+Starlight gives sequential content a 1rem top margin. Inside a grid that margin doesn't
+separate siblings — `gap` already does — it shunts every item *except the first* down by
+16px, so a row of cards sits out of line with its own first card. There was a rule for this
+written as `.fl-categories > .card`; the homepage later moved to `.fl-card` and the rule
+silently stopped matching, misaligning three rows on the front page for months. The
+replacement selects `> *` under `.sl-markdown-content` for exactly that reason.
+
 **Starlight icon names fail silently.** An invalid `icon=` renders *nothing*. Starlight has
 no map/subway/passport icon — use `src/components/Ico.astro` for those.
 

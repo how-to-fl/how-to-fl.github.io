@@ -4,7 +4,7 @@ description: "Where to eat on campus, what each canteen is for, and how to pay."
 status: draft
 last_verified: 2024-05
 sidebar:
-  order: 3
+  order: 4
 ---
 
 There are more than ten canteens on campus and they are **absurdly cheap** — around ¥8–15
@@ -87,7 +87,8 @@ cooked with meat.
 
 The two places that reliably work:
 
-- **A vegan stall on the second floor of the largest canteen.**
+- **A vegan stall on the second floor of 家园 Jia Yuan**, the biggest canteen on campus — four
+  storeys of it.
 - **The 麻辣 málà stall on the third floor**, where you pick your ingredients and they cook
   them — so you can build something vegetarian with tofu.
 
@@ -99,12 +100,6 @@ one of us arrived vegetarian and stopped being vegetarian here.
 None of that is meant to talk you out of it. Plenty of people manage — it just takes more
 planning than it does at home, and it's worth arriving with a strategy rather than an
 assumption.
-
-:::note[Help us sharpen this]
-We know the vegan stall is on the second floor of the biggest canteen; we haven't pinned down
-which canteen that is by name. If you know, tell us — a name would make this paragraph
-twice as useful.
-:::
 
 <p class="fl-source">Canteen list, cafés, shops and payment rules from the official FL
 Student Handbook, 2024 edition; Tong Yuan recommendation and prices from the Mannheim

@@ -28,8 +28,9 @@ pay the hospital directly — but somebody has to ring **4008105119** to start t
 an English line. The stamp you need for reimbursement comes from the ISD in the New Sun
 Student Center.
 
-So take out a proper international health policy at home as well. If you're on a **DAAD
-scholarship, a good one is included**. See [what the year costs](/china/what-it-costs/#insurance-specifically).
+So take out a proper international health policy at home as well — and check whether a
+scholarship you hold already includes one before you pay for a second. See
+[what the year costs](/china/what-it-costs/#insurance-specifically).
 
 Find out what your policy needs from you **before** you're ill: some want you to call them
 first, most want the original itemised receipts, and Chinese hospitals will give you those

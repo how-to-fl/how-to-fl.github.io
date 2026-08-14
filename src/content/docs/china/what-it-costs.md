@@ -93,16 +93,16 @@ converting to multiple-entry **before** you leave the country, which takes up to
 
 This is where the year stops being expensive.
 
-**DAAD annual scholarship** (for German students) — over **€1,000 a month** for an academic
-year, plus a flight allowance, plus an excellent international health insurance policy. It
-**combines** with the FL scholarship and with the Begabtenförderungswerke. A lot of Mannheim
-FL students have had it. With that combination you're studying more or less for free.
-
 **CSC — Chinese Scholarship Council.** In practice almost every international student in
 China receives this. It's straightforward money and there's no reason not to apply.
 
-If you're not German, check what your own country's exchange funding bodies offer — the
-equivalent almost always exists, and the FL team will know.
+**Your own country's exchange funding.** Cohort 6 came from sixteen countries, and almost
+every one of them has a national body that funds a year abroad — often stackable with the FL
+scholarship, sometimes worth more than it. The names differ everywhere, so the useful move is
+to ask your home university's international office what students from your country apply for,
+and to do it early: most of these have deadlines the best part of a year ahead.
+
+The FL team will know what previous students from your school have used. Ask them too.
 
 ## Insurance, specifically
 
@@ -118,8 +118,9 @@ Two separate things, and you need to understand both:
   hospitals — exactly the ones you'll want when something's actually wrong — costs climb
   fast and PKU's cover doesn't stretch far.
 
-So take out international health insurance at home **as well**, before you fly. The DAAD
-scholarship includes a good one. This is the cheapest regret to avoid on the whole list.
+So take out international health insurance at home **as well**, before you fly. Some
+national scholarships bundle a good policy — check yours before buying separately. This is
+the cheapest regret to avoid on the whole list.
 
 <p class="fl-source">All figures from the Mannheim cohort's 2025 student guide, which
 reflects the 2024/25 year. Prices and exchange rates drift — treat these as the right order

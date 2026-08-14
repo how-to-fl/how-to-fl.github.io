@@ -4,7 +4,7 @@ description: "One section per partner school, because Bocconi's rules look nothi
 status: draft
 last_verified: 2025-04
 sidebar:
-  order: 5
+  order: 6
 ---
 
 ## How to read this page

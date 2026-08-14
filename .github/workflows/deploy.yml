@@ -44,7 +44,11 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - uses: actions/upload-pages-artifact@v4
+      # v5, not v4, specifically because of what it pins underneath: v4 wrapped
+      # actions/upload-artifact v4.6.2, which targets the retired Node 20 runtime
+      # and made every deploy print a deprecation warning. v5 wraps v7. Nothing
+      # about our own usage changed — the fix was entirely one level down.
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: ./dist
 

@@ -45,8 +45,8 @@ Two layers, and you want both:
   private or English-speaking hospitals — precisely the ones you'll want if something
   serious happens.
 
-If you're German and applying for **DAAD**, a very good international policy is included.
-Details on [what the year costs](/china/what-it-costs/).
+Some national scholarships include a good policy — worth checking what yours covers before
+you buy one separately. Details on [what the year costs](/china/what-it-costs/).
 
 ### While you're at the doctor anyway
 
@@ -60,6 +60,31 @@ other things:
 - **Register with your own foreign ministry's citizen service** before you go. Most countries
   run one — Germany's is ELEFAND — and it's how your embassy reaches you in an emergency.
   Five minutes, and the sort of thing you only regret not doing.
+
+## Two things PKU makes you do online, before you arrive
+
+Both are compulsory, both are part of registration, and both are easy to miss because they
+arrive by email in the middle of August while you're packing.
+
+**The student disciplinary rules exam.** An online test at `test.pku.edu.cn` that every new
+student has to pass. In the 2025 cycle the window was roughly the last fortnight of August
+and closed *before* arrival — so it is genuinely a pre-departure job.
+
+It's not a trick. It's a read-the-rules-then-answer-questions exercise covering Chinese law,
+university regulations and the conduct expected of you, with real consequences behind it —
+the university's disciplinary ladder runs from a warning letter through losing your
+scholarship and your dorm place to being removed from the programme. Read the rules rather
+than guessing at the answers; it's the one time anyone will sit you down with them.
+
+**The new-student psychological health questionnaire.** Through the PKU portal — look for
+学生心理健康, or use the "All" list if it isn't on your front page. It's a standard intake
+questionnaire, it's confidential, and completing it is part of registering.
+
+:::caution[The catch]
+Both live behind PKU's network. If you're not on campus yet — and you won't be — you need
+**PKU's own VPN** to reach them. Install it *before* the emails arrive, not after. See
+[campus life](/pku/campus-life/#the-pku-vpn--not-the-one-youre-thinking-of).
+:::
 
 ## Sort your VPN before you fly
 
@@ -141,7 +166,12 @@ This is not a rule to find out about at the airport.
 - Everyday toiletries, paracetamol, plasters
 - An air purifier — [get a Xiaomi one here](/misc/seasonal-calendar/#air-quality) and sell
   it to the next cohort when you go
-- Large amounts of cash
+
+**Do bring cash**, though — enough for the first few weeks. Change it at a bank here and
+deposit it once your Chinese account opens. Your first stipend won't arrive until late
+September at the earliest, so there's a real gap to cover; the
+[plan that works](/china/banking/#the-plan-that-works) is on the banking page, and step one
+of it happens before you leave home.
 
 ## Learning some Chinese first
 

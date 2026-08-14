@@ -37,17 +37,40 @@ Every page tells you the month one of us last checked it.
 Nothing here beats what the programme office or the PSB tell you. If we contradict an
 official source, **we're the ones who are wrong** — please tell us.
 
-## Where to start
+## Start here
 
-If you're arriving soon, in this order:
+If you're arriving in September, read it in this order. Nothing below the line you're on
+matters yet.
 
-1. [Before you fly](/china/before-you-fly/) — while you can still change what's in your bag.
-2. [Getting in from the airport without being scammed](/china/airport-and-taxi-scams/) —
-   read this on the plane.
-3. [Your first 72 hours](/china/first-72-hours/) — the checklist, including the police
-   registration that's a legal requirement and the single most forgotten thing on this site.
+### Now, while you're still at home
 
-The rest can wait until you're here.
+1. **[Before you fly](/china/before-you-fly/)** — the visa, the medical, the two online tests
+   PKU makes you sit before you arrive, and what genuinely can't go in your suitcase.
+2. **[What the year costs](/china/what-it-costs/)** and
+   **[banking](/china/banking/#the-plan-that-works)** — set up Alipay and WeChat Pay *before*
+   you fly. This is the step people skip and then regret.
+3. **[Print the arrival card](/misc/arrival-card/)** — one page, in your wallet, for the hour
+   you land with no SIM.
+
+### On the plane
+
+4. **[Getting in from the airport without being scammed](/china/airport-and-taxi-scams/)**.
+5. **[Your first 72 hours](/china/first-72-hours/)** — the chain, including the police
+   registration that is a legal requirement and the single most forgotten thing on this site.
+
+### Your first week
+
+6. **[The campus map](/pku/campus-map/)** — where you sleep, where you study, where you
+   register.
+7. **[Choosing courses](/pku/choosing-courses/)** — add/drop is a fortnight and three courses
+   don't behave normally.
+8. **[Campus life](/pku/campus-life/)** — campus card, network, getting through the gate.
+
+### Once you've landed properly
+
+9. **[Canteens](/pku/canteens/)**, **[sports and societies](/pku/sports-and-extracurriculars/)**,
+   **[where we eat](/lifestyle/favourite-spots/)** — the part where it stops being admin.
+10. **[The map](/map/)** — for when you want to leave Haidian.
 
 ## Tell us what you know
 

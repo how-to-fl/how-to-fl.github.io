@@ -68,6 +68,27 @@ places:
     recommended_by: Cohort 6
     last_verified: 2026-08
 
+  - name_en: BRBR Syrian Restaurant
+    name_zh: BRBR叙利亚餐厅
+    address_zh: 北京市海淀区东升南路东升家园12号楼商业底商
+    category: food
+    lat: 39.98740
+    lng: 116.33133
+    note: Wraps and sandwiches. Get the chicken shawarma or the falafel. Also on Meituan.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+
+  - name_en: Sanlitun Taikoo Li
+    name_zh: 三里屯太古里
+    address_zh: 北京市朝阳区三里屯路19号
+    category: shop
+    lat: 39.93355
+    lng: 116.44820
+    metro: Workers' Stadium (Line 3/17), exit D, then 240 m on foot
+    note: Outdoor mall, and the default answer to "where do we go on Saturday". Guomao is the indoor version.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+
   # ── Copy from here ─────────────────────────────────────────────────────────
   # - name_en:
   #   name_zh:

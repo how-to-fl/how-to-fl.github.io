@@ -1267,3 +1267,203 @@ header.header {
 	color: var(--sl-color-gray-3);
 	font-variant-numeric: tabular-nums;
 }
+
+/* --- The printable arrival card -------------------------------------------
+   Two jobs: read sensibly on screen, and print as one self-contained page with
+   none of the site's chrome. Doubled selectors again for the Starlight cascade. */
+.fl-print-card {
+	border: 2px solid var(--sl-color-gray-4);
+	border-radius: 0.5rem;
+	padding: 1.4rem 1.5rem 1.6rem;
+	margin-block: 1.75rem;
+	background: var(--sl-color-bg-nav);
+}
+
+.fl-print-card h2.pc-title {
+	font-family: var(--fl-font-display);
+	font-size: 1.3rem;
+	margin: 0 0 1.1rem;
+	padding: 0 0 0.6rem;
+	border-bottom: 2px solid var(--sl-color-accent);
+	color: var(--sl-color-white);
+}
+
+.fl-print-card .pc-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+	gap: 1.1rem 1.6rem;
+}
+
+.fl-print-card .pc-block h3 {
+	font-size: 0.72rem;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+	margin: 0 0 0.4rem;
+	border: 0;
+	padding: 0;
+	font-weight: 600;
+}
+
+.fl-print-card p {
+	margin: 0 0 0.45rem;
+}
+
+.fl-print-card .pc-zh {
+	font-size: 1.12rem;
+	font-weight: 600;
+	line-height: 1.45;
+	color: var(--sl-color-white);
+}
+
+.fl-print-card .pc-en {
+	font-size: 0.86rem;
+	line-height: 1.45;
+	color: var(--sl-color-gray-2);
+}
+
+.fl-print-card .pc-py {
+	display: block;
+	color: var(--sl-color-gray-3);
+	font-size: 0.8rem;
+}
+
+.fl-print-card .pc-tel {
+	font-size: 0.82rem;
+	color: var(--sl-color-gray-3);
+	font-variant-numeric: tabular-nums;
+}
+
+.fl-print-card .pc-alert {
+	border-left: 3px solid var(--sl-color-accent);
+	padding-left: 0.8rem;
+}
+
+.fl-print-card .pc-deadline {
+	font-size: 0.85rem;
+	line-height: 1.45;
+}
+
+.fl-print-card table.pc-nums {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.84rem;
+	font-variant-numeric: tabular-nums;
+}
+
+.fl-print-card table.pc-nums td {
+	padding: 0.12rem 0;
+	border: 0;
+	background: none;
+}
+
+.fl-print-card table.pc-nums td:last-child {
+	text-align: right;
+	font-weight: 600;
+	color: var(--sl-color-white);
+	white-space: nowrap;
+}
+
+.fl-print-card .pc-blank {
+	border-bottom: 1px dotted var(--sl-color-gray-4) !important;
+	color: var(--sl-color-gray-4) !important;
+	font-weight: 400 !important;
+	font-style: italic;
+	min-width: 7rem;
+}
+
+/* Print: the card, and nothing else. Starlight's chrome is all outside <main>,
+   so hiding by landmark is more robust than chasing its class names. */
+@media print {
+	body > *,
+	header,
+	nav,
+	aside,
+	footer,
+	.right-sidebar,
+	.sidebar-pane,
+	.print-hidden {
+		display: none !important;
+	}
+	main,
+	main *,
+	.fl-print-card,
+	.fl-print-card * {
+		display: revert !important;
+		visibility: visible !important;
+	}
+	main {
+		display: block !important;
+		position: static !important;
+		width: 100% !important;
+		max-width: none !important;
+		padding: 0 !important;
+		margin: 0 !important;
+	}
+	/* Everything in the article except the card itself. */
+	main h1,
+	main > * > *:not(.fl-print-card),
+	.sl-markdown-content > *:not(.fl-print-card) {
+		display: none !important;
+	}
+	.fl-print-card {
+		display: block !important;
+		border: 1px solid #000 !important;
+		background: #fff !important;
+		color: #000 !important;
+		padding: 1cm !important;
+		margin: 0 !important;
+		break-inside: avoid;
+	}
+	.fl-print-card *,
+	.fl-print-card .pc-zh,
+	.fl-print-card .pc-en,
+	.fl-print-card .pc-tel,
+	.fl-print-card table.pc-nums td:last-child {
+		color: #000 !important;
+	}
+	.fl-print-card h2.pc-title {
+		border-bottom-color: #000 !important;
+	}
+	.fl-print-card .pc-alert {
+		border-left-color: #000 !important;
+	}
+	.fl-print-card .pc-grid {
+		grid-template-columns: 1fr 1fr !important;
+	}
+	@page {
+		margin: 1.2cm;
+	}
+}
+
+/* --- Grid children must not carry stacked-content margins -------------------
+   Starlight gives sequential content a top margin so paragraphs breathe. Inside
+   a CSS grid that margin does not separate siblings — it shunts every item
+   except the first one down by 1rem, so a row of cards sits 16px out of line
+   with its own first card.
+
+   There was already a rule for this, written as `.fl-categories > .card` when
+   the homepage used Starlight's Card component. The markup later moved to
+   `.fl-card` and the rule quietly stopped matching, which is how three separate
+   rows of cards on the front page ended up misaligned. Selecting the child
+   universally rather than by class means the next markup change can't
+   reintroduce it.
+
+   Scoped under .sl-markdown-content (0,2,0) to clear Starlight's own spacing
+   rules — the same specificity trap that AGENTS.md records for .fl-strip. */
+.sl-markdown-content .fl-categories > *,
+.sl-markdown-content .fl-duo > *,
+.sl-markdown-content .fl-cards > *,
+.sl-markdown-content .fl-stats > li,
+.sl-markdown-content .fl-emergency > li,
+.sl-markdown-content .fl-print-card .pc-grid > * {
+	margin-top: 0;
+}
+
+/* Equal-height boxes in a row. Only matters where the box has a visible edge,
+   which is why the print card's blocks are left alone. */
+.sl-markdown-content .fl-categories > *,
+.sl-markdown-content .fl-duo > *,
+.sl-markdown-content .fl-cards > * {
+	align-self: stretch;
+}

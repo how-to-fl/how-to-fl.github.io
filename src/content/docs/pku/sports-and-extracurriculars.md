@@ -4,7 +4,7 @@ description: "The club fest, PKU's gyms and pitches, and how to actually join so
 status: draft
 last_verified: 2024-05
 sidebar:
-  order: 4
+  order: 5
 ---
 
 PKU has **over a hundred student societies**, and they recruit twice a year — **March and
@@ -71,6 +71,27 @@ everywhere and cost almost nothing, and are the fastest way across Haidian.
 - The **International Students Division** runs cultural events, trips and tours around the
   city — watch `isd.pku.edu.cn` under "Notice" and "Events"
 - The **FL programme team and Guanghua** run their own things. Read those emails
+
+### The full list exists, and almost nobody opens it
+
+The FL Student Handbook ends with a **nine-page appendix listing about 160 student
+societies** — with the WeChat ID for each, which is how you actually join one. It's the most
+under-used thing in the whole handbook.
+
+They're grouped into four families, and the range is wider than "sports and music":
+
+| | |
+|---|---|
+| **Academic & Techtronic** | Astronomy, Linux Club, Intellectual Property, Entrepreneurship & Investment, Risk Management & Insurance, Cultural Relics Enthusiasts, Traditional Chinese Medicine, Planning |
+| **Cultural & Art** | Orchestras, troupes, calligraphy, Culinary and Gastronomy, Magic |
+| **Charity & Volunteering** | Greenlife, reading clubs, outreach |
+| **Political Theoretical** | Marxism research, Asian Future Political Leaders, National Defense Education |
+
+Plus the sports ones — baseball and softball, Chinese chess, shuttlecock and the rest.
+
+Two practical notes: **you join through the WeChat ID**, not through a website; and the
+handbook itself warns that **some accounts are out of date**, so if one doesn't resolve, ask
+at the club fest rather than assuming the society folded.
 
 ## Competitions
 
