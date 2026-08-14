@@ -1161,15 +1161,13 @@ header.header {
 	color: var(--sl-color-gray-3);
 }
 
-:root[data-theme='light'] .fl-campus-ground {
-	fill: #efe4d8;
-	stroke: var(--sl-color-gray-4);
-}
-
-:root[data-theme='light'] .fl-campus-water {
-	fill: #7fb3c9;
-	fill-opacity: 0.75;
-}
+/* NOTE: there were `:root[data-theme='light'] .fl-campus-ground/-water` rules
+   here, left over from the map's first version. At (0,2,0) they out-specified
+   the (0,1,0) rules that introduce the gradients, so in light theme the ground
+   and the water silently fell back to flat hardcoded colours — the shading was
+   simply absent, and the --campus-* tokens they predate were being ignored too.
+   Theme differences belong in the token block at the top, never in a
+   theme-scoped override of a component rule. */
 
 :root[data-theme='light'] .fl-campus-pin[data-kind='landmark'],
 :root[data-theme='light'] .fl-campus ul.fl-campus-key li[data-kind='landmark'] {

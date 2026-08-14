@@ -77,6 +77,13 @@ is silently dropped from a stylesheet loaded via `customCss`. Use plain selector
 **Watch your own specificity.** `.sl-markdown-content p` (0,2,0) beats `.fl-strip` (0,1,0).
 That has already caused one silent bug.
 
+**Theme differences go in the token block, never in a theme-scoped override of a component
+rule.** `:root[data-theme='light'] .fl-campus-ground` is (0,2,0) and beats the (0,1,0) rule
+that actually styles the component. Two stale rules like that survived the campus map's
+rewrite and silently held the light theme on flat hardcoded colours — the gradient shading
+was simply absent in light mode, and the `--campus-*` tokens they predated were ignored.
+Nothing failed; it just quietly looked like the old version. Redefine the token, not the rule.
+
 **Grid children need their top margin zeroed, and the rule must not name a class.**
 Starlight gives sequential content a 1rem top margin. Inside a grid that margin doesn't
 separate siblings — `gap` already does — it shunts every item *except the first* down by
