@@ -195,9 +195,36 @@ const barPx = ((barM / mPerDegLon) / (maxLon - minLon)) * W;
 			Line 4 station. Every place shown is also listed in text below this map.
 		</desc>
 
+		<defs>
+			{/* Shading, all of it declarative — no filters on 540 buildings, which
+			    would cost far more than it looks. The campus gets a soft radial
+			    lift so the middle reads as raised; water gets depth from a
+			    gradient rather than a flat fill; the wall casts a real shadow so
+			    the campus sits above the city instead of beside it. */}
+			<radialGradient id="fl-ground-lift" cx="46%" cy="42%" r="72%">
+				<stop offset="0%" stop-color="var(--campus-ground-hi)" />
+				<stop offset="100%" stop-color="var(--campus-ground)" />
+			</radialGradient>
+			<linearGradient id="fl-water-depth" x1="0" y1="0" x2="0.25" y2="1">
+				<stop offset="0%" stop-color="var(--campus-water-hi)" />
+				<stop offset="100%" stop-color="var(--campus-water)" />
+			</linearGradient>
+			<filter id="fl-campus-shadow" x="-6%" y="-6%" width="112%" height="112%">
+				<feDropShadow dx="0" dy="4" stdDeviation="7" flood-color="var(--campus-shadow)" />
+			</filter>
+		</defs>
+
 		<rect x="0" y="0" width={W} height={H} class="fl-campus-city" />
 
-		{boundary && <path d={poly(boundary.geometry.coordinates[0])} class="fl-campus-ground" />}
+		{
+			boundary && (
+				<path
+					d={poly(boundary.geometry.coordinates[0])}
+					class="fl-campus-ground"
+					filter="url(#fl-campus-shadow)"
+				/>
+			)
+		}
 
 		{buildingPaths.map((d) => <path d={d} class="fl-campus-building" />)}
 

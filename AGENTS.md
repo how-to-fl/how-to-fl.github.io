@@ -146,6 +146,25 @@ against the worst-case content that can scroll behind, not a mockup.
 The logo (`src/components/Logo.astro`) has **no "6"** (the guide outlives any cohort) and
 **no PKU seal** (the university's mark, not ours to redraw).
 
+**The page sits on a fixed wash** — three faint pools of crimson, ember and mauve on `body`
+with `background-attachment: fixed`, so the content scrolls and the light behind it doesn't.
+Two things about it are load-bearing:
+
+- **Each pool needs a middle stop.** A gradient running straight to `transparent` ramps its
+  alpha linearly and leaves a visible rim, which reads as a shape drawn on the page rather
+  than as light. The middle stop bends the falloff and the edge disappears.
+- **`--fl-grain-soft`, not `--fl-grain`, for anything page-sized.** The full-strength grain is
+  tuned for the hero, where it sits on a saturated gradient. Across a whole page it reads as
+  television static.
+
+The wash lives in the background stack rather than on a fixed pseudo-element over the
+content. A blended overlay above the page tints body text the moment a stacking context
+doesn't go your way, and a fourth background layer does the same job with no such bet. The
+whole pass folds flat under `prefers-reduced-transparency` and `prefers-contrast`.
+
+Worst-case text contrast over the wash was measured, not eyeballed: **7.3:1 light, 8.0:1
+dark** with all three pools overlapping at full strength, which never actually happens.
+
 ---
 
 ## Commands

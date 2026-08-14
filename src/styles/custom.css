@@ -20,6 +20,10 @@
 	--fl-font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
 	/* Grain. An inline SVG turbulence — no external texture to fetch or block. */
+	/* A quieter grain for the page backdrop. The full-strength one is for the
+	   hero, where it sits on a saturated gradient and can take it; across a
+	   whole page at 0.42 it reads as television static. */
+	--fl-grain-soft: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.10'/%3E%3C/svg%3E");
 	--fl-grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
 }
 
@@ -985,6 +989,10 @@ header.header {
 	--campus-road: #7a5f55;
 	--campus-wall: #b89a8b;
 	--campus-halo: rgb(23 16 16 / 0.82);
+	--campus-ground-hi: #3d2c25;
+	--campus-water-hi: #3f89a6;
+	--campus-shadow: rgb(0 0 0 / 0.55);
+	--campus-building-edge: rgb(255 255 255 / 0.07);
 }
 
 :root[data-theme='light'] {
@@ -996,6 +1004,10 @@ header.header {
 	--campus-road: #c2a894;
 	--campus-wall: #8a6e5c;
 	--campus-halo: rgb(251 246 238 / 0.85);
+	--campus-ground-hi: #fffdf8;
+	--campus-water-hi: #a8d3e4;
+	--campus-shadow: rgb(94 62 44 / 0.30);
+	--campus-building-edge: rgb(92 62 44 / 0.16);
 }
 
 .fl-campus-city {
@@ -1005,17 +1017,20 @@ header.header {
 }
 
 .fl-campus-ground {
-	fill: var(--campus-ground);
+	fill: url(#fl-ground-lift);
 	stroke: none;
 }
 
+/* A hairline on each footprint is what separates a terrace of buildings into
+   buildings. Without it they merge into one blob at this scale. */
 .fl-campus-building {
 	fill: var(--campus-building);
-	stroke: none;
+	stroke: var(--campus-building-edge);
+	stroke-width: 0.6;
 }
 
 .fl-campus-water {
-	fill: var(--campus-water);
+	fill: url(#fl-water-depth);
 	stroke: none;
 }
 
@@ -1037,13 +1052,15 @@ header.header {
 .fl-campus-wall {
 	fill: none;
 	stroke: var(--campus-wall);
-	stroke-width: 1.6;
+	stroke-width: 1.8;
+	stroke-linejoin: round;
 }
 
 .fl-campus-dot {
 	fill: var(--campus-c, var(--sl-color-accent));
-	stroke: var(--sl-color-bg-nav);
-	stroke-width: 2;
+	stroke: var(--campus-halo);
+	stroke-width: 2.5;
+	paint-order: stroke fill;
 }
 
 .fl-campus-label {
@@ -1522,4 +1539,189 @@ header.header {
 .sl-markdown-content .fl-duo > *,
 .sl-markdown-content .fl-cards > * {
 	align-self: stretch;
+}
+
+/* ==========================================================================
+   Depth pass — a steady backdrop, clearer edges, and shading
+   ==========================================================================
+   The brief: content should flow against something that stays still. So the
+   wash lives on <body> with background-attachment: fixed — the page scrolls,
+   the light behind it does not. It's a background-image layer rather than a
+   pseudo-element because body already paints an opaque colour, and anything
+   sitting behind that colour is invisible by definition.
+
+   Everything here is tokenised so both themes stay deliberate, and the whole
+   pass folds flat under prefers-contrast and prefers-reduced-transparency.
+   ========================================================================== */
+
+:root {
+	/* Three pools of light, warm and off-centre, so nothing looks like a
+	   symmetrical CSS gradient. Kept faint — this sits under body text. */
+	--wash-a: 0.20;
+	--wash-b: 0.15;
+	--wash-c: 0.12;
+	--wash-grain: 0.26;
+
+	--edge: rgb(244 236 220 / 0.14);
+	--edge-strong: rgb(244 236 220 / 0.22);
+	--lift-1: 0 1px 2px rgb(10 5 6 / 0.30), 0 6px 18px -8px rgb(10 5 6 / 0.55);
+	--lift-2: 0 2px 4px rgb(10 5 6 / 0.34), 0 18px 40px -14px rgb(10 5 6 / 0.66);
+	--sheen: linear-gradient(160deg, rgb(255 255 255 / 0.055), transparent 55%);
+}
+
+:root[data-theme='light'] {
+	--wash-a: 0.12;
+	--wash-b: 0.09;
+	--wash-c: 0.07;
+	--wash-grain: 0.14;
+
+	--edge: rgb(42 18 22 / 0.13);
+	--edge-strong: rgb(42 18 22 / 0.22);
+	--lift-1: 0 1px 2px rgb(92 52 40 / 0.10), 0 6px 18px -8px rgb(92 52 40 / 0.22);
+	--lift-2: 0 2px 4px rgb(92 52 40 / 0.12), 0 18px 40px -14px rgb(92 52 40 / 0.28);
+	--sheen: linear-gradient(160deg, rgb(255 255 255 / 0.55), transparent 55%);
+}
+
+body {
+	/* Three stops per pool, not two. A single stop to `transparent` ramps its
+	   alpha linearly and leaves a visible rim where the gradient ends — it read
+	   as a shape drawn on the page rather than as light. The middle stop bends
+	   the falloff so the edge disappears. Origins sit outside the viewport so
+	   only the soft shoulder of each pool is ever on screen. */
+	background-image:
+		radial-gradient(
+			80rem 58rem at 2% -16%,
+			rgb(142 27 44 / var(--wash-a)),
+			rgb(142 27 44 / calc(var(--wash-a) * 0.42)) 36%,
+			transparent 72%
+		),
+		radial-gradient(
+			72rem 54rem at 104% 6%,
+			rgb(192 69 42 / var(--wash-b)),
+			rgb(192 69 42 / calc(var(--wash-b) * 0.42)) 38%,
+			transparent 74%
+		),
+		radial-gradient(
+			66rem 50rem at 80% 108%,
+			rgb(162 84 124 / var(--wash-c)),
+			rgb(162 84 124 / calc(var(--wash-c) * 0.42)) 36%,
+			transparent 72%
+		),
+		var(--fl-grain-soft);
+	background-repeat: no-repeat, no-repeat, no-repeat, repeat;
+	background-size: cover, cover, cover, 140px 140px;
+	/* The steady part. iOS treats this as `scroll`, which degrades to a
+	   perfectly ordinary page rather than a broken one. */
+	background-attachment: fixed;
+}
+
+/* The grain rides in the background stack above, not on a pseudo-element.
+   A fixed, mix-blend-mode layer painted over the page would tint body text
+   the moment a stacking context didn't go our way — and it bought nothing
+   that a fourth background layer doesn't. */
+
+/* --- Cards: an edge you can see, and a light source --------------------- */
+.fl-card,
+.fl-categories > .card {
+	border-color: var(--edge);
+	border-top-color: var(--sl-color-accent);
+	background-image: var(--sheen);
+	box-shadow: var(--lift-1);
+	transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
+}
+
+.fl-card:hover,
+.fl-categories > .card:hover {
+	box-shadow: var(--lift-2);
+	transform: translateY(-2px);
+	border-color: var(--edge-strong);
+}
+
+/* --- Stat tiles and emergency tiles ------------------------------------- */
+.sl-markdown-content .fl-stats li,
+.sl-markdown-content .fl-emergency li {
+	background-image: var(--sheen);
+	border-color: var(--edge);
+	box-shadow: var(--lift-1);
+}
+
+/* --- The chain: numbers get weight, the rail gets a gradient ------------ */
+.fl-chain::before {
+	background: linear-gradient(
+		180deg,
+		transparent,
+		var(--sl-color-gray-5) 6%,
+		var(--sl-color-gray-5) 94%,
+		transparent
+	);
+}
+
+.fl-chain .fl-chain-num {
+	background-image: var(--sheen);
+	box-shadow: var(--lift-1);
+	border-color: var(--edge-strong);
+}
+
+.fl-chain li.is-deadline .fl-chain-num {
+	background-image: linear-gradient(150deg, var(--fl-ember), var(--fl-crimson));
+	box-shadow: var(--lift-2);
+}
+
+/* --- Print card and campus figure: same family -------------------------- */
+.fl-print-card,
+.fl-campus .fl-campus-svg {
+	box-shadow: var(--lift-2);
+	border-color: var(--edge-strong);
+}
+
+.fl-print-card {
+	background-image: var(--sheen);
+}
+
+/* --- Tables: readable rules rather than hairlines ----------------------- */
+.sl-markdown-content table {
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 1px solid var(--edge);
+	border-radius: 0.5rem;
+	overflow: hidden;
+	box-shadow: var(--lift-1);
+}
+
+.sl-markdown-content table th {
+	background: color-mix(in srgb, var(--sl-color-accent) 12%, var(--sl-color-bg-nav));
+	border-bottom: 1px solid var(--edge-strong);
+}
+
+.sl-markdown-content table tr:nth-child(even) td {
+	background: color-mix(in srgb, var(--sl-color-gray-6, var(--sl-color-bg-nav)) 55%, transparent);
+}
+
+/* --- Accessibility: fold the whole pass flat ---------------------------- */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+	body {
+		background-image: none;
+	}
+	.fl-card,
+	.fl-categories > .card,
+	.sl-markdown-content .fl-stats li,
+	.sl-markdown-content .fl-emergency li,
+	.fl-print-card,
+	.fl-chain .fl-chain-num,
+	.sl-markdown-content table {
+		background-image: none;
+		box-shadow: none;
+		border-color: CanvasText;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.fl-card,
+	.fl-categories > .card {
+		transition: none;
+	}
+	.fl-card:hover,
+	.fl-categories > .card:hover {
+		transform: none;
+	}
 }
