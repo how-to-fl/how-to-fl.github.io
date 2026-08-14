@@ -100,6 +100,45 @@ competition, and subject ones worth knowing about — the **Bain Cup case contes
 PKU's Consulting Association each April, and **Guanghua's annual business competition** at
 the end of the year.
 
+### Actually entering a sports competition
+
+This is written down because somebody in the cohort went through it and it was much harder
+than it should have been. It's an account of entering a track and field event; other sports
+will differ, but the shape of the problem won't.
+
+**Expect to have to push.** The recurring theme is that nobody is sure whether international
+students are allowed to compete. Coaches included — the first answer was that it wasn't
+possible, and that turned out to be wrong. Requirements genuinely do vary between
+competitions, so an uncertain "no" early on is worth testing rather than accepting.
+
+**Registration is on a separate platform, `sh.bjdtx.org.cn`, and athletes enter themselves.**
+Access is restricted, so you need login details from the coordinator for your sport. That's
+the first thing to go and ask for.
+
+There are two routes in:
+
+- **As a "Chinese student"**, which needs a **CHSI online certificate** — passport
+  verification, and it takes a while. This is the route that should work and didn't in at
+  least one case. If you try it, make sure **your name matches the PKU system exactly**,
+  including the format (`SURNAME,FIRST NAME SECOND NAME`), because the platform cross-checks
+  against internal records and a mismatch fails silently.
+- **As an international student**, uploading your **admission letter, passport and a third
+  document**. That third one is vague and hard to obtain; a current **enrolment certificate**
+  was accepted in its place — which is a good reason to know
+  [how to get one](/pku/academics/#transcripts).
+
+**Upload everything as JPEG.** Other formats produce error messages that don't tell you the
+format is the problem.
+
+Two more things worth knowing before you invest an afternoon. Your entry is verified through
+the platform, but **the final decision rests with the event organiser rather than with PKU**.
+And events are often split into **Group A for professional athletes and Group B for regular
+students**, with eligibility that isn't clearly published — entry to the professional
+category required either performance benchmarks or official Chinese sports qualifications.
+
+If you hit a wall, it helps to point out that international students have already competed
+for PKU in other sports. That precedent exists; it just isn't written anywhere official.
+
 ## Concerts and things to go to
 
 **PKU Hall** (北大讲堂) puts on a steady stream of concerts, theatre and cultural events on

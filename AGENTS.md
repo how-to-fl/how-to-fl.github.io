@@ -209,12 +209,13 @@ exactly like a broken map. Verify canvas/WebGL work in a real browser, or ask.
 
 ## Outstanding
 
-- **25–30 real map pins.** Only 3 exist. Biggest gap, and it needs Toni rather than code.
-- **13 of 32 pages are still stubs** — and the remaining ones genuinely can't be written from
-  documents. The four closed in Aug 2026 (banking, credit transfer, phrasebook, visas) came
-  out of the official PDFs; what's left is lived experience, plus two specific safety gaps
-  worth naming: **how to state a food allergy in Chinese**, and **what to do if you lose your
-  passport**.
+- **25–30 real map pins.** Six exist. Still the biggest gap, and it needs Toni rather than
+  code — the blocker is a full Chinese address per place, not the coordinates.
+- **11 of 35 pages are still stubs.** What's closed came out of the official PDFs and the
+  cohort's own notes; what's left genuinely needs lived experience. Two are safety gaps and
+  should be treated as such: **how to state a food allergy in Chinese**, and **what to do if
+  you lose your passport**.
+- **Photographs.** The site has none at all. Toni has offered some.
 - A **second GitHub org owner**, so the project survives graduation.
 - Analytics is wired but **off** — paste a token into `CF_BEACON_TOKEN` in `Head.astro`.
   It's probably unreachable from mainland China, so it under-counts the actual readers.

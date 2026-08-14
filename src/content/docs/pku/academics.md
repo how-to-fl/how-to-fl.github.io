@@ -79,8 +79,20 @@ Two rules that catch people:
   simply won't let you.
 - **14–25 credits per semester** is the allowed range.
 
-There's also a mid-term withdrawal, normally around week 8. The course then shows on your
-transcript as **W**.
+There's also a **mid-term withdrawal**, normally around week 8. The course then shows on your
+transcript as **W**. You do it in the portal: search **中期退课**, pick the course, done.
+
+### Taking a course pass/fail
+
+You can convert some courses to **pass/no-pass** rather than a graded mark, which is worth
+knowing about before you sink a semester into worrying about one elective's effect on your
+GPA. Portal → **申请自选合格制(P/NP)** → select the course.
+
+Two things to think about first, because the button is easier than the decision: a `P` sits
+outside your GPA calculation entirely, and your home university may treat a pass/fail mark
+differently from a graded one when it comes to
+[credit transfer](/pku/credit-transfer/). Ask before you convert something that has to count
+at both ends.
 
 ## How grading actually works
 
@@ -149,13 +161,29 @@ Handy characters for that page: 学年度 school year · 学期 semester · 学�
 
 ## Transcripts
 
-**They are not sent automatically — you have to ask.** Three ways:
+**They are not sent automatically — you have to ask.**
 
-1. **The self-service machines** at the library, New Sun Student Center, and some
-   department buildings. Chinese-only interface: 校内门户认证 → 公文制作 → 成绩单.
-2. **In person** at the Office of Educational Administration, New Sun Student Center B106
-   (010-62751406). Bring your campus card.
-3. **Online** via `dean.pku.edu.cn`.
+The route most of us end up using is the **PKU portal**, which does transcripts *and*
+enrolment certificates:
+
+1. Portal → **申办中英文成绩单和学籍证明** (apply for Chinese/English transcripts and proof
+   of student status).
+2. Click **身份认证系统** — the authentication system — and log in.
+3. For the electronic version, choose **立即申办** under **申办电子材料**.
+4. Fill the form in, submit, and pay.
+5. **Allow about three days**, sometimes less. The electronic copy arrives at whichever email
+   address you gave on the form — so give one you can actually open from here.
+
+That enrolment certificate is worth knowing about for its own sake: it's the document that
+stands in when something asks for proof you're a student and you don't have whatever else
+they wanted.
+
+Two other routes if the portal is being difficult:
+
+- **The self-service machines** at the library, New Sun Student Center, and some department
+  buildings. Chinese-only interface: 校内门户认证 → 公文制作 → 成绩单.
+- **In person** at the Office of Educational Administration, New Sun Student Center B106
+  (010-62751406). Bring your campus card.
 
 Available in English or Chinese, paper or electronic. If your home university needs one for
 credit transfer, order it earlier than you think you need to.

@@ -89,10 +89,24 @@ there are three fixes:
 PKU is a tourist destination in its own right and access is controlled, so **your friends and
 family cannot simply walk in** — which is a nasty surprise the morning your parents arrive.
 
-You book them in yourself: open the **PKU app**, search **"Appointment"**, and follow it
-through. Do it **before** they turn up at the gate, not while they're standing at it. Visitor
-slots can run out in peak season, so for a visit you've planned around, book as early as the
-system lets you.
+You book them in yourself, either through the **PKU app** (search "Appointment") or through
+the **PKU portal**, which is the easier one to get right:
+
+1. Portal → **Appointment**.
+2. **Choose 燕园 Yanyuan.** That's our campus. The other options in that list are other PKU
+   sites, and picking one books your guest into somewhere they aren't going.
+3. Check your remaining allowance — it's shown on that screen.
+4. **开始预约** → fill in your guest's details → **提交**.
+5. If the booking appears in the list underneath, it worked. If it doesn't, it didn't.
+
+:::caution[There's a quota, and it's smaller than you think]
+Roughly **eight guest registrations a month**, and **no more than three people on any one
+day**. A family of four visiting for a weekend is already most of a day's allowance and part
+of your month. Plan it rather than discovering it at the gate.
+:::
+
+Do it **before** they turn up, not while they're standing outside. Slots also run out in peak
+season, so for a visit you've planned around, book as early as the system lets you.
 
 ## Getting online
 
