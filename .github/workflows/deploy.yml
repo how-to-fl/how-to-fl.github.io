@@ -21,7 +21,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth: 0 is load-bearing. actions/checkout defaults to a shallow
+      # clone, and Starlight's `lastUpdated` reads each page's date from git
+      # history — with only one commit available it stamps *every* page with the
+      # date of the latest deploy. A page nobody has touched since 2024 then
+      # claims it was updated today, which is precisely the lie this site is
+      # built to avoid.
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - uses: actions/setup-node@v5
         with:

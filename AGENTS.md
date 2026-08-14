@@ -87,7 +87,10 @@ the setting, never the symptom.
 
 ## Conventions
 
-**Every page carries `last_verified: YYYY-MM`** and a `status` of `stub | draft | live`.
+**Every page with content on it carries `last_verified: YYYY-MM`** and a `status` of
+`stub | draft | live`. **Stubs deliberately carry no `last_verified`** — nothing on them has
+ever been checked, and dating an empty page would be the one lie this convention exists to
+stop. Add the date in the same edit that adds the content.
 `src/components/PageTitle.astro` renders a quiet line from it, escalating past 12 months.
 Pages transcribed from the 2024 handbook carry `last_verified: 2024-05` **deliberately** —
 those facts were confirmed then, not now. Bump it only when someone has actually re-checked,
