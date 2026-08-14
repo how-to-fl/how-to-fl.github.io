@@ -81,6 +81,28 @@ const Q_ACCESS = `
 out tags center;
 `;
 
+// The underlay. Without building footprints and the road network the campus
+// draws as a blank polygon with a few ponds floating on it, which reads as
+// specks on a beige field rather than as a place — that was the first version's
+// real failure, and it wasn't the coordinates.
+// nwr, not way. The library and the campus hospital are both multipolygon
+// *relations*, so a way-only query drew every building on campus except the two
+// people most need to find — leaving their pins floating on blank ground, which
+// is exactly what "the locations are wrong" looked like.
+const Q_BUILDINGS = `
+[out:json][timeout:180];
+nwr["building"](${BBOX});
+out geom;
+`;
+
+// Named road classes plus the campus footpaths, which matter here: PKU is
+// mostly pedestrian and the paths are how the place actually reads.
+const Q_ROADS = `
+[out:json][timeout:180];
+way["highway"~"^(primary|secondary|tertiary|residential|unclassified|service|living_street|pedestrian|footway|path)$"](${BBOX});
+out geom;
+`;
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function overpass(query, label) {
@@ -203,11 +225,13 @@ function kind(tags = {}) {
 
 console.log('\nPKU campus → OpenStreetMap\n');
 
-const [boundary, water, places, access] = [
-	await overpass(Q_BOUNDARY, 'boundary'),
-	await overpass(Q_WATER, 'water   '),
-	await overpass(Q_PLACES, 'places  '),
-	await overpass(Q_ACCESS, 'access  '),
+const [boundary, water, places, access, buildings, roads] = [
+	await overpass(Q_BOUNDARY, 'boundary '),
+	await overpass(Q_WATER, 'water    '),
+	await overpass(Q_PLACES, 'places   '),
+	await overpass(Q_ACCESS, 'access   '),
+	await overpass(Q_BUILDINGS, 'buildings'),
+	await overpass(Q_ROADS, 'roads    '),
 ];
 
 const features = [];
@@ -228,6 +252,42 @@ for (const e of water.elements ?? []) {
 	// everybody actually means.
 	if (!r.some((pt) => nearCampus(pt, CAMPUS))) continue;
 	features.push(feat({ type: 'Polygon', coordinates: [r] }, { layer: 'water', ...labels(e.tags) }));
+}
+
+// Building footprints. Kept if any corner is on campus, so a building on the
+// wall isn't half-dropped.
+//
+// Ways carry their own geometry; relations carry it on their members, and only
+// the `outer` ones are the outline — inner members are courtyards and holes,
+// which we skip rather than drawing as separate blocks.
+const buildingRings = [];
+for (const e of buildings.elements ?? []) {
+	if (e.type === 'relation') {
+		for (const m of e.members ?? []) {
+			if (m.role === 'outer' && m.geometry?.length >= 4) buildingRings.push(ring(m.geometry));
+		}
+	} else if (e.geometry?.length >= 4) {
+		buildingRings.push(ring(e.geometry));
+	}
+}
+for (const r of buildingRings) {
+	if (!r.some((pt) => nearCampus(pt, CAMPUS))) continue;
+	features.push(feat({ type: 'Polygon', coordinates: [r] }, { layer: 'building' }));
+}
+
+// Roads and paths, as lines. `major` drives the stroke weight — a six-lane road
+// and a garden path should not be drawn the same.
+const MAJOR = new Set(['primary', 'secondary', 'tertiary', 'residential', 'unclassified']);
+for (const e of roads.elements ?? []) {
+	if (!e.geometry || e.geometry.length < 2) continue;
+	const r = ring(e.geometry);
+	if (!r.some((pt) => nearCampus(pt, CAMPUS))) continue;
+	features.push(
+		feat(
+			{ type: 'LineString', coordinates: r },
+			{ layer: 'road', major: MAJOR.has(e.tags?.highway) ? 1 : 0 },
+		),
+	);
 }
 
 // Points. `out tags center` gives ways a centroid, so nodes and ways land in the

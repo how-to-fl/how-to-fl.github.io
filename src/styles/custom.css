@@ -974,16 +974,70 @@ header.header {
 	background: var(--sl-color-bg-nav);
 }
 
+/* Campus map palette. Dark is the base theme here; the light overrides follow
+   the ':root[data-theme=light]' pattern used everywhere else in this file. */
+:root {
+	--campus-city: #171010;
+	--campus-ground: #33241f;
+	--campus-building: #56403a;
+	--campus-water: #2f6d86;
+	--campus-path: #5c4740;
+	--campus-road: #7a5f55;
+	--campus-wall: #b89a8b;
+	--campus-halo: rgb(23 16 16 / 0.82);
+}
+
+:root[data-theme='light'] {
+	--campus-city: #e4d6c4;
+	--campus-ground: #fbf6ee;
+	--campus-building: #d5c0a8;
+	--campus-water: #8fc0d4;
+	--campus-path: #d3c0aa;
+	--campus-road: #c2a894;
+	--campus-wall: #8a6e5c;
+	--campus-halo: rgb(251 246 238 / 0.85);
+}
+
+.fl-campus-city {
+	/* Everything outside the wall: the blocks Global Village and the station sit
+	   in. Deliberately duller than campus so the eye finds the campus first. */
+	fill: var(--campus-city);
+}
+
 .fl-campus-ground {
-	fill: var(--sl-color-gray-6, #2c1c1a);
-	stroke: var(--sl-color-gray-4);
-	stroke-width: 1.5;
+	fill: var(--campus-ground);
+	stroke: none;
+}
+
+.fl-campus-building {
+	fill: var(--campus-building);
+	stroke: none;
 }
 
 .fl-campus-water {
-	fill: #2f6d86;
-	fill-opacity: 0.55;
+	fill: var(--campus-water);
 	stroke: none;
+}
+
+/* Roads are strokes, not fills — 825 of them, so no per-path attributes. */
+.fl-campus-path {
+	stroke: var(--campus-path);
+	stroke-width: 1;
+	stroke-linecap: round;
+}
+
+.fl-campus-road {
+	stroke: var(--campus-road);
+	stroke-width: 2.6;
+	stroke-linecap: round;
+}
+
+/* The wall, redrawn over the underlay so the campus edge stays legible where
+   buildings and roads run right up to it. */
+.fl-campus-wall {
+	fill: none;
+	stroke: var(--campus-wall);
+	stroke-width: 1.6;
 }
 
 .fl-campus-dot {
@@ -994,25 +1048,27 @@ header.header {
 
 .fl-campus-label {
 	font-family: var(--fl-font-body);
-	font-size: 11px;
-	font-weight: 500;
+	/* In viewBox units. The SVG scales to ~0.7×, so 16 here lands near 11px on
+	   screen — 11 here rendered at under 8px and was unreadable. */
+	font-size: 16px;
+	font-weight: 600;
 	fill: var(--sl-color-white);
 	/* Labels cross both the ground and the lake, so they need a halo. Painting
 	   the stroke under the fill keeps the letterforms from being eaten. */
-	stroke: var(--sl-color-bg-nav);
-	stroke-width: 3;
+	stroke: var(--campus-halo);
+	stroke-width: 4.5;
 	paint-order: stroke fill;
 }
 
 .fl-campus-scale line {
-	stroke: var(--sl-color-gray-3);
-	stroke-width: 1.5;
+	stroke: var(--sl-color-gray-2);
+	stroke-width: 2;
 }
 
 .fl-campus-scale text {
 	font-family: var(--fl-font-body);
-	font-size: 10px;
-	fill: var(--sl-color-gray-3);
+	font-size: 13px;
+	fill: var(--sl-color-gray-2);
 	stroke: none;
 }
 
