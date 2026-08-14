@@ -62,9 +62,14 @@ and China Construction Bank all sit within a walk of the gates. They're on
 [the campus map](/pku/campus-map/) and on [the Beijing map](/map/) with coordinates, which is
 more reliable than a walking time.
 
-We're saying that carefully because the two official booklets disagree with each other. *Get
-Ready for PKU* puts ICBC 20 minutes from the East Gate; the *International Student Guide* puts
-it one minute away. They can't both be right, and neither is worth trusting over a map.
+**The ICBC you want is two minutes from the east gate** — ground floor, north side of Founder
+Mansion (方正大厦), 成府路298号. Given ICBC is one of only two banks that count for your
+scholarship registration, that's the one address on this page worth remembering. It's
+[on the map](/map/).
+
+Worth knowing why we're being specific: the two official booklets contradict each other about
+where ICBC is — one puts it twenty minutes from the east gate, the other one minute. Neither
+is a substitute for a pin.
 
 The hotlines they agree on, and most have English service:
 

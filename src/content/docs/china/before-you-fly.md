@@ -100,26 +100,60 @@ are themselves generally unreachable from inside China. The window to set one up
 *before* you arrive. Every cohort has someone who didn't, and spent a fortnight borrowing a
 friend's hotspot.
 
-What we'd suggest:
+### What people actually use
 
-- Set it up **on every device** — laptop, phone, tablet — and check each one works before
-  you leave. A config that only lives on your laptop is no use in a queue with your phone
-- **Have a second option installed.** Reliability varies week to week and a single point of
-  failure is a poor plan for your email
-- Know **how you'll pay from abroad**, and whether it renews on a card that'll still work
-- **Download things while you can:** offline maps of Beijing and your arrival documents.
-  Worth saving the pages of this guide you'll need on day one too — the site needs a
-  connection, and yours may be patchy for the first few days
+Three that cohorts here have used. We're naming them because being vague about this helps
+nobody, but understand the caveat first: **which one works well changes month to month.**
+That's the single most important thing on this page. Any list, including this one, is a
+starting point rather than a guarantee.
+
+- **Astrill** — the long-standing choice among people living in China, and the most expensive
+  of the three. It's built for this specific problem, which is what you're paying for.
+- **Mullvad** — flat monthly price, no account tied to your identity, strong privacy record.
+  Popular with people who care what happens to their traffic.
+- **Surfshark** — the cheap mainstream option on a long plan, and it covers unlimited devices,
+  which matters when you're running a laptop and a phone.
+
+:::caution[Be careful with LetsVPN]
+It's the one you'll hear about most once you're here, because it's easy to obtain from inside
+China and heavily marketed to people in exactly your situation. That's also the reason to be
+wary: **who runs it and what happens to your traffic are not transparent**, and a VPN is a
+service you route *everything* through — your email, your bank, your messages home. If you
+can't find out who's on the other end, don't give them all of it.
+:::
+
+### Setting it up, properly
+
+Do all of this **before you fly**. Each step is here because somebody skipped it.
+
+1. **Buy the subscription at home.** Payment pages are often unreachable from the mainland,
+   and so is customer support if something goes wrong.
+2. **Install it on every device** — laptop, phone, tablet. A config that only exists on your
+   laptop is no use to you in a queue with your phone.
+3. **Download the installer files themselves** and keep them offline. If you have to
+   reinstall after you arrive, the provider's own website is frequently the thing you can't
+   reach.
+4. **Save your account details somewhere you can open without a connection.** Not in an email
+   account you'd need the VPN to read — that's a genuinely circular problem people hit.
+5. **Install a second provider as a backup.** Reliability moves around, and a single point of
+   failure is a poor plan for your degree's email.
+6. **Learn where the protocol and server settings are** before you need them. When a
+   connection stops working, switching protocol or server is usually what fixes it, and
+   working that out for the first time under pressure is miserable.
+7. **Check how it renews** — on a card that will still work, and not on a date you'll forget.
+8. **Test every device before you leave.** "It installed" is not the same as "it works".
+
+Also worth doing while you still have an easy connection: **download offline maps of Beijing**,
+your arrival documents, and the pages of this guide you'll need on day one. The site needs a
+connection, and yours may be patchy for the first few days.
 
 **On the legal side.** Personal use by foreign students is extremely common and openly
-discussed on campus. It also sits in a genuine grey area under Chinese law, and the rules
-are written loosely enough that we won't pretend otherwise. Two things are clear: don't sell
-or share access, and don't make a public thing of it.
+discussed on campus. It also sits in a genuine grey area under Chinese law, and the rules are
+written loosely enough that we won't pretend otherwise. Two things are clear: **don't sell or
+share access, and don't make a public thing of it.**
 
-We're deliberately not naming providers or writing setup steps — this is a public page with
-our names on it, and specifics age badly anyway. **Ask in the cohort chat**; someone who
-arrived last year will tell you what's currently working, which beats anything we could pin
-to a webpage.
+And **ask the current cohort** as well. Someone who arrived last year knows what's working
+right now, which is something no webpage can keep up with.
 
 **Also:** your university probably has its own VPN, and **PKU has one too**
 (`vpn.pku.edu.cn`). Those are for reaching library databases and journals — a different job,

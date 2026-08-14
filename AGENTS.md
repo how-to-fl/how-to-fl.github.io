@@ -20,8 +20,14 @@ to page copy, UI notices, issue forms, CONTRIBUTING and README.
 
 > "On a Beijing connection it often won't load, and that's not your problem to fix."
 
-Short and specific beats long and vague. Say when we're unsure. No political commentary, and
-VPN content stays **descriptive, not instructional**.
+Short and specific beats long and vague. Say when we're unsure. No political commentary.
+
+**VPN content is practical, as of Aug 2026.** The earlier rule — descriptive, never
+instructional, no provider names — was reversed deliberately: being vague about the one tool
+the degree depends on helped nobody, and every cohort was getting the specifics verbally
+anyway. Name providers, give setup steps, and keep two things: the honest note that personal
+use sits in a legal grey area, and the warning that reliability moves month to month so any
+list is a starting point rather than a promise.
 
 ---
 

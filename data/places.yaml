@@ -68,6 +68,20 @@ places:
     recommended_by: Cohort 6
     last_verified: 2026-08
 
+  - name_en: ICBC — the branch by the east gate
+    name_zh: 中国工商银行（成府路方正大厦）
+    address_zh: 北京市海淀区成府路298号方正大厦F1北侧
+    category: service
+    lat: 39.98974
+    lng: 116.31039
+    metro: East Gate of Peking University (Line 4), two minutes
+    note: >-
+      Ground floor, north side of Founder Mansion. ICBC is one of only two banks
+      that count for your scholarship registration, and this is the closest one
+      to campus. Go in the morning.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+
   - name_en: BRBR Syrian Restaurant
     name_zh: BRBR叙利亚餐厅
     address_zh: 北京市海淀区东升南路东升家园12号楼商业底商
