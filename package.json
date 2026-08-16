@@ -16,7 +16,8 @@
     "fetch:subway": "node scripts/fetch-subway.mjs",
     "fetch:campus": "node scripts/fetch-campus.mjs",
     "fetch:fonts": "node scripts/fetch-fonts.mjs",
-    "make:og": "node scripts/make-og.mjs"
+    "make:og": "node scripts/make-og.mjs",
+    "postbuild": "node scripts/sitemap.mjs"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.41.7",
