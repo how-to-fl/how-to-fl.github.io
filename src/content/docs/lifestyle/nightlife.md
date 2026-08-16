@@ -9,9 +9,15 @@ sidebar:
   order: 2
 ---
 
-We've laid out the headings we think this page needs. Swap each `_To be written._`
-for what you actually know — short and specific beats long and vague, and filling in
-one heading is a proper contribution. You don't have to do the whole thing.
+**We haven't written this one yet.** Until we do:
+
+- **[Where we actually eat](/lifestyle/favourite-spots/)** has Sanlitun — Taikoo Li for the
+  bars and the people-watching, which is the default answer to "where do we go on Saturday".
+- **[The map](/map/)** shows how to get there and back.
+- **Getting home late:** the subway stops before you'll want it to. Didi is the answer, it's
+  cheap, and it's [set up before you fly](/china/airport-and-taxi-scams/).
+
+What's missing is which places are actually worth it — and, just as usefully, which aren't.
 
 ## Bars
 

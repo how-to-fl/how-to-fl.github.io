@@ -9,9 +9,19 @@ sidebar:
   order: 6
 ---
 
-We've laid out the headings we think this page needs. Swap each `_To be written._`
-for what you actually know — short and specific beats long and vague, and filling in
-one heading is a proper contribution. You don't have to do the whole thing.
+**We haven't written this one yet, and it's the page we most want somebody to write.**
+
+Everything else on this site is procedure — visas, canteens, deadlines. This is the one that
+decides whether the year is any good, and none of us can write it on behalf of anyone else.
+What it needs is people describing their own experience honestly, including the parts that
+were harder than the brochure suggests.
+
+Until then: [health](/lifestyle/health/) covers doctors, contraception and mental health
+support in English, and the counselling centre explicitly handles adapting, low mood and
+friction with classmates. Those numbers work now.
+
+If any of the headings below is your experience, please write it. Three honest sentences
+beats an empty section, and it will matter to somebody.
 
 ## Queer life in Beijing
 

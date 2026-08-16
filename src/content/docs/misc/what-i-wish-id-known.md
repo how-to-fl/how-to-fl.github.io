@@ -9,9 +9,13 @@ sidebar:
   order: 6
 ---
 
-We've laid out the headings we think this page needs. Swap each `_To be written._`
-for what you actually know — short and specific beats long and vague, and filling in
-one heading is a proper contribution. You don't have to do the whole thing.
+**Empty, and it should be the easiest page on the site to fill.**
+
+One sentence each. The thing you'd say to yourself in August if you could. Not advice you
+think sounds wise — the actual specific thing, however small, that you had to learn the hard
+way.
+
+The rest of this guide is what we found out. This page is what we'd tell you.
 
 ## Cohort 6
 

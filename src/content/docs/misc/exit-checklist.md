@@ -9,9 +9,16 @@ sidebar:
   order: 5
 ---
 
-We've laid out the headings we think this page needs. Swap each `_To be written._`
-for what you actually know — short and specific beats long and vague, and filling in
-one heading is a proper contribution. You don't have to do the whole thing.
+**We haven't written this one yet** — Cohort 6 is the first to reach the end, so it will get
+written this year for the first time.
+
+If you're leaving: the things people forget are the Chinese bank account, the residence
+permit, the phone number that half your apps authenticate against, and selling the room
+things rather than binning them. Write down what you did as you do it — this page is much
+easier to write from a week out than from home in September.
+
+Two related pages exist meanwhile: [banking](/china/banking/) for what opening the account
+involved, and [visas and permits](/china/visas-and-permits/) for what the permit needs.
 
 ## Closing your bank account
 

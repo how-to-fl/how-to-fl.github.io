@@ -9,9 +9,13 @@ sidebar:
   order: 7
 ---
 
-We've laid out the headings we think this page needs. Swap each `_To be written._`
-for what you actually know — short and specific beats long and vague, and filling in
-one heading is a proper contribution. You don't have to do the whole thing.
+**Nobody has written one of these yet.**
+
+This is the place for the longer piece that doesn't fit under a heading — a term that went
+badly, a thing you changed your mind about, what it was actually like. The rest of the site is
+deliberately short and factual; this is where that rule is suspended.
+
+If you'd rather write eight hundred words than fill in a table, write them here.
 
 ## Add yours
 
