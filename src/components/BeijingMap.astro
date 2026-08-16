@@ -11,6 +11,7 @@
  * localIdeographFontFamily rather than downloaded as glyph tiles. Vendoring CJK
  * glyphs would have cost tens of megabytes; this costs nothing.
  */
+import { existsSync } from 'node:fs';
 import { parse } from 'yaml';
 // ?raw inlines the file at compile time. Reading it with fs and import.meta.url
 // instead would resolve against the bundled chunk's location at build time, not
@@ -28,12 +29,20 @@ const places = parse(placesRaw)?.places ?? [];
 // OpenStreetMap, which carry each line's official colour and name. If somebody
 // has run it and committed the result, we draw that on top instead. Detected at
 // build time so a missing file simply means the baseline is used.
-const subwayFiles = import.meta.glob('/public/data/beijing-subway.geojson', {
-	query: '?url',
-	import: 'default',
-	eager: true,
-});
-const hasSubwayData = Object.keys(subwayFiles).length > 0;
+// A plain filesystem check, deliberately NOT `import.meta.glob`.
+//
+// This used `import.meta.glob(..., { query: '?url', eager: true })`, which made
+// Vite treat the file as an asset to emit — so every build wrote a *second*
+// 490 KB copy into _astro/ under a hashed name that nothing ever fetched,
+// because the map requests the stable /data/ path further down. Half a megabyte
+// of every deploy existed purely as a side effect of asking "does this exist?".
+//
+// Dropping the query is not the fix: without one the glob becomes a module
+// import, and rolldown then tries to parse the GeoJSON as JavaScript and dies on
+// line 1. Existence is a filesystem question, so ask the filesystem — this is
+// build-time Node, `astro build` runs from the project root, and the bundler
+// never sees it.
+const hasSubwayData = existsSync('public/data/beijing-subway.geojson');
 
 const geojson = {
 	type: 'FeatureCollection',

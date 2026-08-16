@@ -126,7 +126,9 @@ both `BeijingMap.astro` and `custom.css`.
 
 **Two maps, on purpose.** The Beijing map is MapLibre over our own pmtiles; the campus map
 (`CampusMap.astro`) is plain inline SVG projected at build time from
-`public/data/pku-campus.geojson`. A campus is one screen at one zoom, so tiling buys nothing
+`data/pku-campus.geojson` — which lives in `data/`, **not** `public/`, precisely because
+it is never fetched: it is inlined into the page, so publishing it would ship 436 KB that
+nobody downloads. A campus is one screen at one zoom, so tiling buys nothing
 — and an SVG survives a screenshot, a print, and a browser pane with animation frames paused,
 which is exactly where the WebGL map cannot be checked.
 

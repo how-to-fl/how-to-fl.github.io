@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Fetches the Peking University campus — boundary, water, named buildings and
- * gates — from OpenStreetMap into public/data/pku-campus.geojson.
+ * gates — from OpenStreetMap into data/pku-campus.geojson.
  *
  * Run by hand; the result is committed, exactly like the subway data, so the
  * site builds without Overpass being up.
@@ -24,7 +24,11 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const OUT = join(ROOT, 'public', 'data', 'pku-campus.geojson');
+// data/, not public/. The component inlines this file into the SVG at build
+// time, so nothing ever fetches it over the network — publishing it only added
+// 436 KB to every deploy for no one to download. It lives beside places.yaml,
+// which is the other build-time-only data file.
+const OUT = join(ROOT, 'data', 'pku-campus.geojson');
 
 const ENDPOINTS = [
 	'https://overpass-api.de/api/interpreter',
@@ -325,7 +329,7 @@ const counts = features.reduce((a, f) => {
 	return a;
 }, {});
 
-console.log(`\n  ${features.length} features → public/data/pku-campus.geojson`);
+console.log(`\n  ${features.length} features → data/pku-campus.geojson`);
 console.log(
 	'  ' +
 		Object.entries(counts)

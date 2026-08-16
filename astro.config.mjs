@@ -18,6 +18,28 @@ export default defineConfig({
 			// Nothing here may reference a CDN, Google Fonts, or raw.githubusercontent.com.
 			customCss: ['./src/styles/fonts.css', './src/styles/custom.css'],
 			head: [
+				// Both faces that render above the fold, preloaded.
+				//
+				// DM Sans was the omission that mattered: it sets every word of body
+				// copy, but a @font-face src is only discovered once the browser has
+				// downloaded and parsed the stylesheet — so the font the reader
+				// actually reads started later than the display face used for the
+				// headings. On a mainland connection that gap is the difference
+				// between a brief swap and a visibly re-flowing paragraph.
+				//
+				// Only the `latin` subsets. The `latin-ext` and italic files stay
+				// lazy: they're wanted rarely and preloading a file the page may
+				// never request just competes for bandwidth with one it will.
+				{
+					tag: 'link',
+					attrs: {
+						rel: 'preload',
+						as: 'font',
+						type: 'font/woff2',
+						crossorigin: 'anonymous',
+						href: '/fonts/dm-sans-latin-normal.woff2',
+					},
+				},
 				{
 					tag: 'link',
 					attrs: {

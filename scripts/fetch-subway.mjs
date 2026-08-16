@@ -53,6 +53,12 @@ const QUERY_STATIONS = `
 out;
 `;
 
+// Five decimals ≈ 1.1 m, which is finer than a subway line is drawn at any zoom
+// this map offers. Overpass returns seven (≈1 cm); keeping them cost ~90 KB of
+// the file for precision no one can see, on the one asset the map page must
+// download in full before it can draw anything.
+const c5 = (n) => Math.round(n * 1e5) / 1e5;
+
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function overpass(query, label) {
@@ -145,7 +151,7 @@ for (const el of lineData.elements ?? []) {
 	if (!line) unnamed++;
 	features.push({
 		type: 'Feature',
-		geometry: { type: 'LineString', coordinates: el.geometry.map((p) => [p.lon, p.lat]) },
+		geometry: { type: 'LineString', coordinates: el.geometry.map((p) => [c5(p.lon), c5(p.lat)]) },
 		properties: {
 			kind: 'line',
 			line,
@@ -167,7 +173,7 @@ for (const el of stationData.elements ?? []) {
 	seen.add(key);
 	features.push({
 		type: 'Feature',
-		geometry: { type: 'Point', coordinates: [el.lon, el.lat] },
+		geometry: { type: 'Point', coordinates: [c5(el.lon), c5(el.lat)] },
 		properties: { kind: 'station', name, name_zh: el.tags?.name ?? '' },
 	});
 }

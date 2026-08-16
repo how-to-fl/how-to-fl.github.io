@@ -2,7 +2,7 @@
 /**
  * The PKU campus map.
  *
- * Plain inline SVG, drawn at build time from public/data/pku-campus.geojson.
+ * Plain inline SVG, drawn at build time from data/pku-campus.geojson.
  *
  * Why not MapLibre, like the Beijing map:
  * a campus is one screen at one zoom. Panning and tiling buy nothing here, and
@@ -29,7 +29,7 @@ import { parse } from 'yaml';
 // ?raw for the same reason BeijingMap does it: reading with fs and
 // import.meta.url resolves against the bundled chunk at build time, not this
 // file, and dies with ENOENT during `astro build`.
-import campusRaw from '../../public/data/pku-campus.geojson?raw';
+import campusRaw from '../../data/pku-campus.geojson?raw';
 import placesRaw from '../../data/places.yaml?raw';
 
 type Pt = [number, number];
@@ -148,9 +148,46 @@ const py = (lat: number) => H - ((lat - minLat) / (maxLat - minLat)) * H;
 
 // One decimal is ~0.15 m on this frame; more just inflates the page.
 const d1 = (n: number) => Math.round(n * 10) / 10;
-const poly = (r: Pt[]) =>
-	r.map(([lo, la], i) => `${i ? 'L' : 'M'}${d1(px(lo))} ${d1(py(la))}`).join('') + 'Z';
-const line = (r: Pt[]) => r.map(([lo, la], i) => `${i ? 'L' : 'M'}${d1(px(lo))} ${d1(py(la))}`).join('');
+
+/**
+ * Ramer–Douglas–Peucker, run in *projected* units rather than degrees.
+ *
+ * That's the point: a tolerance in metres has to be converted in your head to
+ * know whether it's visible, whereas 0.5 viewBox units is 0.35 of a CSS pixel at
+ * the size this renders — provably below what a screen can show. OSM traces
+ * kerb lines and building corners at a fidelity meant for zooming in; at one
+ * fixed zoom most of those vertices land on the same pixel as their neighbour
+ * and cost bytes to say so.
+ */
+const EPS = 0.5;
+function simplify(pts: Pt[]): Pt[] {
+	if (pts.length < 3) return pts;
+	const [ax, ay] = pts[0];
+	const [bx, by] = pts[pts.length - 1];
+	const dx = bx - ax;
+	const dy = by - ay;
+	const len2 = dx * dx + dy * dy;
+	let far = 0;
+	let idx = 0;
+	for (let i = 1; i < pts.length - 1; i++) {
+		const [x, y] = pts[i];
+		const t = len2 ? Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / len2)) : 0;
+		const d = Math.hypot(x - (ax + t * dx), y - (ay + t * dy));
+		if (d > far) {
+			far = d;
+			idx = i;
+		}
+	}
+	if (far <= EPS) return [pts[0], pts[pts.length - 1]];
+	return [...simplify(pts.slice(0, idx + 1)).slice(0, -1), ...simplify(pts.slice(idx))];
+}
+
+const project = (r: Pt[]): Pt[] => r.map(([lo, la]) => [px(lo), py(la)] as Pt);
+const draw = (p: Pt[], close: boolean) =>
+	p.map(([x, y], i) => `${i ? 'L' : 'M'}${d1(x)} ${d1(y)}`).join('') + (close ? 'Z' : '');
+
+const poly = (r: Pt[]) => draw(simplify(project(r)), true);
+const line = (r: Pt[]) => draw(simplify(project(r)), false);
 
 // Drop buildings too small to read — at this scale they are visual noise and
 // several hundred of them are just page weight.
