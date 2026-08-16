@@ -3,6 +3,9 @@ title: "Personal write-ups"
 description: "The longer, more honest pieces that don't fit anywhere tidy."
 status: stub
 sidebar:
+  badge:
+    text: not written yet
+    variant: note
   order: 7
 ---
 

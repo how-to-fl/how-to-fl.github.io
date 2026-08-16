@@ -3,6 +3,9 @@ title: "Scams and staying safe"
 description: "The cons that specifically target new arrivals — beyond the taxi one."
 status: stub
 sidebar:
+  badge:
+    text: not written yet
+    variant: note
   order: 6
 ---
 

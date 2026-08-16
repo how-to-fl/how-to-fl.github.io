@@ -3,6 +3,9 @@ title: "Living here as yourself"
 description: "Queer life, women's safety, being visibly foreign, faith, and getting around with a disability."
 status: stub
 sidebar:
+  badge:
+    text: not written yet
+    variant: note
   order: 6
 ---
 

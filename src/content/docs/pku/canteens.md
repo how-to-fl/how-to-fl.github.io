@@ -53,6 +53,9 @@ Two things that trip people up:
 | Where | Roughly |
 |---|---|
 | 光华咖啡 Guanghua Cafe | Inside the Guanghua building — the obvious one between classes |
+| 燕南咖啡 Yannan Café | **The morning one.** Especially good for yoghurt before a 10:10 start |
+| 农园咖啡 Nongyuan Café | Attached to Nong Yuan, so it's the one nearest the teaching buildings |
+| MiniCo | Cheap, quick, and everywhere |
 | 泊星地 Paradise Coffee | Near Yan Nan canteen |
 | 最美时光 Zui Mei Shi Guang | Near Xue Wu |
 | 麦隆咖啡 Mellower Coffee | Inside the second teaching building |
@@ -64,6 +67,8 @@ Two things that trip people up:
 
 - **Convenience stores:** Wumei and a bubble tea shop at B1, dorm 45 · Hollywood at B1,
   dorm 29 · Family Mart and Guoan · Uncle Mai's inside the teaching buildings
+- **Wumart (物美 wùměi)** just off campus is the proper supermarket for a weekly shop —
+  groceries and everyday things rather than snacks
 - **Vending machines** take WeChat Pay and Alipay
 - **Carrefour** is off campus to the south for a proper shop
 

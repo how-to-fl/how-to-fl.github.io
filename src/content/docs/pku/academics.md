@@ -28,18 +28,36 @@ moves every year with the lunar calendar.
 
 Straight off PKU's own calendar, so these are firm rather than approximate:
 
+**Autumn 2026** — eighteen teaching weeks.
+
 | | |
 |---|---|
-| New international undergraduates arrive | **Sun 30 August 2026** |
+| Undergraduates arrive (incl. HK/Macau/Taiwan) | Tue 18 August 2026 |
+| **New international undergraduates arrive** | **Sun 30 August** |
 | PKU opening ceremony | Fri 4 September |
 | **First day of classes** | **Mon 7 September** |
+| Registration for continuing students | 7–11 September |
 | Mid-Autumn Festival, no classes | Fri 25 September |
+| Autumn sports meet | 10–11 October |
 | National Day holiday, no classes | 1–7 October |
-| Autumn exams | 28 Dec – 10 Jan 2027 |
+| Autumn exams, no classes | 28 Dec – 10 Jan 2027 |
 | Winter break | 11 Jan – 21 Feb |
-| Spring classes resume | Mon 22 February 2027 |
-| Spring exams | 14–27 June |
+
+**Spring 2027** — eighteen teaching weeks.
+
+| | |
+|---|---|
+| **Classes resume** | **Mon 22 February 2027** |
+| Registration for continuing students | 22–26 February |
+| Spring sports meet | 23–25 April |
+| Labour Day, no classes | 1 May |
+| No classes | 2–7 May |
+| University anniversary, no classes | 4 May |
+| Spring exams, no classes | 14–27 June |
 | Summer break from | 28 June |
+| Graduation processing | 28 June – 4 July |
+| PKU graduation ceremony | 1–2 July |
+| Summer school | 5 July – 8 August |
 
 :::caution[Public holidays you still have class on]
 China moves working days around public holidays, and PKU follows suit. In 2026–27 that means
@@ -50,6 +68,13 @@ nobody reads it until they've missed a lecture.
 
 Within the semester, [Golden Week](/misc/seasonal-calendar/) in early October and the May
 break are the two big pauses.
+
+:::note[Two spring dates aren't fixed yet]
+**Qingming and the Dragon Boat Festival** don't appear above because they can't yet — the
+State Council sets the 2027 public holiday calendar and PKU publishes its adjustments
+afterwards. The same goes for New Year's Day. Expect them to land as short breaks in April
+and June; don't book anything non-refundable around them until the university confirms.
+:::
 
 ## Class times
 

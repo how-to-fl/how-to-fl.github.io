@@ -1,14 +1,24 @@
 ---
 title: "Things to do, and people to meet"
 description: "Embassy events, the expat scene, parties, and things that aren't drinking."
-status: stub
+status: draft
+last_verified: 2026-08
 sidebar:
   order: 4
 ---
 
-We've laid out the headings we think this page needs. Swap each `_To be written._`
-for what you actually know — short and specific beats long and vague, and filling in
-one heading is a proper contribution. You don't have to do the whole thing.
+## Your own embassy runs things, and hardly anyone goes
+
+Worth knowing early, because it's the easiest social thing on this list and it's invisible
+unless someone tells you.
+
+**Most embassies in Beijing put on events for their own nationals** — national day
+celebrations, Christmas markets, cultural evenings, receptions. They're a good way to meet
+people from home who aren't students, and they tend to be genuinely nice evenings rather than
+dutiful ones.
+
+Find your embassy's website or WeChat account when you arrive and get on the mailing list.
+The programme won't tell you about these; they're yours to find.
 
 ## Embassy and cultural institute events
 

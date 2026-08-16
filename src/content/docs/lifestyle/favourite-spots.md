@@ -56,6 +56,28 @@ alternative, and you get tea and biscuits afterwards. Worth it for the appointme
 really don't want a language barrier.
 [Their site](https://www.kocoonspalounge.com/pages/waxing).
 
+## More of the city
+
+A second cohort list, less about neighbourhoods and more about "I want a specific thing":
+
+| | |
+|---|---|
+| **花家怡园 Hua's Restaurant** | **Peking duck**, and proper Chinese food around it. The one to take visiting parents to. |
+| **69 Noodles** | Beijing noodles, done straight. |
+| **Wagas** | Reliable Western — salads, sandwiches. For the week in month three when you'd pay anything for a normal lunch. |
+| **gaga** | Café-restaurant, good for sitting in. |
+| **Tims 天好咖啡** | Tim Hortons. Coffee and something quick. |
+| **Friendly Crush** | Yoghurt. |
+
+## Finding somewhere yourself
+
+The app for this is **Dianping (大众点评)** — reviews, photos and table reservations, and it
+goes well beyond restaurants into cafés, activities and services. It's the front door;
+[Meituan](/lifestyle/meituan/) is for ordering once you've decided.
+
+And before you order delivery from anywhere: **check [Taobao](/misc/taobao/) for a voucher
+first.** Same restaurant, same food, frequently cheaper.
+
 ## Cafés and places to work
 
 _To be written._ — Campus has plenty and none of them are written down here yet. If you have

@@ -215,6 +215,12 @@ few weeks of **Pleco** and an app like **tandem** before you fly pays off immedi
 the willingness to try is what gets you looked after. Numbers, food words, and "how much is
 it" go a very long way.
 
+**Install Pleco now and then actually use it daily.** The habit that works isn't studying —
+it's looking up every word you see or hear and don't know, the moment you meet it. A menu, a
+sign on a door, something a classmate said. It builds the vocabulary you actually encounter
+rather than the vocabulary a textbook thinks you should, and its camera reads characters off
+packaging, which is how you find out what you just bought.
+
 <p class="fl-source">Visa, insurance and packing detail from an earlier cohort's own 2025
 student guide; the PKU VPN and residence permit process from the FL Student Handbook 2024.
 Medication guidance is general — verify your own prescription against current customs rules.</p>

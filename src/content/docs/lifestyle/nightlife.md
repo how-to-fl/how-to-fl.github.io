@@ -3,6 +3,9 @@ title: "Going out"
 description: "Where we go, and what each place is actually like."
 status: stub
 sidebar:
+  badge:
+    text: not written yet
+    variant: note
   order: 2
 ---
 

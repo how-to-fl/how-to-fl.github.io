@@ -28,6 +28,11 @@ How it actually works:
 
 Be a bit shameless in that first fortnight. Everyone is new to something.
 
+**Go to the sports associations' showcase at the start of the semester and actually try
+things.** It's a fair, you can have a go at what's on offer, and it's the single easiest way
+to meet people outside your programme — which is the thing that turns a year abroad into a
+year somewhere you live.
+
 ## Gyms and facilities
 
 There are **two gyms on campus**, membership around **€20 a month**.
@@ -138,6 +143,16 @@ category required either performance benchmarks or official Chinese sports quali
 
 If you hit a wall, it helps to point out that international students have already competed
 for PKU in other sports. That precedent exists; it just isn't written anywhere official.
+
+## The International Culture Festival
+
+**北京大学国际文化节** — PKU's international culture festival, where countries get a stand and
+students represent their own. It comes strongly recommended by people who did it, and it is
+one of the few things on campus where being the international student is the entire point
+rather than a complication.
+
+Take the stand. It is a good day, and it is the fastest way to meet the other internationals
+across the whole university rather than just the ones on your programme.
 
 ## Concerts and things to go to
 

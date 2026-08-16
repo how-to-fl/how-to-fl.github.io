@@ -3,6 +3,9 @@ title: "Leaving — the checklist"
 description: "Shutting things down properly, and handing your life to the next cohort."
 status: stub
 sidebar:
+  badge:
+    text: not written yet
+    variant: note
   order: 5
 ---
 

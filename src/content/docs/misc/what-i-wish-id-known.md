@@ -3,6 +3,9 @@ title: "What we wish we'd known"
 description: "Each cohort's parting words, in their own voice."
 status: stub
 sidebar:
+  badge:
+    text: not written yet
+    variant: note
   order: 6
 ---
 
