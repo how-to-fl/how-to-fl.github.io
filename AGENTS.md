@@ -212,11 +212,25 @@ exactly like a broken map. Verify canvas/WebGL work in a real browser, or ask.
 ## Outstanding
 
 - **25–30 real map pins.** Six exist. Still the biggest gap, and it needs Toni rather than
-  code — the blocker is a full Chinese address per place, not the coordinates.
-- **11 of 35 pages are still stubs.** What's closed came out of the official PDFs and the
-  cohort's own notes; what's left genuinely needs lived experience. Two are safety gaps and
-  should be treated as such: **how to state a food allergy in Chinese**, and **what to do if
-  you lose your passport**.
+  code — the blocker is a full Chinese address per place, not the coordinates. Four places
+  from the Cohort 6 spreadsheet (汗巴巴, 小滇娘, Kocoon Spa, Pho13) are **not in OSM at all**,
+  so for those the address is the only way in.
+- **6 of 34 pages are still stubs**: `china/scams-and-safety`, `lifestyle/living-as-yourself`,
+  `lifestyle/nightlife`, `misc/exit-checklist`, `misc/personal-experiences`,
+  `misc/what-i-wish-id-known`. What's closed came out of the official PDFs and the cohort's
+  own notes; all six of these genuinely need lived experience. Don't write them from sources.
+- **The food-allergy phrasebook gap stays open, deliberately.** It's flagged in place at
+  `misc/phrasebook.md` as a safety gap. Toni's call (2026-08-16) is to leave it flagged
+  rather than fill it with textbook phrasing nobody has tested on a canteen worker — the
+  point of the section is that someone confirms it *worked*. Don't quietly close it.
+  (The other former safety gap, losing your passport, **is** closed — `emergency.md` and
+  `china/visas-and-permits.md`.)
+- **No contact route works for a reader who hasn't arrived yet.** WeChat, the shared email
+  and the sessions all run through the cohort chat, which Cohort 7 joins on arrival, and
+  GitHub is ~60% disrupted from the mainland. Nothing is publishable yet (Toni, 2026-08-16),
+  so the pages now **say so plainly** instead of implying a door. If an address or QR ever
+  becomes publishable, the three places to wire it are `CONTRIBUTING.md`,
+  `how-to-use-this.md` and the homepage card in `index.mdx`.
 - **Photographs.** The site has none at all. Toni has offered some.
 - A **second GitHub org owner**, so the project survives graduation.
 - Analytics is wired but **off** — paste a token into `CF_BEACON_TOKEN` in `Head.astro`.

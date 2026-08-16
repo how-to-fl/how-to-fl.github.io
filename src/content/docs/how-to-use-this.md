@@ -85,6 +85,10 @@ a place to the map.
 to one of us, or bring it to the next contribution session. Someone will type it in, and
 your name still goes on it.
 
+**If you haven't arrived yet**, those routes run through the cohort chat and open up once
+you're here. Until then it's the form, or a note to yourself that you bring to the first
+session. We'd rather tell you that than pretend there's a door.
+
 What's in your head is the scarce thing here. The tooling isn't, and it should never be the
 reason something goes unwritten.
 

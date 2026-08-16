@@ -19,6 +19,12 @@ instead:
 
 One of us types it in. Your name still goes on it.
 
+**If you haven't landed yet, none of those three are open to you.** All of them run through
+the cohort chat, and you join that once you're here — so we'd rather say it plainly than
+point you at a door that won't open. Until then the form is the only route in, and if
+GitHub won't load for you either, it keeps: write it down for yourself and bring it to the
+first session. Week one is when what's in your head is worth the most to us anyway.
+
 Please don't let "I couldn't get GitHub to load" be the reason something never gets written
 down. What's in your head is the scarce thing here. The tooling isn't.
 
