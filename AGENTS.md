@@ -220,7 +220,9 @@ with `--remote-debugging-port=9222` and talk to it with Node's global `WebSocket
 windows"); size with `Emulation.setDeviceMetricsOverride` instead. Pillow lives in the venv at
 `~/Desktop/Claude Code/.venv` for cropping and pixel measurement.
 
-**`astro build` deadlocks on a cold Vite cache.** With `node_modules/.vite` missing, the build
+**`astro build` deadlocks on a cold Vite cache — on this machine only.** CI builds from a
+cold cache every time (`npm ci` leaves no `.vite`) and is fine, so this is local, not the
+repo: don't go looking for a bug in the config. With `node_modules/.vite` missing, the build
 hangs at "Unable to load your Astro config → transport invoke timed out after 60000ms" while
 fetching Starlight's expressive-code module — no CPU, no sockets, just asleep. Deleting caches
 to fix it makes it *worse*, because the cold cache is the cause. **Run `npm run dev` once to
