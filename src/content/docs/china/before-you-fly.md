@@ -18,8 +18,11 @@ What you need before you apply:
 
 - **The JW202 form** and your admission letter — these come from PKU. Don't book flights
   until you have them
-- **A medical examination**, done at home. The certificate must be **less than 6 months old
-  when you arrive**, so don't do it too early either
+- **A medical examination.** You can have it done at home, but **most of us did it here
+  instead**, at one of Beijing's specialised health-check centres: it costs about **¥30**,
+  and the report goes straight to the Global Village front desk in Building 1 rather than
+  back to you. If you do have it done at home, the certificate has to be **less than six
+  months old when you arrive**, so don't get it too early either
 - Passport valid well beyond the year — check the expiry now
 
 Applications go through online forms, then you hand your passport in at the relevant office
@@ -50,8 +53,8 @@ you buy one separately. Details on [what the year costs](/china/what-it-costs/).
 
 ### While you're at the doctor anyway
 
-You're having a medical examination for the visa regardless, so use the appointment for two
-other things:
+If you do book an appointment at home — for the medical, or for anything else before you go
+— use it for two other things while you're there:
 
 - **Ask about travel vaccinations.** Worth doing properly if you intend to travel around Asia
   during the breaks rather than only being in Beijing — Japanese encephalitis is the one that
@@ -192,7 +195,8 @@ This is not a rule to find out about at the airport.
 - **Passport photos — bring 5 to 10 printed.** Not a spare pair. Registration, the residence
   permit, the medical examination and assorted forms each want one, and the queue for the
   photo booth in the New Sun basement is not where you want to spend arrival week
-- Your **health certificate, JW202 and admission letter**, in print
+- Your **JW202 and admission letter**, in print — plus the **health certificate** if you had
+  the examination done at home rather than here
 - A **small first-aid kit** — the specific things you reach for at home, not a generic one
 
 **Don't bother:**
@@ -220,6 +224,71 @@ it's looking up every word you see or hear and don't know, the moment you meet i
 sign on a door, something a classmate said. It builds the vocabulary you actually encounter
 rather than the vocabulary a textbook thinks you should, and its camera reads characters off
 packaging, which is how you find out what you just bought.
+
+## The checklist
+
+Everything above, as one tickable list. If you only work down this, you've done the
+important parts.
+
+**Paperwork**
+
+**☐ Get the JW202 and admission letter from PKU**, and don't book flights until you have
+them.
+
+**☐ Check your passport expiry** — it needs to run well beyond the year.
+
+**☐ Apply for the X1 visa**, allowing more time than the website suggests.
+
+**☐ Sort the medical examination** — at home if you want the certificate in hand, or plan
+to do it here for about ¥30.
+
+**☐ Buy PKU's compulsory insurance** *before* you enter the mainland. Guanghua pays the
+basic premium back with your stipend.
+
+**☐ Take out a proper international policy** from home as well.
+
+**☐ Register with your foreign ministry's citizen service.** Five minutes.
+
+**Online, before you arrive**
+
+**☐ Install PKU's own VPN** (`vpn.pku.edu.cn`) — both tasks below sit behind PKU's network.
+
+**☐ Sit the student disciplinary rules exam** at `test.pku.edu.cn`. The window closes
+before arrival.
+
+**☐ Complete the psychological health questionnaire** through the PKU portal.
+
+**Your own VPN — the one that catches people**
+
+**☐ Buy the subscription at home**, install it on **every** device, and test each one.
+
+**☐ Save the installers offline**, plus your account details somewhere you can open
+without a connection.
+
+**☐ Install a second provider** as a backup.
+
+**Apps and money**
+
+**☐ Install Alipay and connect a card** — at home, where the verification SMS reaches you.
+Most of the other apps hang off it.
+
+**☐ Install DiDi** (滴滴出行) and sign in. This is what removes the airport taxi problem
+entirely — see [your first 72 hours](/china/first-72-hours/#day-one).
+
+**☐ Get cash** for the first few weeks; your first stipend won't land until late September
+at the earliest.
+
+**Packing**
+
+**☐ Check every prescription** against Chinese customs rules, and bring the prescription
+and a doctor's letter for anything you're allowed.
+
+**☐ Print 5–10 passport photos.**
+
+**☐ Download offline maps of Beijing**, your arrival documents, and the pages of this guide
+you'll need on day one.
+
+**☐ Install Pleco** and start using it daily.
 
 <p class="fl-source">Visa, insurance and packing detail from an earlier cohort's own 2025
 student guide; the PKU VPN and residence permit process from the FL Student Handbook 2024.

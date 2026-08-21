@@ -1,5 +1,5 @@
 ---
-title: "Credit transfer, school by school"
+title: "Credit Transfer and Grades"
 description: "The PKU half is the same for everyone. The half at your own university is not."
 status: draft
 last_verified: 2025-04

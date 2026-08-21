@@ -76,9 +76,12 @@ money.** Not the police, not immigration, not your bank, not "the embassy". The 
 targets international students in China is a phone call claiming there's a problem with your
 visa or a parcel, and it is convincing enough that it catches people every year.
 
-Hang up. Then call the FL team or the police on 110 yourself, on a number you looked up.
+Hang up. Then call the FL team or the police on [110](tel:110) yourself, on a number you
+looked up.
 
-More on the everyday cons in [scams and staying safe](/china/scams-and-safety/).
+**[96110](tel:96110) is the national anti-fraud hotline** — the number to call if a con is
+in progress or you think you have just been had. The tell is always the same: nobody
+legitimate asks for a verification code or a transfer.
 
 <p class="fl-source">Numbers and addresses from the official FL Student Handbook, 2024
 edition. Worth confirming a number before you rely on it — and please

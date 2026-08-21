@@ -12,6 +12,11 @@ sidebar:
 and none of the rest of this can happen to you.
 :::
 
+The three rules and the address to show a driver are on
+[your first 72 hours](/china/first-72-hours/#day-one), where you'll be looking on the day.
+This page is the longer version: what the scam actually is, what a fare should cost, and
+the train instead.
+
 ## Do this before you get on the plane
 
 This is the single highest-value thing on the site, because it costs you ten minutes at home
