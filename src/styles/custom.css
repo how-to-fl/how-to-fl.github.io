@@ -2333,15 +2333,18 @@ summary:focus-visible {
    The map was rendering 720px wide inside a 1440px window — less than half the
    screen for the page whose entire content is a map. The prose keeps its
    measure; the map breaks out of it. */
-.fl-map-wrap {
-	/* Never narrower than the column it sits in — `max(100%, …)` keeps the
-	   breakout from inverting into an indent on a phone, where the viewport is
-	   narrower than the measure. */
-	--fl-map-w: max(100%, min(1080px, calc(100vw - 5rem)));
+/* Widen the column the map sits in, rather than breaking the map out of it.
+   The breakout this replaces was sized off `100vw`, which does not know about
+   the 300px sidebar: at a 1280 viewport the panel is 980 wide, the map became
+   1080, and the page scrolled sideways by 50px. Setting a max-width on the
+   container instead lets the browser cap it against the panel at every width,
+   with no arithmetic to get wrong. The prose keeps its own measure below. */
+body:has(.fl-map-wrap) .content-panel + .content-panel .sl-container {
+	max-width: 1080px;
+}
 
-	width: var(--fl-map-w);
-	max-width: none;
-	margin-inline: calc((100% - var(--fl-map-w)) / 2);
+body:has(.fl-map-wrap) .sl-markdown-content > *:not(.fl-map-wrap) {
+	max-width: 45rem;
 }
 
 /* On a phone the campus map shrank to 358px, which put its 24 labels at 7px —
