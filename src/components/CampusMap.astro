@@ -73,15 +73,32 @@ const water = campus.features.filter(
  */
 const WANTED: { zh: string; label: string; kind: string; dy?: number; side?: 'l' | 'r' }[] = [
 	{ zh: '北京大学中关新园', label: 'Global Village — home', kind: 'home' },
-	{ zh: '光华管理学院', label: 'Guanghua 1 — classes', kind: 'study', dy: 5 },
+	// Guanghua: the two nodes up here — the school itself and 2号楼, 72 m apart —
+	// are both parts of Building 2, so they get one pin between them. Building 1,
+	// the one with the classrooms in it, is 550 m south among the teaching
+	// buildings, and was missing from this map entirely.
 	{ zh: '光华管理学院2号楼', label: 'Guanghua 2', kind: 'study', dy: -6 },
+	{ zh: '光华管理学院1号楼', label: 'Guanghua 1 — classes', kind: 'study', dy: -8 },
 	{ zh: '新太阳学生中心（16楼-18楼）', label: 'New Sun — ISD, visas, card', kind: 'admin', side: 'l' },
 	{ zh: '北京大学图书馆', label: 'Library', kind: 'study', side: 'l' },
 	{ zh: '第二教学楼（李兆基楼）', label: 'Teaching Building 2', kind: 'study', dy: 11, side: 'l' },
 	{ zh: '北京大学校医院', label: 'Campus hospital', kind: 'health', side: 'l' },
 	{ zh: '燕园派出所', label: 'Yanyuan police station', kind: 'admin' },
 	{ zh: '邱德拔体育馆', label: 'Gym & 50 m pool', kind: 'sport' },
-	{ zh: '农园餐厅', label: 'Nong Yuan canteen', kind: 'food', dy: -11 },
+	// Every canteen inside the wall, plus 畅春园, which faces the west gate from
+	// just outside it and is on the canteens page. 北大青鸟总部食堂 is a company
+	// canteen east of campus, not a student one, so it stays off.
+	{ zh: '农园餐厅', label: 'Nong Yuan', kind: 'food', dy: -11 },
+	{ zh: '佟园餐厅（清真）', label: 'Tong Yuan — halal', kind: 'food' },
+	{ zh: '学五食堂', label: 'Xue Wu', kind: 'food' },
+	{ zh: '学一食堂', label: 'Xue Yi', kind: 'food' },
+	{ zh: '餐饮综合楼（家园食堂）', label: 'Jia Yuan', kind: 'food' },
+	{ zh: '艺园餐厅', label: 'Yi Yuan', kind: 'food' },
+	{ zh: '燕南食堂', label: 'Yan Nan', kind: 'food' },
+	{ zh: '勺园食堂', label: 'Shao Yuan', kind: 'food' },
+	{ zh: '松林餐厅', label: 'Song Lin', kind: 'food' },
+	{ zh: '畅春园食堂', label: 'Chang Chun Yuan', kind: 'food' },
+	{ zh: '成府园食堂', label: 'Chengfu Yuan', kind: 'food' },
 	{ zh: '博雅塔', label: 'Boya Tower', kind: 'landmark' },
 	{ zh: '中国农业银行', label: 'ABC bank', kind: 'admin', side: 'l' },
 	{ zh: '北京大学东门', label: 'East Gate — Line 4', kind: 'metro' },
@@ -101,10 +118,80 @@ const gates = (parse(placesRaw)?.places ?? []).filter(
 	(p: any) => typeof p?.lat === 'number' && /West Gate$/.test(p.name_en ?? ''),
 );
 
+// OSM's named nodes are label anchors, not guaranteed to sit inside the thing
+// they name. Three of ours don't: 第二教学楼 lands 13 m out in the courtyard
+// between blocks, the campus hospital 24 m out and the ABC bank 39 m out — so
+// those pins pointed at bare ground next to the building you were looking for.
+// Where a node falls outside every footprint, snap it to the nearest building's
+// centroid. Anything already inside a footprint is left exactly where it is.
+const ringsOf = (f: any): Pt[][] => {
+	const g = f.geometry;
+	if (g.type === 'Polygon') return [g.coordinates[0]];
+	if (g.type === 'MultiPolygon') return g.coordinates.map((poly: Pt[][]) => poly[0]);
+	return [];
+};
+
+// A representative point that is guaranteed to be *inside* the ring, which the
+// centroid is not: 第二教学楼 is an L, and the centroid of an L sits in the
+// notch. Take the centroid's latitude, find where that line crosses the ring,
+// and use the middle of the widest span it cuts through the building.
+const interiorPoint = (ring: Pt[]): Pt => {
+	const cy = ring.reduce((a, c) => a + c[1], 0) / ring.length;
+	const xs: number[] = [];
+	for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+		const [xi, yi] = ring[i];
+		const [xj, yj] = ring[j];
+		if (yi > cy !== yj > cy) xs.push(xi + ((cy - yi) / (yj - yi)) * (xj - xi));
+	}
+	xs.sort((a, b) => a - b);
+	let best = 0;
+	let bestX = ring.reduce((a, c) => a + c[0], 0) / ring.length;
+	for (let i = 0; i + 1 < xs.length; i += 2) {
+		const span = xs[i + 1] - xs[i];
+		if (span > best) {
+			best = span;
+			bestX = (xs[i] + xs[i + 1]) / 2;
+		}
+	}
+	return [bestX, cy];
+};
+
+const footprints: { ring: Pt[]; at: Pt }[] = buildings.flatMap((f: any) =>
+	ringsOf(f)
+		.filter((r) => r.length > 3)
+		.map((ring) => ({ ring, at: interiorPoint(ring) })),
+);
+
+const inRing = ([x, y]: Pt, ring: Pt[]) => {
+	let inside = false;
+	for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+		const [xi, yi] = ring[i];
+		const [xj, yj] = ring[j];
+		if (yi > y !== yj > y && x < ((xj - xi) * (y - yi)) / (yj - yi) + xi) inside = !inside;
+	}
+	return inside;
+};
+
+const snapToBuilding = (c: Pt): Pt => {
+	if (footprints.some((f) => inRing(c, f.ring))) return c;
+	// Longitude degrees are shorter than latitude ones; take the factor from the
+	// point itself rather than the map-wide `kx`, which is initialised further
+	// down the file and would be a use-before-init here.
+	const k = Math.cos((c[1] * Math.PI) / 180);
+	let best: { d: number; c: Pt } | null = null;
+	for (const f of footprints) {
+		const d = Math.hypot((f.at[0] - c[0]) * k, f.at[1] - c[1]);
+		if (!best || d < best.d) best = { d, c: f.at };
+	}
+	return best ? best.c : c;
+};
+
 const pins = [
 	...WANTED.flatMap((w) => {
-		const c = byName.get(w.zh);
-		return c ? [{ ...w, lng: c[0], lat: c[1], zhLabel: w.zh }] : [];
+		const raw = byName.get(w.zh);
+		if (!raw) return [];
+		const c = snapToBuilding(raw);
+		return [{ ...w, lng: c[0], lat: c[1], zhLabel: w.zh }];
 	}),
 	...gates.map((g: any) => ({
 		zh: g.name_zh,
@@ -202,15 +289,84 @@ const buildingPaths = buildings.map(ringOf).filter(bigEnough).map(poly);
 const roadMajor = roads.filter((f) => f.properties.major).map((f) => line(f.geometry.coordinates));
 const roadMinor = roads.filter((f) => !f.properties.major).map((f) => line(f.geometry.coordinates));
 
-// Label placement: flip to whichever side keeps the text on the frame, unless
-// the entry names a side. ~5.6px per character at 12px DM Sans.
-const laid = pins.map((p) => {
-	const x = px(p.lng);
-	const y = py(p.lat);
-	const w = p.label.length * 8;
-	const side = p.side ?? (x + w + 20 > W ? 'l' : 'r');
-	return { ...p, x, y, side, r: p.kind === 'home' ? 9 : 6.5 };
-});
+// Label placement, with collision avoidance.
+//
+// This map carried 13 pins and hand-tuned `dy` nudges was enough. Adding every
+// canteen took it to 24, and the canteens are the worst possible case: 学一,
+// 松林, 家园 and 艺园 sit inside one block in the south-west. Placing them by
+// hand printed "Xue Wu" straight through "New Sun — ISD, visas, card".
+//
+// So: greedy placement in reading order, north to south. Each label tries its
+// preferred side first, then the other side, then the same pair nudged
+// progressively further vertically, and takes the first position that clears
+// every label and every dot already placed. Flipping sides is tried before
+// nudging because a label that has moved 40 units from its own dot is worse
+// than one that sits on the other side of it.
+//
+// Metrics are measured from the rendered SVG rather than guessed: 16px in
+// viewBox units, averaging 8.12 units per character.
+const CHAR_W = 8.2;
+const LABEL_ASC = 13;
+const LABEL_DESC = 5;
+const GAP = 9;
+
+type Box = { x0: number; x1: number; y0: number; y1: number };
+const hits = (a: Box, b: Box) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1;
+
+const base = pins.map((p) => ({
+	...p,
+	x: px(p.lng),
+	y: py(p.lat),
+	r: p.kind === 'home' ? 9 : 6.5,
+}));
+
+// Seed with the dots, so no label is allowed to print over another pin's mark.
+const taken: Box[] = base.map((p) => ({
+	x0: p.x - p.r,
+	x1: p.x + p.r,
+	y0: p.y - p.r,
+	y1: p.y + p.r,
+}));
+
+const boxOf = (p: (typeof base)[number], side: 'l' | 'r', baseline: number): Box => {
+	const w = p.label.length * CHAR_W;
+	const edge = side === 'l' ? p.x - p.r - GAP : p.x + p.r + GAP;
+	return {
+		x0: side === 'l' ? edge - w : edge,
+		x1: side === 'l' ? edge : edge + w,
+		y0: baseline - LABEL_ASC,
+		y1: baseline + LABEL_DESC,
+	};
+};
+
+const placement = new Map<number, { side: 'l' | 'r'; dy: number }>();
+base
+	.map((p, i) => ({ p, i }))
+	.sort((a, b) => a.p.y - b.p.y)
+	.forEach(({ p, i }) => {
+		const prefer = p.side ?? (p.x + p.label.length * CHAR_W + 26 > W ? 'l' : 'r');
+		const other: 'l' | 'r' = prefer === 'l' ? 'r' : 'l';
+		const start = p.y + 5.5 + (p.dy ?? 0);
+
+		for (const nudge of [0, -20, 20, -40, 40, -60, 60]) {
+			for (const side of [prefer, other] as const) {
+				const box = boxOf(p, side, start + nudge);
+				if (box.x0 < 4 || box.x1 > W - 4) continue;
+				if (taken.some((q) => hits(box, q))) continue;
+				taken.push(box);
+				placement.set(i, { side, dy: (p.dy ?? 0) + nudge });
+				return;
+			}
+		}
+		// Nothing clear anywhere: keep the preferred spot rather than dropping the
+		// label, so a crowded corner degrades to overlap instead of to silence.
+		taken.push(boxOf(p, prefer, start));
+		placement.set(i, { side: prefer, dy: p.dy ?? 0 });
+	});
+
+// Rebuilt in the original order, so the text key below the map still reads in
+// the order the pins were declared rather than north-to-south.
+const laid = base.map((p, i) => ({ ...p, ...(placement.get(i) as { side: 'l' | 'r'; dy: number }) }));
 
 const mPerDegLon = 111_320 * kx;
 const barM = 300;
@@ -228,8 +384,9 @@ const barPx = ((barM / mPerDegLon) / (maxLon - minLon)) * W;
 		<desc id="campus-desc">
 			The walled campus with Weiming Lake at its centre, its buildings and paths, Zhongguanyuan
 			Global Village just outside the east side, and the places a new Future Leaders student
-			needs: Guanghua, the New Sun Student Center, the library, the campus hospital and the
-			Line 4 station. Every place shown is also listed in text below this map.
+			needs: both Guanghua buildings, the New Sun Student Center, the library, the campus
+			hospital, the Line 4 station, and every canteen on campus. Every place shown is also
+			listed in text below this map.
 		</desc>
 
 		<defs>
