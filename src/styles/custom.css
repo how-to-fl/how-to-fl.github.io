@@ -1937,3 +1937,302 @@ body {
 		}
 	}
 }
+
+/* ==========================================================================
+   Interior pages — the asides
+   ==========================================================================
+   These arrived as stock Starlight and never got looked at: `--sl-color-red`
+   is a magenta `hsl(339 90% 60%)`, so the page that tells you about visa
+   deadlines carried a hot-pink box, and `note` was lavender-blue on a warm
+   cream page. On this site the asides are not decoration — they hold "The
+   three clocks" and "Two rules that stop the money", the things that cost
+   real money when missed. They should look like they belong to the guide.
+
+   Styled directly rather than by redefining `--sl-color-red` and friends:
+   those tokens feed badges and links too, and the aside's own contrast is
+   worth stating explicitly where it can be read, rather than inheriting it
+   from a variable three files away. Every ratio below is measured, not
+   estimated — see the block comment at the end of this section.
+   ========================================================================== */
+
+.starlight-aside {
+	--fl-aside-rule: var(--sl-color-gray-3);
+	--fl-aside-bg: var(--sl-color-gray-7);
+	--fl-aside-title: var(--sl-color-white);
+
+	border-inline-start: 3px solid var(--fl-aside-rule);
+	border-radius: 0.5rem;
+	background-color: var(--fl-aside-bg);
+	padding: 1.05rem 1.25rem;
+}
+
+.starlight-aside__title {
+	font-family: var(--fl-font-display);
+	font-size: 1.02rem;
+	font-weight: 700;
+	letter-spacing: -0.005em;
+	color: var(--fl-aside-title);
+	align-items: center;
+	gap: 0.5rem;
+}
+
+/* The icon is currentColor, so it follows the title and needs no rule. */
+.starlight-aside__content {
+	color: var(--sl-color-gray-2);
+}
+
+.starlight-aside__content a {
+	color: var(--fl-aside-title);
+	text-underline-offset: 0.2em;
+}
+
+/* --- Dark (Starlight's default state) ------------------------------------- */
+.starlight-aside--danger {
+	--fl-aside-rule: #d4636a;
+	--fl-aside-bg: #2b1317;
+	--fl-aside-title: #f2b3a8;
+}
+
+.starlight-aside--caution {
+	--fl-aside-rule: #d97a4e;
+	--fl-aside-bg: #2a1a12;
+	--fl-aside-title: #f0bb96;
+}
+
+.starlight-aside--tip {
+	--fl-aside-rule: #c084a6;
+	--fl-aside-bg: #261a21;
+	--fl-aside-title: #e6bcd2;
+}
+
+.starlight-aside--note {
+	--fl-aside-rule: #9a7f78;
+	--fl-aside-bg: #241a18;
+	--fl-aside-title: #e5d5cd;
+}
+
+/* --- Light ---------------------------------------------------------------- */
+:root[data-theme='light'] .starlight-aside--danger {
+	--fl-aside-rule: var(--fl-red);
+	--fl-aside-bg: #f9e7e4;
+	--fl-aside-title: #7d1526;
+}
+
+:root[data-theme='light'] .starlight-aside--caution {
+	--fl-aside-rule: var(--fl-ember);
+	--fl-aside-bg: #fbeade;
+	--fl-aside-title: #8d3616;
+}
+
+:root[data-theme='light'] .starlight-aside--tip {
+	--fl-aside-rule: var(--fl-mauve);
+	--fl-aside-bg: #f7e9f0;
+	--fl-aside-title: #743a58;
+}
+
+:root[data-theme='light'] .starlight-aside--note {
+	/* gray-4 measured 2.56:1 against the note's tint — under the 3:1 floor for
+	   a non-text element that is doing the work of telling variants apart. */
+	--fl-aside-rule: #7b615c;
+	--fl-aside-bg: #f4ece1;
+	--fl-aside-title: #4a3230;
+}
+
+:root[data-theme='light'] .starlight-aside__content {
+	color: #4a3230;
+}
+
+/* ==========================================================================
+   Interior pages — the masthead, and the rhythm down the page
+   ==========================================================================
+   The homepage now opens like a title page. These are the pages after it, and
+   a printed guide gives those a running head, a rule under the title, and a
+   visible break between sections. That furniture is what makes a long page
+   feel navigable rather than merely long — and most of these pages are long.
+   ========================================================================== */
+
+.fl-runninghead {
+	font-family: var(--fl-font-body);
+	font-size: 0.7rem;
+	font-weight: 500;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+	color: var(--sl-color-gray-3);
+	margin: 0 0 0.7rem;
+	font-variant-numeric: tabular-nums;
+}
+
+/* The rule that closes the masthead.
+   Starlight already draws a flat 1px divider between the title panel and the
+   content panel, so this styles that line rather than adding one — an earlier
+   attempt hung a rule under the freshness line and produced two rules 24px
+   apart. Styling the existing divider also means the six stub pages get it,
+   which they would not have: stubs carry no `last_verified`, so there is no
+   freshness line beneath their title to hang anything on. */
+.content-panel + .content-panel {
+	position: relative;
+	/* The border stays in the box model so nothing shifts; the visible line is
+	   the gradient below it. */
+	border-top-color: transparent;
+}
+
+/* Measures 2.78:1 light / 2.90:1 dark against the page. Left there knowingly:
+   a separator is decoration under WCAG 1.4.11, not a control and not a graphic
+   anything depends on — and it is already about 2.5x more visible than the
+   #f0e6da line Starlight shipped here (~1.1:1). The aside rules are held to
+   3:1 instead, because those genuinely carry meaning: they are what tells a
+   caution from a danger. */
+.content-panel + .content-panel::before {
+	content: '';
+	position: absolute;
+	top: -1px;
+	inset-inline: 0;
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		var(--sl-color-gray-4) 0%,
+		var(--sl-color-gray-5) 55%,
+		transparent 100%
+	);
+	transform-origin: left center;
+}
+
+/* ── Section breaks ──────────────────────────────────────────────────────────
+   A short accent rule above every h2, so the eye can find the seams of a long
+   page without reading it.
+
+   Four pages open straight onto an h2 rather than a paragraph (campus-life,
+   credit-transfer, career, activities-in-beijing). There the section rule
+   would land directly beneath the masthead rule and read as a double line, so
+   the first heading on a page goes without. */
+.sl-markdown-content h2 {
+	position: relative;
+	padding-top: 1.5rem;
+}
+
+.sl-markdown-content h2::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	inset-inline-start: 0;
+	width: 2.4rem;
+	height: 2px;
+	background: var(--sl-color-accent);
+	opacity: 0.75;
+}
+
+/* Starlight wraps headings in .sl-heading-wrapper when they carry an anchor
+   link, so "first thing on the page" is the wrapper, not the h2 itself. Both
+   forms are covered because the wrapper is not guaranteed. */
+.sl-markdown-content > .sl-heading-wrapper:first-child h2,
+.sl-markdown-content > h2:first-child {
+	padding-top: 0;
+}
+
+.sl-markdown-content > .sl-heading-wrapper:first-child h2::before,
+.sl-markdown-content > h2:first-child::before {
+	content: none;
+}
+
+/* Starlight wraps headings that carry anchor links; the rule belongs to the
+   wrapper there, or it sits inside the link's hover target. */
+.sl-markdown-content .sl-heading-wrapper h2 {
+	margin-top: 0;
+}
+
+/* ── The opening paragraph ───────────────────────────────────────────────────
+   Only when it genuinely opens the page (`:first-child`, not `:first-of-type`)
+   — several pages lead with an aside, and enlarging the first paragraph *after*
+   a callout would emphasise an arbitrary sentence. */
+.sl-markdown-content > p:first-child {
+	font-size: 1.1rem;
+	line-height: 1.62;
+	color: var(--sl-color-white);
+}
+
+/* ── Arrival ─────────────────────────────────────────────────────────────────
+   Same contract as the homepage: hidden states live inside the motion guard,
+   so if the animation never runs the content was never hidden. */
+@media (prefers-reduced-motion: no-preference) {
+	.fl-runninghead {
+		animation: fl-set 0.5s cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
+	}
+
+	.content-panel:first-of-type .sl-container > h1#_top {
+		animation: fl-set 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) 0.08s backwards;
+	}
+
+	.content-panel:first-of-type .sl-container > .fl-verified {
+		animation: fl-set 0.55s cubic-bezier(0.2, 0.7, 0.3, 1) 0.18s backwards;
+	}
+
+	.content-panel + .content-panel::before {
+		animation: fl-rule 0.8s cubic-bezier(0.16, 0.84, 0.32, 1) 0.26s backwards;
+	}
+
+	@supports (animation-timeline: view()) {
+		.sl-markdown-content > .sl-heading-wrapper,
+		.sl-markdown-content > .starlight-aside {
+			animation: fl-rise linear both;
+			animation-timeline: view();
+			animation-range: entry 2% cover 18%;
+		}
+	}
+}
+
+/* ── Links outside the prose ─────────────────────────────────────────────────
+   Starlight scopes its link styling to `.sl-markdown-content`, and PageTitle
+   renders above that wrapper — so the "here's how" link in the stub notice was
+   rendering at the browser default #0000EE. Six live stub pages had a raw blue
+   link on a cream page. */
+.fl-note a {
+	color: var(--sl-color-accent);
+	text-decoration: underline;
+	text-underline-offset: 0.2em;
+	text-decoration-thickness: from-font;
+}
+
+.fl-note a:hover {
+	color: var(--sl-color-accent-high);
+}
+
+/* A focus ring that matches the one the buttons and chips already use, rather
+   than three different browser defaults. The component rules are more specific
+   and keep their own. */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+	outline: 2px solid var(--sl-color-accent);
+	outline-offset: 2px;
+	border-radius: 2px;
+}
+
+/* ── Show-this-to-the-driver blocks ──────────────────────────────────────────
+   Both blockquotes on the site hold the same thing: the Chinese sentence you
+   hold up to a taxi driver, on the pages that tell you to screenshot it before
+   you fly. Starlight's default is a 1px hairline and body-sized text, which is
+   the wrong treatment for the one block on the site that gets read off a phone
+   screen, at arm's length, by someone who does not read English. So it becomes
+   a card, and the Chinese line gets set at a size you can actually hand over. */
+.sl-markdown-content blockquote {
+	border-inline-start: 3px solid var(--sl-color-accent);
+	background: var(--sl-color-bg-nav);
+	border-radius: 0.5rem;
+	padding: 1.05rem 1.25rem;
+}
+
+/* Scoped to the blockquote on purpose: the same lang attribute marks inline
+   Chinese all over the site (美团, 淘宝) and those must stay inline-sized. */
+.sl-markdown-content blockquote [lang='zh-CN'] {
+	display: block;
+	font-size: 1.35rem;
+	line-height: 1.55;
+	margin-bottom: 0.4rem;
+	color: var(--sl-color-white);
+}
+
+/* Inline code already inherits the brand tokens; it was only the square corner
+   that was out of step with the cards, asides and blocks around it. */
+.sl-markdown-content code {
+	border-radius: 0.25rem;
+}
