@@ -92,14 +92,39 @@ h2 {
 	text-wrap: balance;
 }
 
+/* Headings you read, as opposed to the one you admire.
+   Bodoni Moda is a didone, and a didone's character *is* its thin strokes —
+   which is the whole point at 8.5rem on the front page and a liability at
+   1.6rem, where those thins are the reason a section heading scanned worse
+   than the body text underneath it. So the page title keeps the didone, and
+   every heading below it moves to DM Sans: already the body face, already
+   preloaded, and built to hold up at this size. */
+.sl-markdown-content h2,
+.sl-markdown-content h3,
+.sl-markdown-content h4,
+.sl-markdown-content h5,
+.sl-markdown-content h6 {
+	font-family: var(--fl-font-body);
+	/* Sans wants less negative tracking than the didone did. */
+	letter-spacing: -0.008em;
+}
+
 .sl-markdown-content h2 {
-	font-size: 1.6rem;
+	/* A sans at 1.6rem reads bigger than a didone at 1.6rem — larger x-height,
+	   heavier stems — so the size comes down slightly to keep the same weight
+	   in the page rather than shouting. */
+	font-size: 1.5rem;
+	font-weight: 700;
 	margin-top: 2.2rem;
 }
 
 .sl-markdown-content h3 {
-	font-size: 1.18rem;
-	font-weight: 600;
+	font-size: 1.14rem;
+	font-weight: 650;
+}
+
+.sl-markdown-content h4 {
+	font-weight: 650;
 }
 
 /* Page titles get the full Didone treatment */
@@ -274,11 +299,6 @@ h2 {
 	height: 100%;
 	border-top: 3px solid var(--sl-color-accent);
 	border-radius: 0.6rem;
-}
-
-.fl-categories .card .title {
-	font-family: var(--fl-font-display);
-	font-weight: 700;
 }
 
 .fl-categories p {
@@ -503,7 +523,8 @@ h2 {
 .fl-pop-cat[data-category='landmark'] { color: var(--cat-landmark); }
 
 .fl-pop-name {
-	font-family: var(--fl-font-display);
+	/* Read on a phone, over a map, usually in a hurry. */
+	font-family: var(--fl-font-body);
 	font-size: 1.05rem;
 	font-weight: 700;
 	line-height: 1.22;
@@ -676,7 +697,9 @@ h2 {
 }
 
 .fl-card-head h3 {
-	font-family: var(--fl-font-display);
+	/* Sans, like the other headings: at 1.15rem the didone's thins cost more
+	   legibility than its character is worth. */
+	font-family: var(--fl-font-body);
 	font-size: 1.15rem;
 	font-weight: 700;
 	margin: 0;
@@ -1353,7 +1376,9 @@ header.header {
 }
 
 .fl-print-card h2.pc-title {
-	font-family: var(--fl-font-display);
+	/* The print card exists to be shown to somebody; sans survives a bad
+	   printer and a folded pocket better than a didone does. */
+	font-family: var(--fl-font-body);
 	font-size: 1.3rem;
 	margin: 0 0 1.1rem;
 	padding: 0 0 0.6rem;
@@ -1969,7 +1994,8 @@ body {
 }
 
 .starlight-aside__title {
-	font-family: var(--fl-font-display);
+	/* These carry the deadline warnings, so legibility beats flourish. */
+	font-family: var(--fl-font-body);
 	font-size: 1.02rem;
 	font-weight: 700;
 	letter-spacing: -0.005em;

@@ -146,6 +146,17 @@ red-biased neutrals (never neutral grey). **Bodoni Moda** display + **DM Sans** 
 self-hosted in `public/fonts/`. Playfair Display was rejected — too soft for the source
 posters, and its ampersand is an ornate Et-ligature.
 
+**Where each face goes, and why it is not "display font for all headings".** Bodoni Moda is
+a didone: its character *is* the thick/thin contrast, which is the whole point at 8.5rem on
+the front page and a liability at 1.15rem, where the thin strokes are exactly what makes a
+heading scan worse than the body text under it. So the didone is kept for **display sizes,
+brand labels and numerals** — the hero, page titles (h1), the folio numerals, the emergency
+numbers, the stat figures, the hero pills. Everything else that is *read* — h2 down, card
+headings, aside titles, map popup names, the print card — is DM Sans. It is already the
+body face and already preloaded, so this costs nothing and removes a Bodoni dependency
+above the fold. Do not "restore" the didone on small headings; it was moved off them on
+purpose.
+
 The **frosted panel** material (our Liquid Glass interpretation) is on exactly two surfaces,
 both chrome: the sticky header and the hero badges. Glass never goes under body text. It
 ships with `@supports`, `prefers-reduced-transparency`, `prefers-contrast` and
