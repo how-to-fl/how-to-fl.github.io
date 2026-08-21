@@ -103,6 +103,422 @@ places:
     recommended_by: Cohort 6
     last_verified: 2026-08
 
+
+  # ── Cohort 6's city list, added 2026-08 ────────────────────────────────────
+  #
+  # Coordinates here are solid. Each one came from the place's own Amap entry,
+  # which is GCJ-02, and was converted to WGS-84 with the same transform
+  # BeijingMap.astro uses, run backwards. The offset removed is about 550 m, a
+  # round-trip reproduces Amap's original to under a metre, and two of them
+  # (Cafe Zarah, Great Leap Brewing) land on their own OSM entries as a check.
+  #
+  # Two fields are weaker than the rest of this file, and you should know which:
+  #
+  #   name_zh    — only 大跃啤酒, 唱吧麦颂, 全聚德 and 油梨树 are genuinely the
+  #                Chinese names. For the other 34 this repeats the name the
+  #                place is listed under on Amap, which for most of these bars
+  #                really is the Latin one. It is not a translation, and it has
+  #                not been invented either — replace it as you learn the real
+  #                one.
+  #   address_zh — 11 of the 38 carry a door number. Those were built from two
+  #                sourced halves and only where both agree: the Chinese road
+  #                name from OSM, and the street number from the original
+  #                listing, kept only when reverse-geocoding the same point in
+  #                English returned the same road. Where the two disagreed, or
+  #                where the listing's number was a unit or a floor rather than
+  #                a street number (Alimentari's "No.12-13", Slow Boat's 51
+  #                belonging to Di'anmen Street and not the Hehua market), the
+  #                address stays at street level rather than being guessed —
+  #                a confidently wrong door number is worse than a vague one.
+  #                The pin itself is exact either way, and the popup's "Open in
+  #                Amap" goes to the precise point, so navigation works; it is
+  #                only the copy-for-a-driver button that is coarser on the
+  #                other 27.
+  #
+  # The door detail that was in the English listing lives in `note`, so it is
+  # still on the page for anyone standing outside looking for the entrance.
+
+  - name_en: Destinations Pub
+    name_zh: Destinations Pub
+    address_zh: 北京市东城区东营房胡同
+    category: bar
+    lat: 39.92718
+    lng: 116.43733
+    note: >-
+      Pub, about ¥119. Gongti West Road 7.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Fuge (Zhongguancun)
+    name_zh: Fuge (Zhongguancun)
+    address_zh: 北京市海淀区海淀大街
+    category: bar
+    lat: 39.98109
+    lng: 116.30976
+    note: >-
+      Quiet bar, about ¥107. Zhongguancun Street 9. The near-campus one.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Great Leap Brewing (Doujiao Hutong)
+    name_zh: 大跃啤酒
+    address_zh: 北京市东城区豆角胡同6号
+    category: bar
+    lat: 39.93595
+    lng: 116.39316
+    note: >-
+      The original courtyard brewery, about ¥95. Doujiao Hutong 6.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Heaven Supermarket
+    name_zh: Heaven Supermarket
+    address_zh: 北京市朝阳区工人体育场北路13号
+    category: bar
+    lat: 39.93289
+    lng: 116.4433
+    note: >-
+      Bought by the bottle and drunk on the spot, about ¥117. Gongti North Road 13, basement. Cheap, loud, an institution.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: LA JOLLA Mexico Bar
+    name_zh: LA JOLLA Mexico Bar
+    address_zh: 北京市海淀区
+    category: bar
+    lat: 39.99233
+    lng: 116.33073
+    note: >-
+      Mexican bar, about ¥96. Heqing Road just north of Chengfu Road.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: LUSH (Wudaokou)
+    name_zh: LUSH (Wudaokou)
+    address_zh: 北京市海淀区财经东路
+    category: bar
+    lat: 39.99112
+    lng: 116.33047
+    note: >-
+      The Wudaokou standby, about ¥91. Huaqing Jiayuan, north side.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: La Social SLT (Sanlitun)
+    name_zh: La Social SLT (Sanlitun)
+    address_zh: 北京市朝阳区南三里屯路
+    category: bar
+    lat: 39.93022
+    lng: 116.45024
+    note: >-
+      Bar, about ¥112. Gongti North Road 4, building 75.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Martini Bar X JD78
+    name_zh: Martini Bar X JD78
+    address_zh: 北京市朝阳区南三里屯路
+    category: bar
+    lat: 39.92962
+    lng: 116.4505
+    note: >-
+      Cocktail bar, about ¥145. Gongti North Road 4, building 78, fourth floor.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Modernista
+    name_zh: Modernista
+    address_zh: 北京市东城区宝钞胡同44号
+    category: bar
+    lat: 39.94316
+    lng: 116.39349
+    note: >-
+      Old café and tapas bar, about ¥154. Baochao Hutong 44.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Paddy O'Shea's (Dongzhimen)
+    name_zh: Paddy O'Shea's (Dongzhimen)
+    address_zh: 北京市朝阳区东直门外大街
+    category: bar
+    lat: 39.93955
+    lng: 116.44056
+    note: >-
+      Irish pub, about ¥121. Dongzhimen Outer Street 28, opposite the Australian embassy.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Slow Boat Brewery (Shichahai)
+    name_zh: Slow Boat Brewery (Shichahai)
+    address_zh: 北京市西城区荷花市场
+    category: bar
+    lat: 39.93403
+    lng: 116.38482
+    note: >-
+      Brewery taproom, about ¥127. Di'anmen Street 51, inside the Hehua market.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: The Local
+    name_zh: The Local
+    address_zh: 北京市朝阳区南三里屯路
+    category: bar
+    lat: 39.93022
+    lng: 116.45101
+    note: >-
+      Quiet bar, about ¥149. Gongti North Road 4, inside the Mechanical & Electrical Research yard.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Timekeepers Ball House
+    name_zh: Timekeepers Ball House
+    address_zh: 北京市东城区钟楼湾胡同40号
+    category: bar
+    lat: 39.94087
+    lng: 116.39041
+    note: >-
+      Bar, about ¥69. Zhonglouwan Hutong 40, by the Bell Tower.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: uh-huh
+    name_zh: uh-huh
+    address_zh: 北京市东城区交道口南大街146号
+    category: bar
+    lat: 39.93247
+    lng: 116.40271
+    note: >-
+      Bar, about ¥224. Jiaodaokou South Street 146, near Nanluoguxiang.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Cafe Zarah
+    name_zh: Cafe Zarah
+    address_zh: 北京市东城区鼓楼东大街46号
+    category: cafe
+    lat: 39.93934
+    lng: 116.39996
+    note: >-
+      Coffee, about ¥56. Gulou East Street 46, and a good place to start a hutong evening.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Plato Cafe (Lanqiying)
+    name_zh: Plato Cafe (Lanqiying)
+    address_zh: 北京市海淀区成府路69号
+    category: cafe
+    lat: 39.99153
+    lng: 116.31923
+    note: >-
+      Coffee, about ¥44. Chengfu Road 69, Tsinghua's Lanqiying, second floor. Cohort 6's pick for somewhere to spend the day.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Casa Bacardi (Taikoo Li South)
+    name_zh: Casa Bacardi (Taikoo Li South)
+    address_zh: 北京市朝阳区三里屯路
+    category: club
+    lat: 39.93347
+    lng: 116.44854
+    note: >-
+      Club, about ¥172. Taikoo Li South, fourth floor.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Changba Maisong KTV (Zhongguancun)
+    name_zh: 唱吧麦颂
+    address_zh: 北京市海淀区海淀北二街
+    category: club
+    lat: 39.9822
+    lng: 116.30831
+    note: >-
+      KTV, about ¥30 a head. Haidian Street 3, basement. Booked by the hour, and the cheapest night out near campus.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Supermiami
+    name_zh: Supermiami
+    address_zh: 北京市朝阳区工人体育场西路
+    category: club
+    lat: 39.92805
+    lng: 116.43802
+    note: >-
+      Club, Gongti West Road building 8. The per-person figure people quote is a table price, not a door price.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Alimentari Grande (T+ Mall)
+    name_zh: Alimentari Grande (T+ Mall)
+    address_zh: 北京市朝阳区南三里屯路
+    category: food
+    lat: 39.9305
+    lng: 116.44889
+    note: >-
+      Italian deli, T+ Mall on South Sanlitun Road, first floor.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Avocado Tree
+    name_zh: 油梨树
+    address_zh: 北京市海淀区中关村广场步行街
+    category: food
+    lat: 39.97824
+    lng: 116.30751
+    note: >-
+      Zhongguancun, south of campus.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: BOTTEGA Fratelli Salvo (Jinshang)
+    name_zh: BOTTEGA Fratelli Salvo (Jinshang)
+    address_zh: 北京市朝阳区新东路
+    category: food
+    lat: 39.94742
+    lng: 116.44347
+    note: >-
+      Neapolitan pizza, about ¥156. Xindong Road at Xinyuan Li, first floor.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Benlei American Barbecue (Sanlitun)
+    name_zh: Benlei American Barbecue (Sanlitun)
+    address_zh: 北京市朝阳区工人体育场北路
+    category: food
+    lat: 39.93108
+    lng: 116.45092
+    note: >-
+      Smoked meat, about ¥157. South Sanlitun Road, 100 m past the old Bookworm.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: BerlinBites Doner (Sanlitun)
+    name_zh: BerlinBites Doner (Sanlitun)
+    address_zh: 北京市朝阳区南三里屯路
+    category: food
+    lat: 39.92977
+    lng: 116.45055
+    note: >-
+      Doner, about ¥57. Gongti North Road 4, building 78, room 108. The cheapest thing in Sanlitun.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Duli (Youyi)
+    name_zh: Duli (Youyi)
+    address_zh: 北京市朝阳区秀水南街
+    category: food
+    lat: 39.9084
+    lng: 116.43686
+    note: >-
+      Fusion, about ¥177. Jianguomen Outer Street 17, in the old Friendship Store park.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Huogui PYRO (Wudaokou)
+    name_zh: Huogui PYRO (Wudaokou)
+    address_zh: 北京市海淀区财经东路
+    category: food
+    lat: 39.99068
+    lng: 116.3307
+    note: >-
+      Italian, about ¥82. Huaqing Jiayuan building 12, downstairs.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: LA PLATEA (Sanlitun)
+    name_zh: LA PLATEA (Sanlitun)
+    address_zh: 北京市朝阳区南三里屯路
+    category: food
+    lat: 39.93081
+    lng: 116.45082
+    note: >-
+      Mediterranean and open late, about ¥150. Gongti North Road 4, building 11.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Laojing Russian Restaurant
+    name_zh: Laojing Russian Restaurant
+    address_zh: 北京市东城区西羊管胡同
+    category: food
+    lat: 39.9413
+    lng: 116.42124
+    note: >-
+      Russian, about ¥128. Xiyangguan Hutong A1, opposite Beixinqiao police station.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Quanjude (TUS Park)
+    name_zh: 全聚德
+    address_zh: 北京市海淀区成府路
+    category: food
+    lat: 39.99274
+    lng: 116.32421
+    note: >-
+      Peking duck, about ¥146. TusPark on Zhongguancun East Road — the branch you can walk to.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Sanse Lotus (International Harbor)
+    name_zh: Sanse Lotus (International Harbor)
+    address_zh: 北京市朝阳区东直门外大街
+    category: food
+    lat: 39.93954
+    lng: 116.44048
+    note: >-
+      South-East Asian, about ¥128. Dongzhimen Outer Street 28, second floor.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Schindler's Tankstelle (Sanlitun)
+    name_zh: Schindler's Tankstelle (Sanlitun)
+    address_zh: 北京市朝阳区三里屯北小街10号
+    category: food
+    lat: 39.94345
+    lng: 116.44644
+    note: >-
+      German, about ¥175. Sanlitun North Alley 10. Next door to Jenny Lou's.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Side Street (Jiaodaokou)
+    name_zh: Side Street (Jiaodaokou)
+    address_zh: 北京市东城区交道口东大街113号
+    category: food
+    lat: 39.93978
+    lng: 116.40389
+    note: >-
+      Western, about ¥95. Jiaodaokou East Street 113 — pairs with a hutong evening.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Tangled
+    name_zh: Tangled
+    address_zh: 北京市东城区板桥南巷
+    category: food
+    lat: 39.93718
+    lng: 116.41101
+    note: >-
+      Italian, about ¥159. Banqiao South Alley 20, four minutes from Beixinqiao station.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Turkish Feast (WF Central)
+    name_zh: Turkish Feast (WF Central)
+    address_zh: 北京市东城区大甜水井胡同
+    category: food
+    lat: 39.91129
+    lng: 116.40358
+    note: >-
+      Turkish, about ¥192. WF Central at Wangfujing, east block, fourth floor.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Uyghur Restaurant (Chengfu Road)
+    name_zh: Uyghur Restaurant (Chengfu Road)
+    address_zh: 北京市海淀区成府路
+    category: food
+    lat: 39.99083
+    lng: 116.31796
+    note: >-
+      Xinjiang, about ¥46. Chengfu Road at Qinghua South Road. The cheapest sit-down meal near campus.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: GULOU Gourmand Import Food Shop
+    name_zh: GULOU Gourmand Import Food Shop
+    address_zh: 北京市东城区安定门内大街
+    category: shop
+    lat: 39.94177
+    lng: 116.40194
+    note: >-
+      Import food shop, Andingmen Inner Street 221. The hutong-side option for things from home.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Jenny Lou's (Sanlitun)
+    name_zh: Jenny Lou's (Sanlitun)
+    address_zh: 北京市朝阳区三里屯北小街6号
+    category: shop
+    lat: 39.942
+    lng: 116.44638
+    note: >-
+      The expat grocery, Sanlitun North Alley 6. One trip does this and Schindler's.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+  - name_en: Ole Supermarket (IMIX PARK)
+    name_zh: Ole Supermarket (IMIX PARK)
+    address_zh: 北京市海淀区中关村地下环廊
+    category: shop
+    lat: 39.98063
+    lng: 116.30555
+    note: >-
+      Imported supermarket at IMIX PARK, Haidian Street. Expensive, and the answer when you want real cheese.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+
   # ── Copy from here ─────────────────────────────────────────────────────────
   # - name_en:
   #   name_zh:

@@ -55,7 +55,8 @@ Two things that trip people up:
 | 光华咖啡 Guanghua Cafe | Inside the Guanghua building — the obvious one between classes |
 | 燕南咖啡 Yannan Café | **The morning one.** Especially good for yoghurt before a 10:10 start |
 | 农园咖啡 Nongyuan Café | Attached to Nong Yuan, so it's the one nearest the teaching buildings |
-| MiniCo | Cheap, quick, and everywhere |
+| MiniCo 小咖 | Cheap, quick, and everywhere. The campus one is on the **first floor of 李兆基楼 Lee Shau Kee** — the same building as Teaching Building 2, so it's the one between classes |
+| 瑞幸 Luckin | **Ground floor of 吕志和楼 Lui Che Woo**, in the life-sciences building off Yiheyuan Road. App-only ordering, and the cheapest coffee on campus once you've found a voucher |
 | 泊星地 Paradise Coffee | Near Yan Nan canteen |
 | 最美时光 Zui Mei Shi Guang | Near Xue Wu |
 | 麦隆咖啡 Mellower Coffee | Inside the second teaching building |
