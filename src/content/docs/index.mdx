@@ -10,9 +10,13 @@ import Logo from '../../components/Logo.astro';
 import Ico from '../../components/Ico.astro';
 
 <div class="fl-hero">
+  <span class="fl-hero-folio" aria-hidden="true">北京 · Beijing</span>
   <div class="fl-hero-seal"><Logo size={96} /></div>
 
-  <h1 id="_top" class="fl-hero-title">Welcome to<br /><em>How to FL</em></h1>
+  <h1 id="_top" class="fl-hero-title">
+    <span class="fl-hero-kicker">Welcome to</span>
+    <em>How to FL</em>
+  </h1>
 
   <p class="fl-hero-tagline">
     Everything we wish someone had told us before we landed — getting into China,
@@ -55,7 +59,7 @@ checked it**, and shouts at you if that was ages ago.
 
 <div class="fl-categories">
   <div class="fl-card">
-    <div class="fl-card-head"><Ico name="passport" size={26} /><h3>1 · China</h3></div>
+    <div class="fl-card-head"><Ico name="passport" size={26} /><h3>China</h3></div>
     <p><strong>Getting here, and your first three days.</strong> The half with actual
     deadlines attached, where a mistake costs you real money or a trip to the police station.</p>
     <p class="fl-card-list">Visas and the JW202 · what you genuinely can't pack · VPNs, sorted
@@ -65,7 +69,7 @@ checked it**, and shouts at you if that was ages ago.
   </div>
 
   <div class="fl-card">
-    <div class="fl-card-head"><Ico name="cap" size={26} /><h3>2 · PKU &amp; academics</h3></div>
+    <div class="fl-card-head"><Ico name="cap" size={26} /><h3>PKU &amp; academics</h3></div>
     <p><strong>Campus, courses, canteens, clubs.</strong> How the university actually works,
     rather than how the handbook says it does.</p>
     <p class="fl-card-list">Global Village and your room · course registration and the bidding
@@ -75,7 +79,7 @@ checked it**, and shouts at you if that was ages ago.
   </div>
 
   <div class="fl-card">
-    <div class="fl-card-head"><Ico name="bowl" size={26} /><h3>3 · Lifestyle</h3></div>
+    <div class="fl-card-head"><Ico name="bowl" size={26} /><h3>Lifestyle</h3></div>
     <p><strong>The bit that makes Beijing somewhere you live</strong>, not just somewhere you
     study for a year.</p>
     <p class="fl-card-list">Where we actually eat and drink · 美团 must-haves · nights out,

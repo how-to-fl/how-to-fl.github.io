@@ -205,7 +205,28 @@ Desktop folder to be readable.
 
 **The in-app Browser pane pauses `requestAnimationFrame` when collapsed.** MapLibre's style
 loading is rAF-driven, so the map can *never* load there and fails silently — it looks
-exactly like a broken map. Verify canvas/WebGL work in a real browser, or ask.
+exactly like a broken map. Verify canvas/WebGL work in a real browser, or ask. The same collapse also
+reports `innerWidth === 0` and returns **blank screenshots that still look like successful
+captures** — the DOM queries keep answering correctly while every image comes back empty
+cream. If a screenshot disagrees with `elementFromPoint`, believe the DOM and check
+`innerWidth` before debugging the CSS.
+
+**Headless Chrome is the reliable renderer here.** `/Applications/Google Chrome.app` is
+installed. `--headless=new --screenshot` only ever captures scroll position 0; for anything
+else (dark theme, reduced motion, mobile, a chosen scroll offset) drive it over CDP — start it
+with `--remote-debugging-port=9222` and talk to it with Node's global `WebSocket`, using
+`Emulation.setEmulatedMedia` for `prefers-color-scheme` / `prefers-reduced-motion`. Note
+`Target.createTarget` rejects `width`/`height` ("Target position can only be set for new
+windows"); size with `Emulation.setDeviceMetricsOverride` instead. Pillow lives in the venv at
+`~/Desktop/Claude Code/.venv` for cropping and pixel measurement.
+
+**`astro build` deadlocks on a cold Vite cache.** With `node_modules/.vite` missing, the build
+hangs at "Unable to load your Astro config → transport invoke timed out after 60000ms" while
+fetching Starlight's expressive-code module — no CPU, no sockets, just asleep. Deleting caches
+to fix it makes it *worse*, because the cold cache is the cause. **Run `npm run dev` once to
+warm the cache, then build.** Do not chase this as a config or path problem; the space in
+"Claude Code" is a red herring, and building through a spaceless symlink actively breaks
+(module ids come out as `/tmp/link/Users/emil.a/...`, root prefixed onto the real path).
 
 ---
 

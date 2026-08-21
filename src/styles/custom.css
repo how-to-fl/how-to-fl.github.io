@@ -1723,3 +1723,217 @@ body {
 		transform: none;
 	}
 }
+
+/* ==========================================================================
+   Front matter — the title page, and the sequence that sets it
+   ==========================================================================
+   The brand is a 1930s travel poster and Bodoni Moda is a didone, which means
+   its whole character lives in the thick/thin contrast — and contrast only
+   shows at size. Setting it at 5rem in uppercase with tight tracking was using
+   a display face as a label. Here it gets to behave like the title page of a
+   printed guide: a small letterspaced kicker over a very large italic, rules
+   that draw themselves, and a folio mark in the corner.
+
+   Every hidden state below sits inside `prefers-reduced-motion: no-preference`.
+   That is deliberate and the safer way round: if animation never runs — reduced
+   motion, an extension, an old engine — the content was never hidden in the
+   first place. Hiding by default and revealing by animation is how a page ends
+   up blank for the one reader who most needs it to work.
+   ========================================================================== */
+
+.fl-hero {
+	/* Room at the top for the masthead: the existing hairline rule (::before,
+	   top 1.6rem) stays where it is, and the folio hangs beneath it on the
+	   right. The seal has to start below both, hence the taller floor. */
+	padding-top: clamp(3.9rem, 9vw, 5.5rem);
+}
+
+.fl-hero .fl-hero-folio {
+	position: absolute;
+	/* Sits under the hairline rule, not on it — a rule struck through the
+	   lettering reads as a bug, not as a masthead. */
+	top: 2.35rem;
+	right: 1.6rem;
+	font-family: var(--fl-font-display);
+	font-size: 0.72rem;
+	line-height: 1;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	/* Decorative only (aria-hidden): it sits over the ember highlight, the
+	   lightest part of the gradient, where cream tops out at 3.78:1 even at
+	   full opacity — so it is deliberately kept as ornament that carries no
+	   information, rather than pretending to be readable content. */
+	color: rgb(244 236 220 / 0.78);
+	pointer-events: none;
+}
+
+.fl-hero .fl-hero-seal {
+	/* Flush left, with the kicker and the title. A centred device sitting over a
+	   flush-left title reads as a leftover from the previous centred layout
+	   rather than a decision — the hero is one column now, so the seal joins it. */
+	justify-content: flex-start;
+	margin-bottom: 1.5rem;
+}
+
+/* ── The title, as a title page ─────────────────────────────────────────── */
+.fl-hero .fl-hero-title {
+	/* Reset the old single-line treatment; the two lines now carry different
+	   jobs and different type. */
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	font-size: unset;
+	letter-spacing: unset;
+	text-transform: none;
+	margin: 0 0 1.4rem;
+}
+
+.fl-hero .fl-hero-kicker {
+	font-family: var(--fl-font-body);
+	font-size: clamp(0.72rem, 1.6vw, 0.85rem);
+	font-weight: 500;
+	letter-spacing: 0.34em;
+	text-transform: uppercase;
+	/* 0.72 measured 4.12:1 against the darkest red under this run — under the
+	   4.5 floor for text this size. 0.84 clears it with margin. */
+	color: rgb(244 236 220 / 0.84);
+	/* Optically aligns the kicker with the italic's left edge below it. */
+	padding-left: 0.18em;
+}
+
+.fl-hero .fl-hero-title em {
+	font-family: var(--fl-font-display);
+	font-style: italic;
+	/* Big enough for the didone contrast to actually read. Bodoni Moda is a
+	   variable face (400–900 in fonts.css); 500 keeps the thins thin. */
+	font-weight: 500;
+	font-optical-sizing: auto;
+	font-size: clamp(3.4rem, 13vw, 8.5rem);
+	line-height: 0.86;
+	letter-spacing: -0.025em;
+	text-transform: none;
+	color: var(--fl-cream);
+	/* Pulls the italic's optical left sidebearing back to the margin — a
+	   slanted F starts further in than a vertical stem does. */
+	margin-left: -0.045em;
+}
+
+/* ── The page-load sequence ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+	@keyframes fl-strike {
+		from { opacity: 0; transform: scale(0.82) rotate(-6deg); }
+		to   { opacity: 1; transform: none; }
+	}
+	@keyframes fl-set {
+		from { opacity: 0; transform: translateY(0.5em); }
+		to   { opacity: 1; transform: none; }
+	}
+	@keyframes fl-rule {
+		from { transform: scaleX(0); }
+		to   { transform: scaleX(1); }
+	}
+	@keyframes fl-fade {
+		from { opacity: 0; }
+		to   { opacity: 1; }
+	}
+
+	/* The seal strikes first, like a stamp. Then the type sets, line by line.
+	   Then the rules draw. Total 1.1s — long enough to read as a sequence,
+	   short enough that nobody waiting on a Beijing connection resents it. */
+	.fl-hero-seal,
+	.fl-hero .fl-hero-kicker,
+	.fl-hero .fl-hero-title em,
+	.fl-hero-tagline,
+	.fl-pills,
+	.fl-hero .fl-hero-folio {
+		animation: fl-set 0.62s cubic-bezier(0.2, 0.7, 0.3, 1) backwards;
+	}
+
+	.fl-hero-seal {
+		animation-name: fl-strike;
+		animation-duration: 0.5s;
+	}
+	.fl-hero .fl-hero-kicker  { animation-delay: 0.16s; }
+	.fl-hero .fl-hero-title em { animation-delay: 0.24s; }
+	.fl-hero-tagline           { animation-delay: 0.40s; }
+	.fl-pills                  { animation-delay: 0.52s; }
+	.fl-hero .fl-hero-folio    { animation-name: fl-fade; animation-delay: 0.9s; }
+
+	/* Rules draw rather than appear. transform-origin left so they grow the way
+	   a pen would. */
+	.fl-hero::before {
+		transform-origin: left center;
+		animation: fl-rule 0.85s cubic-bezier(0.16, 0.84, 0.32, 1) 0.1s backwards;
+	}
+	.sl-markdown-content .fl-strip,
+	.fl-strip {
+		animation: fl-set 0.6s cubic-bezier(0.2, 0.7, 0.3, 1) 0.64s backwards;
+	}
+}
+
+/* ── Folio numerals on the three parts ──────────────────────────────────────
+   The cards used to carry "1 · " inside the heading text, which made the
+   numeral a piece of string rather than a piece of design. A CSS counter puts
+   it back as furniture: a large Bodoni figure ghosted into the top-right of
+   each card, the way a printed guide numbers its parts. It also means the
+   numbers renumber themselves if a part is ever added or reordered. */
+.sl-markdown-content .fl-categories {
+	counter-reset: fl-part;
+}
+
+.sl-markdown-content .fl-categories > .fl-card {
+	counter-increment: fl-part;
+	position: relative;
+	overflow: hidden;
+}
+
+.sl-markdown-content .fl-categories > .fl-card::before {
+	/* Leading zero on purpose. Bodoni Moda draws its "1" as a bare vertical
+	   stem — no flag, no foot serifs — so a lone ghosted 1 reads as a stray
+	   rectangle rather than a numeral. "01" gives it a companion figure, and
+	   as a bonus all three numerals then share a width and sit on a rhythm. */
+	content: counter(fl-part, decimal-leading-zero);
+	position: absolute;
+	/* The whole figure shows. Cropping it against the card edge was the first
+	   instinct, but a bled numeral reads as a rendering fault rather than a
+	   deliberate one — and a cropped Bodoni "1" is simply a vertical stripe. */
+	top: -0.02em;
+	right: 0.05em;
+	font-family: var(--fl-font-display);
+	font-weight: 700;
+	font-size: 5.8rem;
+	line-height: 1;
+	color: var(--sl-color-accent);
+	/* Ghosted rather than coloured: it should register as a watermark you read
+	   second, never as something competing with the heading. */
+	opacity: 0.11;
+	pointer-events: none;
+	user-select: none;
+}
+
+/* The heading needs to clear the numeral so a long title never runs under it. */
+.sl-markdown-content .fl-categories > .fl-card .fl-card-head {
+	padding-right: 2.4rem;
+}
+
+/* ── Sections arriving as you scroll ────────────────────────────────────────
+   Scroll-driven animations, so no JavaScript and no observer. Guarded by
+   @supports: where `animation-timeline` isn't implemented the whole block is
+   skipped and the cards are simply there, which is the correct fallback. */
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		@keyframes fl-rise {
+			from { opacity: 0; transform: translateY(1.2rem); }
+			to   { opacity: 1; transform: none; }
+		}
+
+		.sl-markdown-content .fl-categories > *,
+		.sl-markdown-content .fl-duo > * {
+			animation: fl-rise linear both;
+			animation-timeline: view();
+			/* Starts as the card enters and finishes well before it centres, so
+			   it is settled by the time anyone reads it. */
+			animation-range: entry 5% cover 26%;
+		}
+	}
+}
