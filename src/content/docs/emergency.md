@@ -11,13 +11,13 @@ favourites too, because that's what you'll actually have open.
 ## The numbers
 
 <ul class="fl-emergency">
-  <li><span class="num">110</span><span class="who">Police</span></li>
-  <li><span class="num">120</span><span class="who">Ambulance</span></li>
-  <li><span class="num">119</span><span class="who">Fire</span></li>
-  <li><span class="num">122</span><span class="who">Traffic accident</span></li>
+  <li><a href="tel:110"><span class="num">110</span><span class="who">Police</span></a></li>
+  <li><a href="tel:120"><span class="num">120</span><span class="who">Ambulance</span></a></li>
+  <li><a href="tel:119"><span class="num">119</span><span class="who">Fire</span></a></li>
+  <li><a href="tel:122"><span class="num">122</span><span class="who">Traffic accident</span></a></li>
 </ul>
 
-**999** also reaches an ambulance — it's a separate service that some people find answers
+**[999](tel:999)** also reaches an ambulance — it's a separate service that some people find answers
 faster. Either is fine.
 
 If you can, have a Chinese-speaking friend make the call, or hand your phone to someone
@@ -27,11 +27,11 @@ nearby. Operators may not speak English.
 
 | Who | Number | When |
 |---|---|---|
-| **PKU emergency hotline** | 010-62751331 | Anything serious, any hour |
-| **PKU security department** | 010-62755110 | On-campus incidents |
-| **Counselling, 24-hour hotline** | 010-62760521 | Mental health, any hour |
-| Counselling centre (bookings) | 010-62760852 | Office hours |
-| PKU Campus Hospital | 010-62751919 | On campus |
+| **PKU emergency hotline** | [010-62751331](tel:+861062751331) | Anything serious, any hour |
+| **PKU security department** | [010-62755110](tel:+861062755110) | On-campus incidents |
+| **Counselling, 24-hour hotline** | [010-62760521](tel:+861062760521) | Mental health, any hour |
+| Counselling centre (bookings) | [010-62760852](tel:+861062760852) | Office hours |
+| PKU Campus Hospital | [010-62751919](tel:+861062751919) | On campus |
 
 **Tell the programme office too.** If something serious happens, the FL team and the
 International Students Division both want to know, and both can help — with paperwork,
@@ -45,14 +45,14 @@ For anything you'd want handled in English, or anything serious:
 
 | Hospital | Address | Phone |
 |---|---|---|
-| **United Family, Wudaokou** *(clinic, English-speaking)* | 1F Building D, Tsinghua Tongfang Hi-Tech Plaza, 1 Wangzhuang Lu, Haidian | 010-8236 6918 · **emergency 010-5927 7120** |
-| **Peking Union Medical College** *(International Medical Services)* | 1 Shuai Fu Community, Dongcheng | 010-6915 6114 |
-| **PKU Third Hospital** | 49 Huayuan North Rd, Haidian | 010-8226 6699 |
-| PKU Campus Hospital | On campus | 010-6275 1919 |
-| Haidian Hospital | 29 Zhongguancun Rd, Haidian | 010-8261 9999 |
-| China-Japan Friendship | Yinghua East Rd, Chaoyang | 010-8420 5288 |
-| Beijing Friendship | 95 Yong'an Rd, Xicheng | 010-6301 6616 |
-| Tongren | 1 Dongjiao Minxiang, Dongcheng | 010-5826 6699 |
+| **United Family, Wudaokou** *(clinic, English-speaking)* | 1F Building D, Tsinghua Tongfang Hi-Tech Plaza, 1 Wangzhuang Lu, Haidian | [010-8236 6918](tel:+861082366918) · **emergency [010-5927 7120](tel:+861059277120)** |
+| **Peking Union Medical College** *(International Medical Services)* | 1 Shuai Fu Community, Dongcheng | [010-6915 6114](tel:+861069156114) |
+| **PKU Third Hospital** | 49 Huayuan North Rd, Haidian | [010-8226 6699](tel:+861082266699) |
+| PKU Campus Hospital | On campus | [010-6275 1919](tel:+861062751919) |
+| Haidian Hospital | 29 Zhongguancun Rd, Haidian | [010-8261 9999](tel:+861082619999) |
+| China-Japan Friendship | Yinghua East Rd, Chaoyang | [010-8420 5288](tel:+861084205288) |
+| Beijing Friendship | 95 Yong'an Rd, Xicheng | [010-6301 6616](tel:+861063016616) |
+| Tongren | 1 Dongjiao Minxiang, Dongcheng | [010-5826 6699](tel:+861058266699) |
 
 United Family is private and expensive — but it's the one where you can explain what's
 wrong and be understood, which at 2am matters. Check what your insurance covers *before*

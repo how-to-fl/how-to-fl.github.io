@@ -2236,3 +2236,66 @@ summary:focus-visible {
 .sl-markdown-content code {
 	border-radius: 0.25rem;
 }
+
+/* ==========================================================================
+   The emergency page
+   ==========================================================================
+   This is the one page opened in a hurry, usually on a phone, sometimes at 2am
+   and sometimes handed to a stranger to read. Until now not one of its
+   nineteen phone numbers was dialable — they were all plain text, on the page
+   whose entire job is getting someone to a phone call. The numbers are links
+   now; this makes them look and behave like it.
+
+   The href carries the international form (+86 10 …) while the visible text
+   stays in the local form people read out. Both are the same number, but the
+   international one also dials from a foreign SIM that hasn't been swapped
+   yet — which is exactly the reader this page is written for. The short codes
+   (110/120/119/122/999) are deliberately *not* internationalised: those are
+   dialled bare, and prefixing them would break them.
+   ========================================================================== */
+
+.fl-emergency li {
+	/* The padding moves to the anchor so the whole card is the tap target, not
+	   just the text inside it. */
+	padding: 0;
+}
+
+.fl-emergency li a {
+	display: block;
+	padding: 0.8rem 0.9rem;
+	border-radius: inherit;
+	text-decoration: none;
+	color: inherit;
+}
+
+.fl-emergency li a:hover {
+	background: color-mix(in srgb, var(--fl-ember) 20%, var(--sl-color-bg));
+}
+
+.fl-emergency li a:focus-visible {
+	outline: 2px solid var(--sl-color-accent);
+	outline-offset: 2px;
+}
+
+/* A number that wraps across two lines is hard to read back to an operator. */
+.sl-markdown-content a[href^='tel:'] {
+	white-space: nowrap;
+	font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   The map page
+   ==========================================================================
+   The map was rendering 720px wide inside a 1440px window — less than half the
+   screen for the page whose entire content is a map. The prose keeps its
+   measure; the map breaks out of it. */
+.fl-map-wrap {
+	/* Never narrower than the column it sits in — `max(100%, …)` keeps the
+	   breakout from inverting into an indent on a phone, where the viewport is
+	   narrower than the measure. */
+	--fl-map-w: max(100%, min(1080px, calc(100vw - 5rem)));
+
+	width: var(--fl-map-w);
+	max-width: none;
+	margin-inline: calc((100% - var(--fl-map-w)) / 2);
+}
