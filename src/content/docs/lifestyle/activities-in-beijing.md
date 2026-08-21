@@ -28,10 +28,6 @@ _To be written._
 
 _To be written._
 
-## Queer community and parties
-
-_To be written._
-
 ## Sport around the city
 
 _To be written._

@@ -71,13 +71,20 @@ Chinese classmates without needing much Chinese.
 
 ## Live music
 
-_Nobody has written this up yet._ Both breweries above put bands on, but we haven't kept a
-list of what's worth going to. If you go to something good, this is where it belongs.
+**[TributePub 致敬酒吧](https://uri.amap.com/marker?position=116.471702,39.949728&name=TributePub%20%E8%87%B4%E6%95%AC%E9%85%92%E5%90%A7&src=howtofl&coordinate=gaode)** — the one to go
+to for live music. It's out on Chaoyang Park Road in Maizidian, east of Sanlitun, so it's a
+trip of its own rather than somewhere you wander into on the way home. It's on
+[the map](/map/).
+
+Both breweries above put bands on too. What we still don't keep is a list of *what's worth
+going to* — if you see something good, that's the bit to add.
 
 ## Queer nights
 
-_Still to write._ There's a scene, it moves around, and a page that guessed at it would be
-worse than one that admits it doesn't know yet. Ask the current cohort.
+There's a scene and it moves around, which is exactly why it isn't written down here — a
+page that guessed would be worse than one that points you at someone who knows.
+
+**For more on this, reach out to Emil.**
 
 ## Getting home late
 

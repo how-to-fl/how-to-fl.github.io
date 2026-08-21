@@ -519,6 +519,22 @@ places:
     recommended_by: Cohort 6
     last_verified: 2026-08
 
+  # The live-music one. Unlike most of the batch above, this share carried the
+  # Chinese name, so name_zh here is genuinely Chinese rather than the Latin
+  # name Amap lists. Street-level address: the listing had no door number and
+  # reverse geocoding gives none either.
+  - name_en: TributePub
+    name_zh: 致敬酒吧
+    address_zh: 北京市朝阳区朝阳公园路
+    category: bar
+    lat: 39.94841
+    lng: 116.46557
+    note: >-
+      Live music. Out on Chaoyang Park Road in Maizidian, east of Sanlitun, so
+      it is a trip of its own rather than something you wander into.
+    recommended_by: Cohort 6
+    last_verified: 2026-08
+
   # ── Copy from here ─────────────────────────────────────────────────────────
   # - name_en:
   #   name_zh:
