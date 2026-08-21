@@ -71,24 +71,24 @@ const water = campus.features.filter(
  * can never drift onto the wrong building — if OSM renames something the pin
  * disappears rather than lying. `dy` nudges label text only, never the dot.
  */
-const WANTED: { zh: string; label: string; kind: string; dy?: number; side?: 'l' | 'r' }[] = [
+const WANTED: { zh: string; label: string; kind: string }[] = [
 	{ zh: '北京大学中关新园', label: 'Global Village — home', kind: 'home' },
 	// Guanghua: the two nodes up here — the school itself and 2号楼, 72 m apart —
 	// are both parts of Building 2, so they get one pin between them. Building 1,
 	// the one with the classrooms in it, is 550 m south among the teaching
 	// buildings, and was missing from this map entirely.
-	{ zh: '光华管理学院2号楼', label: 'Guanghua 2', kind: 'study', dy: -6 },
-	{ zh: '光华管理学院1号楼', label: 'Guanghua 1 — classes', kind: 'study', dy: -8 },
-	{ zh: '新太阳学生中心（16楼-18楼）', label: 'New Sun — ISD, visas, card', kind: 'admin', side: 'l' },
-	{ zh: '北京大学图书馆', label: 'Library', kind: 'study', side: 'l' },
-	{ zh: '第二教学楼（李兆基楼）', label: 'Teaching Building 2', kind: 'study', dy: 11, side: 'l' },
-	{ zh: '北京大学校医院', label: 'Campus hospital', kind: 'health', side: 'l' },
+	{ zh: '光华管理学院2号楼', label: 'Guanghua 2', kind: 'study' },
+	{ zh: '光华管理学院1号楼', label: 'Guanghua 1 — classes', kind: 'study' },
+	{ zh: '新太阳学生中心（16楼-18楼）', label: 'New Sun — ISD, visas, card', kind: 'admin' },
+	{ zh: '北京大学图书馆', label: 'Library', kind: 'study' },
+	{ zh: '第二教学楼（李兆基楼）', label: 'Teaching Building 2', kind: 'study' },
+	{ zh: '北京大学校医院', label: 'Campus hospital', kind: 'health' },
 	{ zh: '燕园派出所', label: 'Yanyuan police station', kind: 'admin' },
 	{ zh: '邱德拔体育馆', label: 'Gym & 50 m pool', kind: 'sport' },
 	// Every canteen inside the wall, plus 畅春园, which faces the west gate from
 	// just outside it and is on the canteens page. 北大青鸟总部食堂 is a company
 	// canteen east of campus, not a student one, so it stays off.
-	{ zh: '农园餐厅', label: 'Nong Yuan', kind: 'food', dy: -11 },
+	{ zh: '农园餐厅', label: 'Nong Yuan', kind: 'food' },
 	{ zh: '佟园餐厅（清真）', label: 'Tong Yuan — halal', kind: 'food' },
 	{ zh: '学五食堂', label: 'Xue Wu', kind: 'food' },
 	{ zh: '学一食堂', label: 'Xue Yi', kind: 'food' },
@@ -100,7 +100,7 @@ const WANTED: { zh: string; label: string; kind: string; dy?: number; side?: 'l'
 	{ zh: '畅春园食堂', label: 'Chang Chun Yuan', kind: 'food' },
 	{ zh: '成府园食堂', label: 'Chengfu Yuan', kind: 'food' },
 	{ zh: '博雅塔', label: 'Boya Tower', kind: 'landmark' },
-	{ zh: '中国农业银行', label: 'ABC bank', kind: 'admin', side: 'l' },
+	{ zh: '中国农业银行', label: 'ABC bank', kind: 'admin' },
 	{ zh: '北京大学东门', label: 'East Gate — Line 4', kind: 'metro' },
 ];
 
@@ -197,9 +197,7 @@ const pins = [
 		zh: g.name_zh,
 		zhLabel: g.name_zh,
 		label: 'West Gate',
-		kind: 'gate',
-		side: 'r' as const,
-		dy: 0,
+		kind: 'gate' as const,
 		lng: g.lng,
 		lat: g.lat,
 	})),
@@ -305,9 +303,12 @@ const roadMinor = roads.filter((f) => !f.properties.major).map((f) => line(f.geo
 //
 // Metrics are measured from the rendered SVG rather than guessed: 16px in
 // viewBox units, averaging 8.12 units per character.
-const CHAR_W = 8.2;
-const LABEL_ASC = 13;
-const LABEL_DESC = 5;
+// Kept in step with `.fl-campus-label` in custom.css — if the font-size there
+// changes, these have to move with it or the collision boxes stop matching what
+// is actually drawn. 18px in viewBox units averages 9.2 units per character.
+const CHAR_W = 9.2;
+const LABEL_ASC = 14.5;
+const LABEL_DESC = 5.5;
 const GAP = 9;
 
 type Box = { x0: number; x1: number; y0: number; y1: number };
@@ -328,45 +329,86 @@ const taken: Box[] = base.map((p) => ({
 	y1: p.y + p.r,
 }));
 
-const boxOf = (p: (typeof base)[number], side: 'l' | 'r', baseline: number): Box => {
+// Four ways to hang a label off a dot. Underneath is the default: it reads
+// left-to-right at a predictable distance below the mark, which is easier to
+// scan down a map than text that alternates between the left and right of the
+// dot it belongs to. The other three are fallbacks for when underneath is
+// taken.
+type Spot = 'below' | 'above' | 'right' | 'left';
+
+const boxAt = (p: (typeof base)[number], spot: Spot, shift: number) => {
 	const w = p.label.length * CHAR_W;
-	const edge = side === 'l' ? p.x - p.r - GAP : p.x + p.r + GAP;
+	if (spot === 'below' || spot === 'above') {
+		const ty = spot === 'below' ? p.y + p.r + 17 + shift : p.y - p.r - 9 - shift;
+		return {
+			tx: p.x,
+			ty,
+			anchor: 'middle' as const,
+			box: { x0: p.x - w / 2, x1: p.x + w / 2, y0: ty - LABEL_ASC, y1: ty + LABEL_DESC },
+		};
+	}
+	const ty = p.y + 5.5 + shift;
+	const tx = spot === 'right' ? p.x + p.r + GAP : p.x - p.r - GAP;
 	return {
-		x0: side === 'l' ? edge - w : edge,
-		x1: side === 'l' ? edge : edge + w,
-		y0: baseline - LABEL_ASC,
-		y1: baseline + LABEL_DESC,
+		tx,
+		ty,
+		anchor: (spot === 'right' ? 'start' : 'end') as 'start' | 'end',
+		box: {
+			x0: spot === 'right' ? tx : tx - w,
+			x1: spot === 'right' ? tx + w : tx,
+			y0: ty - LABEL_ASC,
+			y1: ty + LABEL_DESC,
+		},
 	};
 };
 
-const placement = new Map<number, { side: 'l' | 'r'; dy: number }>();
+// Try the preferred spot, then the alternatives, and only then start moving the
+// label away from its own dot — a label that has drifted is worse than one that
+// simply sits above rather than below.
+const CANDIDATES: [Spot, number][] = [
+	['below', 0],
+	['above', 0],
+	['right', 0],
+	['left', 0],
+	['below', 18],
+	['above', 18],
+	['right', 18],
+	['right', -18],
+	['left', 18],
+	['left', -18],
+	['below', 36],
+	['above', 36],
+	['below', 54],
+	['above', 54],
+];
+
+const placement = new Map<number, { tx: number; ty: number; anchor: 'middle' | 'start' | 'end' }>();
 base
 	.map((p, i) => ({ p, i }))
 	.sort((a, b) => a.p.y - b.p.y)
 	.forEach(({ p, i }) => {
-		const prefer = p.side ?? (p.x + p.label.length * CHAR_W + 26 > W ? 'l' : 'r');
-		const other: 'l' | 'r' = prefer === 'l' ? 'r' : 'l';
-		const start = p.y + 5.5 + (p.dy ?? 0);
-
-		for (const nudge of [0, -20, 20, -40, 40, -60, 60]) {
-			for (const side of [prefer, other] as const) {
-				const box = boxOf(p, side, start + nudge);
-				if (box.x0 < 4 || box.x1 > W - 4) continue;
-				if (taken.some((q) => hits(box, q))) continue;
-				taken.push(box);
-				placement.set(i, { side, dy: (p.dy ?? 0) + nudge });
-				return;
-			}
+		for (const [spot, shift] of CANDIDATES) {
+			const c = boxAt(p, spot, shift);
+			if (c.box.x0 < 4 || c.box.x1 > W - 4) continue;
+			if (c.box.y0 < 4 || c.box.y1 > H - 34) continue;
+			if (taken.some((q) => hits(c.box, q))) continue;
+			taken.push(c.box);
+			placement.set(i, { tx: c.tx, ty: c.ty, anchor: c.anchor });
+			return;
 		}
-		// Nothing clear anywhere: keep the preferred spot rather than dropping the
-		// label, so a crowded corner degrades to overlap instead of to silence.
-		taken.push(boxOf(p, prefer, start));
-		placement.set(i, { side: prefer, dy: p.dy ?? 0 });
+		// Nothing clear anywhere: take the default rather than drop the label, so a
+		// crowded corner degrades to overlap instead of to silence.
+		const fallback = boxAt(p, 'below', 0);
+		taken.push(fallback.box);
+		placement.set(i, { tx: fallback.tx, ty: fallback.ty, anchor: fallback.anchor });
 	});
 
 // Rebuilt in the original order, so the text key below the map still reads in
 // the order the pins were declared rather than north-to-south.
-const laid = base.map((p, i) => ({ ...p, ...(placement.get(i) as { side: 'l' | 'r'; dy: number }) }));
+const laid = base.map((p, i) => ({
+	...p,
+	...(placement.get(i) as { tx: number; ty: number; anchor: 'middle' | 'start' | 'end' }),
+}));
 
 const mPerDegLon = 111_320 * kx;
 const barM = 300;
@@ -374,6 +416,10 @@ const barPx = ((barM / mPerDegLon) / (maxLon - minLon)) * W;
 ---
 
 <figure class="fl-campus">
+	{/* Only the map scrolls sideways on a narrow screen — the caption and the
+	    text key below it must stay inside the viewport, so the wrapper goes
+	    around the SVG rather than around the figure. */}
+	<div class="fl-campus-scroll">
 	<svg
 		viewBox={`0 0 ${W} ${H}`}
 		role="img"
@@ -435,12 +481,7 @@ const barPx = ((barM / mPerDegLon) / (maxLon - minLon)) * W;
 			laid.map((p) => (
 				<g class="fl-campus-pin" data-kind={p.kind}>
 					<circle cx={d1(p.x)} cy={d1(p.y)} r={p.r} class="fl-campus-dot" />
-					<text
-						x={d1(p.side === 'l' ? p.x - p.r - 9 : p.x + p.r + 9)}
-						y={d1(p.y + 5.5 + (p.dy ?? 0))}
-						text-anchor={p.side === 'l' ? 'end' : 'start'}
-						class="fl-campus-label"
-					>
+					<text x={d1(p.tx)} y={d1(p.ty)} text-anchor={p.anchor} class="fl-campus-label">
 						{p.label}
 					</text>
 				</g>
@@ -454,6 +495,7 @@ const barPx = ((barM / mPerDegLon) / (maxLon - minLon)) * W;
 			<text x={16 + barPx / 2} y={H - 28} text-anchor="middle">{barM} m</text>
 		</g>
 	</svg>
+	</div>
 
 	<figcaption>
 		Every building, path and pond here is drawn from OpenStreetMap, so the distances are real —

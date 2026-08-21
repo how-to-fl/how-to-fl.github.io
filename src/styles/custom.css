@@ -1065,9 +1065,11 @@ header.header {
 
 .fl-campus-label {
 	font-family: var(--fl-font-body);
-	/* In viewBox units. The SVG scales to ~0.7×, so 16 here lands near 11px on
-	   screen — 11 here rendered at under 8px and was unreadable. */
-	font-size: 16px;
+	/* In viewBox units. The SVG scales to ~0.7×, so 18 here lands near 13px on
+	   screen — 11 here rendered at under 8px and was unreadable. CHAR_W,
+	   LABEL_ASC and LABEL_DESC in CampusMap.astro are derived from this size and
+	   have to change with it. */
+	font-size: 18px;
 	font-weight: 600;
 	fill: var(--sl-color-white);
 	/* Labels cross both the ground and the lake, so they need a halo. Painting
@@ -2298,4 +2300,19 @@ summary:focus-visible {
 	width: var(--fl-map-w);
 	max-width: none;
 	margin-inline: calc((100% - var(--fl-map-w)) / 2);
+}
+
+/* On a phone the campus map shrank to 358px, which put its 24 labels at 7px —
+   present, but not readable, which is the worst of both. Below the width where
+   the map can carry them, it keeps a usable size and scrolls sideways instead.
+   Only the SVG scrolls; the caption and the text key beneath it stay put. */
+.fl-campus-scroll {
+	overflow-x: auto;
+	overscroll-behavior-x: contain;
+}
+
+@media (max-width: 40rem) {
+	.fl-campus .fl-campus-svg {
+		min-width: 38rem;
+	}
 }
