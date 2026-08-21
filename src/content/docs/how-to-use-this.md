@@ -1,13 +1,15 @@
 ---
 title: "How this guide works"
-description: "What this is, who writes it, and how much of it you should trust."
+description: "What this is, who writes it, and how much of it to trust."
 last_verified: 2026-08
 status: live
 ---
 
-This is our guide to landing in Beijing on the Future Leaders programme, written by the
-people who did it a year before you. It isn't official, nobody from the programme office
-signs it off, and it's only as good as what we bother to write down.
+This is our guide to the Future Leaders year at PKU — landing in Beijing, getting through
+the paperwork, and the rest of the year after that. It's written by the people doing it: the
+cohort that arrived last September and the one arriving next, adding things as they find
+them out. It isn't official, nobody from the programme office signs it off, and it's only as
+good as what we bother to write down.
 
 ## How we've organised it
 
@@ -31,8 +33,8 @@ Every page tells you the month one of us last checked it.
 - **"Last checked August 2026"** under the title — someone confirmed it then.
 - **An orange banner** — nobody's checked in over a year. Prices move, places close, and
   visa rules change without telling anyone. Treat it as a starting point, not gospel.
-- **"Nobody's written this yet"** — the structure's there, the words aren't. Yet. You could
-  fix that.
+- **"Nobody's written this yet"** — the structure's there, the words aren't. Yet. Any of us
+  can fix that, and that includes whoever is reading this.
 
 Nothing here beats what the programme office or the PSB tell you. If we contradict an
 official source, **we're the ones who are wrong** — please tell us.
@@ -82,8 +84,8 @@ written by people who aren't.
 a place to the map.
 
 **If GitHub won't load** — and on a Beijing connection it often won't — WeChat or email it
-to one of us, or bring it to the next contribution session. Someone will type it in, and
-your name still goes on it.
+to someone in the cohort chat, or bring it to the next contribution session. Someone will
+type it in, and your name still goes on it.
 
 **If you haven't arrived yet**, those routes run through the cohort chat and open up once
 you're here. Until then it's the form, or a note to yourself that you bring to the first

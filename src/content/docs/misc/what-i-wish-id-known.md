@@ -15,7 +15,7 @@ One sentence each. The thing you'd say to yourself in August if you could. Not a
 think sounds wise — the actual specific thing, however small, that you had to learn the hard
 way.
 
-The rest of this guide is what we found out. This page is what we'd tell you.
+The rest of this guide is what we found out. This page is what we'd say to each other.
 
 ## Cohort 6
 
