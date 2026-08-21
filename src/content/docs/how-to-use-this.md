@@ -41,8 +41,15 @@ official source, **we're the ones who are wrong** — please tell us.
 
 ## Start here
 
-If you're arriving in September, read it in this order. Nothing below the line you're on
+If you're arriving in September, read it in this order — nothing below the line you're on
 matters yet.
+
+**If you're already here**, this order is no use to you and you want the search box or
+[the map](/map/). The pages worth a second look mid-year are the ones with deadlines that
+come round again — [visas and permits](/china/visas-and-permits/) for the renewal, and
+[what the year costs](/china/what-it-costs/) when the stipend maths stops adding up. And the
+half-written pages are where you come in: you know things in March that nobody wrote down in
+September.
 
 ### Now, while you're still at home
 

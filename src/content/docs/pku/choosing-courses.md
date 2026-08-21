@@ -8,7 +8,7 @@ sidebar:
 ---
 
 Course selection is the first thing you do that has consequences a year later, and it's done
-in a fortnight while you're jet-lagged. This is what we wish we'd known going in.
+in a fortnight while you're jet-lagged. This is what we've worked out between us so far.
 
 ## Start with what *your* degree needs
 

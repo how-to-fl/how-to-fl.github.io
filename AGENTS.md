@@ -14,11 +14,35 @@ three of them break the map *silently*, with no error in the console.
 
 ## Voice
 
-The site speaks as **we/us** (the cohorts writing it) to **you** (the reader). Informal,
-direct, warm, specific. Never third-person "students should" or "the cohorts". This applies
-to page copy, UI notices, issue forms, CONTRIBUTING and README.
+**One guide, written by everyone on the programme, for everyone on the programme.** Not a
+handover from the cohort that arrived first to the one arriving next. Cohort 6 is still
+working parts of the year out; Cohort 7 will know things by October that nobody here has
+written down. The reader is a contributor who hasn't added their bit yet, and the copy has
+to read that way.
+
+The **we** always includes the reader. Informal, direct, warm, specific. Never third-person
+"students should" or "the cohorts". This applies to page copy, UI notices, issue forms,
+CONTRIBUTING and README.
 
 > "On a Beijing connection it often won't load, and that's not your problem to fix."
+
+**"You" is still the right word for an instruction.** "Insist the meter goes on" addresses
+whoever is doing the thing, and rewriting it into "one insists" would be worse, not more
+inclusive. The distinction that matters is not the pronoun — it is whether a sentence puts
+the writer outside the group:
+
+| Don't | Because | Do |
+|---|---|---|
+| "written by us, for you" | two groups, one senior | "from us, for us" |
+| "the people who did it a year before you" | seniority as the qualification | "the people doing it" |
+| "this is for both of you" | writes the author out | "this is for all of us" |
+| "WeChat it to one of us" | reader isn't one of us | "WeChat it to someone in the cohort chat" |
+| "what we'd tell you" | one-way | "what we'd say to each other" |
+| "we wrote it down for you" | finished, delivered | "we're writing it down as we go" |
+
+**Attribution is not voice, and it stays.** "Cohort 6's list", "somebody put their name to
+each one", "checked in August 2026" — that sourcing is what the guide rests on, and naming
+which cohort found something out is the opposite of the problem above. Keep every one.
 
 Short and specific beats long and vague. Say when we're unsure. No political commentary.
 
